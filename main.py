@@ -14,7 +14,7 @@ from dataOperations.createJSON import createJSON
 from dataOperations.createHTML import createHTML
 from dataOperations.createCSV import createCSV
 from dataOperations.sendToSQLite import sendToSQLite
-from utils import increaseOneDay, decreaseOneDay, increaseOneMonth, decreaseOneMonth, Settings, PlotValues, PlotObj, CheckboxStatus
+from utils import Settings, PlotValues, PlotObj, CheckboxStatus
 from settingsOperations import saveSettings_JSON, loadSettings
 
 
@@ -45,6 +45,10 @@ class EnergyPrices:
 
         inteager_thread = threading.Thread(target=self.increaseInteger, daemon = True)
         inteager_thread.start()
+
+
+        # self.date = datetime.datetime(2024, 8, 13, 8, 0, 0)
+        # self.date_plus_day = datetime.datetime(2024, 8, 13, 8, 0, 0) + datetime.timedelta(days=1)
 
 
         ## ładuje ustawienia z pliku
@@ -658,50 +662,53 @@ class EnergyPrices:
 
 
         def updateData():
-            # if datetime.datetime.now().hour != self.prev_hour: 
-            print("\nupdating..")
-            print(datetime.datetime.now())
+            if datetime.datetime.now().hour != self.prev_hour: 
+                print("\nupdating..")
+                print(datetime.datetime.now())
+
+                self.date = datetime.datetime.now()
+                self.date_plus_day = datetime.datetime.now() + datetime.timedelta(days=1)
 
 
-            parse_entsoe_thread = threading.Thread(target=parseENTSOE, args=(self.date, self.objectList_entsoe,))
-            parse_tge_thread = threading.Thread(target=parseTGE, args=(self.date, self.objectList_tge,))
-            parse_entsoe_next = threading.Thread(target=parseENTSOE, args=(self.date_plus_day, self.objectList_entsoe_next,))
-            parse_tge_next = threading.Thread(target=parseTGE, args=(self.date_plus_day, self.objectList_tge_next,))
+                parse_entsoe_thread = threading.Thread(target=parseENTSOE, args=(self.date, self.objectList_entsoe,))
+                parse_tge_thread = threading.Thread(target=parseTGE, args=(self.date, self.objectList_tge,))
+                parse_entsoe_next = threading.Thread(target=parseENTSOE, args=(self.date_plus_day, self.objectList_entsoe_next,))
+                parse_tge_next = threading.Thread(target=parseTGE, args=(self.date_plus_day, self.objectList_tge_next,))
 
-            parse_entsoe_thread.start()
-            parse_tge_thread.start()
-            parse_entsoe_next.start()
-            parse_tge_next.start()
+                parse_entsoe_thread.start()
+                parse_tge_thread.start()
+                parse_entsoe_next.start()
+                parse_tge_next.start()
 
-            parse_entsoe_thread.join()
-            parse_tge_thread.join()
-            parse_entsoe_next.join()
-            parse_tge_next.join()
+                parse_entsoe_thread.join()
+                parse_tge_thread.join()
+                parse_entsoe_next.join()
+                parse_tge_next.join()
 
-            ## ustawienie waluty pobranej z pliku
-            if self.objectList_entsoe[0].currency != self.settings.currency:   self.changeCurrency()
+                ## ustawienie waluty pobranej z pliku
+                if self.objectList_entsoe[0].currency != self.settings.currency:   self.changeCurrency()
 
-            ## ustawienie fixingu pobranego z pliku
-            if self.objectList_tge[0].fixing != self.settings.fixing:   self.changeFixing()
-            
-            self.getDifference()
-            
-            self.reloadElements()
-            self.updateGraph()
-            self.sendToModbus()
+                ## ustawienie fixingu pobranego z pliku
+                if self.objectList_tge[0].fixing != self.settings.fixing:   self.changeFixing()
+                
+                self.getDifference()
 
-            
-            self.prev_hour = datetime.datetime.now().hour
-            
-            print("update finished")
-            self.window.after(15000, updateData)
-            
-            # window.after(60000, updateData)
+                sendToSQLite(self.objectList_entsoe, self.objectList_tge, self.objectList_entsoe_next, self.objectList_tge_next)
+                
+                self.reloadElements()
+                self.updateGraph()
+                self.sendToModbus()
+
+                
+                self.prev_hour = datetime.datetime.now().hour
+                
+                print("update finished")
+            self.window.after(60000, updateData)
 
 
 
-        self.prev_hour = datetime.datetime.now().hour
-        self.window.after(10000, updateData)
+        self.prev_hour = self.date.hour
+        self.window.after(15000, updateData)
 
 
 
@@ -732,4 +739,12 @@ if __name__ == '__main__':
 
 
 ## testy wszystkiego
-## pozabezpieczać funkcje try / except
+
+# wysyłanie modbusem
+# zmiana ustawień 
+# zmiana ustawień modbusem
+# update o godzinie 
+# zmiana dnia
+
+
+## pozabezpieczać funkcje  try / except
