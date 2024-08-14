@@ -2,171 +2,171 @@
 
 {
    "time": 0,
-   "entsoe": 484.31,
-   "entsoe_next": 385.3,
-   "tge": 484.75,
-   "tge_next": 385.21
+   "entsoe": 89.71940854581442,
+   "entsoe_next": 109.10001164279892,
+   "tge": 89.69845150774245,
+   "tge_next": 0.0
 }, 
 {
    "time": 1,
-   "entsoe": 418.38,
-   "entsoe_next": 362.28,
-   "tge": 418.74,
-   "tge_next": 362.2
+   "entsoe": 84.35906391896611,
+   "entsoe_next": 104.10059378274536,
+   "tge": 84.34043544067993,
+   "tge_next": 0.0
 }, 
 {
    "time": 2,
-   "entsoe": 390.48,
-   "entsoe_next": 356.57,
-   "tge": 390.79,
-   "tge_next": 356.49
+   "entsoe": 83.02945628129001,
+   "entsoe_next": 95.02386773780415,
+   "tge": 83.01082780300383,
+   "tge_next": 0.0
 }, 
 {
    "time": 3,
-   "entsoe": 375.39,
-   "entsoe_next": 384.4,
-   "tge": 375.71,
-   "tge_next": 384.3
+   "entsoe": 89.50983816509488,
+   "entsoe_next": 92.86296425660728,
+   "tge": 89.48655256723717,
+   "tge_next": 0.0
 }, 
 {
    "time": 4,
-   "entsoe": 392.51,
-   "entsoe_next": 398.1,
-   "tge": 392.82,
-   "tge_next": 398.0
+   "entsoe": 92.69996507160322,
+   "entsoe_next": 94.1739434159972,
+   "tge": 92.67667947374548,
+   "tge_next": 0.0
 }, 
 {
    "time": 5,
-   "entsoe": 422.56,
-   "entsoe_next": 460.03,
-   "tge": 422.91,
-   "tge_next": 459.93
+   "entsoe": 107.1207358248923,
+   "entsoe_next": 104.7502619629759,
+   "tge": 107.09745022703457,
+   "tge_next": 0.0
 }, 
 {
    "time": 6,
-   "entsoe": 572.98,
-   "entsoe_next": 557.08,
-   "tge": 573.47,
-   "tge_next": 556.94
+   "entsoe": 129.71940854581442,
+   "entsoe_next": 108.2896728373501,
+   "tge": 129.6868087088136,
+   "tge_next": 0.0
 }, 
 {
    "time": 7,
-   "entsoe": 576.43,
-   "entsoe_next": 582.85,
-   "tge": 576.94,
-   "tge_next": 582.71
+   "entsoe": 135.72010711375015,
+   "entsoe_next": 116.01816276632903,
+   "tge": 135.68750727674933,
+   "tge_next": 0.0
 }, 
 {
    "time": 8,
-   "entsoe": 508.38,
-   "entsoe_next": 519.16,
-   "tge": 508.83,
-   "tge_next": 519.05
+   "entsoe": 120.88950983816508,
+   "entsoe_next": 112.17836767959017,
+   "tge": 120.86389568052158,
+   "tge_next": 0.0
 }, 
 {
    "time": 9,
-   "entsoe": 304.71,
-   "entsoe_next": 466.64,
-   "tge": 304.97,
-   "tge_next": 466.53
+   "entsoe": 108.65991384328792,
+   "entsoe_next": 91.01408778670393,
+   "tge": 108.63429968564442,
+   "tge_next": 0.0
 }, 
 {
    "time": 10,
-   "entsoe": 150.02,
-   "entsoe_next": 355.28,
-   "tge": 150.17,
-   "tge_next": 355.22
+   "entsoe": 82.72907206892536,
+   "entsoe_next": 33.109791593899175,
+   "tge": 82.71510071021073,
+   "tge_next": 0.0
 }, 
 {
    "time": 11,
-   "entsoe": 84.82,
-   "entsoe_next": 331.32,
-   "tge": 84.89,
-   "tge_next": 331.23
+   "entsoe": 77.14984282221445,
+   "entsoe_next": 15.17522412387938,
+   "tge": 77.12888578414251,
+   "tge_next": 0.0
 }, 
 {
    "time": 12,
-   "entsoe": -31.95,
-   "entsoe_next": 295.68,
-   "tge": -31.99,
-   "tge_next": 295.62
+   "entsoe": 68.85085574572128,
+   "entsoe_next": 5.218302479916171,
+   "tge": 68.83688438700663,
+   "tge_next": 0.0
 }, 
 {
    "time": 13,
-   "entsoe": -43.3,
-   "entsoe_next": 284.08,
-   "tge": -43.33,
-   "tge_next": 284.0
+   "entsoe": 66.14972639422517,
+   "entsoe_next": -13.9457445569915,
+   "tge": 66.131097915939,
+   "tge_next": 0.0
 }, 
 {
    "time": 14,
-   "entsoe": 3.67,
-   "entsoe_next": 253.2,
-   "tge": 3.69,
-   "tge_next": 253.16
+   "entsoe": 58.95913377575969,
+   "entsoe_next": -13.736174176271975,
+   "tge": 58.9498195366166,
+   "tge_next": 0.0
 }, 
 {
    "time": 15,
-   "entsoe": 91.38,
-   "entsoe_next": 267.63,
-   "tge": 91.44,
-   "tge_next": 267.58
+   "entsoe": 62.3192455466294,
+   "entsoe_next": 2.200488997555012,
+   "tge": 62.30760274770054,
+   "tge_next": 0.0
 }, 
 {
    "time": 16,
-   "entsoe": 278.06,
-   "entsoe_next": 335.74,
-   "tge": 278.28,
-   "tge_next": 335.68
+   "entsoe": 78.17906624752591,
+   "entsoe_next": 60.82198160437769,
+   "tge": 78.16509488881127,
+   "tge_next": 0.0
 }, 
 {
    "time": 17,
-   "entsoe": 377.8,
-   "entsoe_next": 494.43,
-   "tge": 378.11,
-   "tge_next": 494.3
+   "entsoe": 115.1309814879497,
+   "entsoe_next": 84.71533356618932,
+   "tge": 115.10071021073466,
+   "tge_next": 0.0
 }, 
 {
    "time": 18,
-   "entsoe": 613.12,
-   "entsoe_next": 630.52,
-   "tge": 613.63,
-   "tge_next": 630.36
+   "entsoe": 146.82035161252765,
+   "entsoe_next": 140.02095703807197,
+   "tge": 146.7830946559553,
+   "tge_next": 0.0
 }, 
 {
    "time": 19,
-   "entsoe": 867.25,
-   "entsoe_next": 910.69,
-   "tge": 867.99,
-   "tge_next": 910.47
+   "entsoe": 212.05961113051578,
+   "entsoe_next": 164.994760740482,
+   "tge": 212.00838281522877,
+   "tge_next": 0.0
 }, 
 {
    "time": 20,
-   "entsoe": 875.1,
-   "entsoe_next": 989.15,
-   "tge": 875.83,
-   "tge_next": 988.93
+   "entsoe": 230.32949120968678,
+   "entsoe_next": 206.03329840493652,
+   "tge": 230.2782628943998,
+   "tge_next": 0.0
 }, 
 {
    "time": 21,
-   "entsoe": 509.84,
-   "entsoe_next": 609.52,
-   "tge": 510.27,
-   "tge_next": 609.36
+   "entsoe": 141.9303760624054,
+   "entsoe_next": 158.9754336942601,
+   "tge": 141.89311910583305,
+   "tge_next": 0.0
 }, 
 {
    "time": 22,
-   "entsoe": 485.82,
-   "entsoe_next": 505.38,
-   "tge": 486.26,
-   "tge_next": 505.24
+   "entsoe": 117.68075445337058,
+   "entsoe_next": 138.5423215741064,
+   "tge": 117.64815461636977,
+   "tge_next": 0.0
 }, 
 {
    "time": 23,
-   "entsoe": 420.45,
-   "entsoe_next": 465.44,
-   "tge": 420.8,
-   "tge_next": 465.33
+   "entsoe": 108.38048666899522,
+   "entsoe_next": 113.74781697520083,
+   "tge": 108.35487251135172,
+   "tge_next": 0.0
 }
 
 ]

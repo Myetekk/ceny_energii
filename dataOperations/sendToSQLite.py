@@ -1,11 +1,15 @@
 import sqlite3
 import datetime
 
+from utils import checkNumberOfErrors
+
+
+
 
 
 path = "dataBase.db"
 
-def sendToSQLite(objectList_entsoe, objectList_tge, objectList_entsoe_next, objectList_tge_next):
+def sendToSQLite(objectList_entsoe, objectList_tge, objectList_entsoe_next, objectList_tge_next, errors, settings, window):
     try:
         conn = sqlite3.connect(path)
         cur = conn.cursor()
@@ -23,24 +27,36 @@ def sendToSQLite(objectList_entsoe, objectList_tge, objectList_entsoe_next, obje
         cur.execute(sql)
         conn.close()
 
+        send(objectList_entsoe, objectList_tge, objectList_entsoe_next, objectList_tge_next, date, errors)
+
+
+    except Exception as e:
+        print(f"An error occurred in sendToSQLite: {e}.")
+        errors.errorNumber += 1
+        if errors.errorNumber <= 20:   sendToSQLite(objectList_entsoe, objectList_tge, objectList_entsoe_next, objectList_tge_next, errors, settings, window)
+        else:   checkNumberOfErrors(errors, settings, window)
+
+
+
+
+
+def send(objectList_entsoe, objectList_tge, objectList_entsoe_next, objectList_tge_next, date, errors):
+    try:
+        conn = sqlite3.connect(path)
+        cur = conn.cursor()
+
         for i in range(24):
-            send(objectList_entsoe[i], objectList_entsoe_next[i], objectList_tge[i], objectList_tge_next[i], date)
-    except sqlite3.Error as e:
-        print(e)
+            sql ='''INSERT INTO odczyt_''' + str(date)[:10] + ''' 
+                    (hours, price_entsoe, price_entsoe_next, price_tge, price_tge_next, date, upload_time) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?);'''
 
+            table = [str(objectList_entsoe[i].hour), str(objectList_entsoe[i].price), str(objectList_entsoe_next[i].price), str(objectList_tge[i].price), str(objectList_tge_next[i].price), str(objectList_entsoe[i].date), str(datetime.datetime.now())[:19]]
+            cur.execute(sql, table)
 
+        
+        conn.commit()
+        conn.close()
 
-
-
-def send(object_entsoe, object_entsoe_next, object_tge, object_tge_next, date):
-    conn = sqlite3.connect(path)
-    cur = conn.cursor()
-
-    sql ='''INSERT INTO odczyt_''' + str(date)[:10] + ''' 
-            (hours, price_entsoe, price_entsoe_next, price_tge, price_tge_next, date, upload_time) 
-            VALUES (?, ?, ?, ?, ?, ?, ?);'''
-
-    table = [str(object_entsoe.hour), str(object_entsoe.price), str(object_entsoe_next.price), str(object_tge.price), str(object_tge_next.price), str(object_entsoe.date), str(datetime.datetime.now())[:19]]
-    cur.execute(sql, table)
-    conn.commit()
-    conn.close()
+    except Exception as e:
+        print(f"An error occurred in sendToSQLite: {e}.")
+        errors.errorNumber += 1

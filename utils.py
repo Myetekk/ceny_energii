@@ -1,32 +1,44 @@
 import re
+import time
 from urllib.request import urlopen
 
+from settingsOperations import saveSettings_JSON
 
 
 
 
 
 ## pobiera dane o kursie euro w danym dniu
-def getEUR(date):
-    date_prev_start = decreaseOneDay(date)
-    date_prev_end = decreaseOneDay(date_prev_start)
-    date_prev_end = decreaseOneDay(date_prev_end)
-    date_prev_end = decreaseOneDay(date_prev_end)
-    date_prev_start = date_prev_start[0] + "-" + date_prev_start[1] + "-" + date_prev_start[2]
-    date_prev_end = date_prev_end[0] + "-" + date_prev_end[1] + "-" + date_prev_end[2]
+def getEUR(date, errors, settings, window): 
+    # try:
+        date_prev_start = decreaseOneDay(date)
+        date_prev_end = decreaseOneDay(date_prev_start)
+        date_prev_end = decreaseOneDay(date_prev_end)
+        date_prev_end = decreaseOneDay(date_prev_end)
+        date_prev_start = date_prev_start[0] + "-" + date_prev_start[1] + "-" + date_prev_start[2]
+        date_prev_end = date_prev_end[0] + "-" + date_prev_end[1] + "-" + date_prev_end[2]
 
-    url = "https://www.money.pl/pieniadze/nbparch/srednie/?symbol=EUR.n&from=" + date_prev_end + "&to=" + date_prev_start
-    page = urlopen(url)
-    html = page.read().decode("utf-8")
+        url = "https://www.money.pl/pieniadze/nbparch/srednie/?symbol=EUR.n&from=" + date_prev_end + "&to=" + date_prev_start
+        page = urlopen(url)
+        html = page.read().decode("utf-8")
 
-    html_class_name = """<div class="rt-td" role="gridcell".*?><div style="text-align:right">.*?</div></div>"""
-    eur = re.findall(html_class_name, html, re.DOTALL)
-    eur = re.sub('</div></div>', "", eur[0])
-    eur = re.sub('<.*>', "", eur)
-    eur = re.sub(',', ".", eur)
-    return float(eur)
-    # return 4.28
+        html_class_name = """<div class="rt-td" role="gridcell".*?><div style="text-align:right">.*?</div></div>"""
+        eur = re.findall(html_class_name, html, re.DOTALL)
+        eur = re.sub('</div></div>', "", eur[0])
+        eur = re.sub('<.*>', "", eur)
+        eur = re.sub(',', ".", eur)
 
+        # print(float(eur))
+        # raise Exception("TESTING")
+    
+        return float(eur)
+
+    # except Exception as e:
+    #     print(f"An error occurred in getEUR: {e}. Trying again")
+    #     errors.errorNumber += 1
+    #     if errors.errorNumber <= 20:   getEUR(date, errors, settings, window)
+    #     else:   checkNumberOfErrors(errors, settings, window)
+    #     time.sleep(1)
 
 
 
@@ -153,61 +165,11 @@ def increaseOneMonth(date_data):
 
 
 
-## na podstawie nazwy kraju podaje jego kod 
-def getCountryCode(value): 
-    if value=='Bulgaria': country_code='BG'
-    elif value=='Croatia': country_code='HR'
-    elif value=='Czech Republic': country_code='CZ'
-    elif value=='Denmark': country_code='DK_1'
-    elif value=='Estonia': country_code='EE'
-    elif value=='Finland': country_code='FI'
-    elif value=='Greece': country_code='GR'
-    elif value=='Hungary': country_code='HU'
-    elif value=='Latwia': country_code='LV'
-    elif value=='Lithuania': country_code='LT'
-    elif value=='Montenegro': country_code='ME'
-    elif value=='Netherlands': country_code='NL'
-    elif value=='North Macedonia': country_code='MK'
-    elif value=='Norway': country_code='NO_1'
-    elif value=='Poland': country_code='PL'
-    elif value=='Portugal': country_code='PT'
-    elif value=='Romania': country_code='RO'
-    elif value=='Serbia': country_code='RS'
-    elif value=='Slovakia': country_code='SK'
-    elif value=='Slovenia': country_code='SI'
-    elif value=='Spain': country_code='ES'
-    elif value=='Sweden': country_code='SE_1'
-    elif value=='Switzerland': country_code='CH'
-    return country_code
-
-
-## na podstawie kodu kraju podaje jego nazwę 
-def getCountryName(country_code):
-    if country_code=='BG': country_code_temp='Bulgaria'
-    elif country_code=='HR': country_code_temp='Croatia'
-    elif country_code=='CZ': country_code_temp='Czech Republic'
-    elif country_code=='DK_1': country_code_temp='Denmark'
-    elif country_code=='EE': country_code_temp='Estonia'
-    elif country_code=='FI': country_code_temp='Finland'
-    elif country_code=='GR': country_code_temp='Greece'
-    elif country_code=='HU': country_code_temp='Hungary'
-    elif country_code=='LV': country_code_temp='Latwia'
-    elif country_code=='LT': country_code_temp='Lithuania'
-    elif country_code=='ME': country_code_temp='Montenegro'
-    elif country_code=='NL': country_code_temp='Netherlands'
-    elif country_code=='MK': country_code_temp='North Macedonia'
-    elif country_code=='NO_1': country_code_temp='Norway'
-    elif country_code=='PL': country_code_temp='Poland'
-    elif country_code=='PT': country_code_temp='Portugal'
-    elif country_code=='RO': country_code_temp='Romania'
-    elif country_code=='RS': country_code_temp='Serbia'
-    elif country_code=='SK': country_code_temp='Slovakia'
-    elif country_code=='SI': country_code_temp='Slovenia'
-    elif country_code=='ES': country_code_temp='Spain'
-    elif country_code=='SE_1': country_code_temp='Sweden'
-    elif country_code=='CH': country_code_temp='Switzerland'
-    return country_code_temp
-
+def checkNumberOfErrors(errors, settings, window):
+    if errors.errorNumber >= 20:
+        print('Too much errors  \n\nRestarting app\n\n')
+        saveSettings_JSON(settings, errors)
+        if window != None:   window.destroy()
 
 
 
@@ -218,19 +180,19 @@ def getCountryName(country_code):
 
 
 class PlotValues:
-    value_entsoe = []
-    value_entsoe_next = []
-    value_tge = []
-    value_tge_next = []
-    value_diff = []
-    value_diff_next = []
+    value_entsoe = None
+    value_entsoe_next = None
+    value_tge = None
+    value_tge_next = None
+    value_diff = None
+    value_diff_next = None
 
 
 
 class PlotObj:
-    fig = []
-    canvas = []
-    plot = []
+    fig = None
+    canvas = None
+    plot = None
 
 
 
@@ -249,3 +211,7 @@ class Settings:
     fixing = 1
     data_source = 1
     
+
+
+class Errors:
+    errorNumber = 0

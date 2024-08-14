@@ -6,48 +6,65 @@ import os
 
 
 ## zapisuje ustawienia w pliku JSON
-def saveSettings_JSON(settings): 
-    if os.path.exists("outputs") == False: os.mkdir("outputs") 
-    with open("outputs\\settings.json", "w") as outfile:
-        data = { "currency": settings.currency, "fixing": settings.fixing, "data_source": settings.data_source }
-        json_object = json.dumps(data, indent=3)
-        outfile.write(json_object)
+def saveSettings_JSON(settings, errors): 
+    try:
+        if os.path.exists("outputs") == False: os.mkdir("outputs") 
+        with open("outputs\\settings.json", "w") as outfile:
+            data = { "currency": str(settings.currency), "fixing": int(settings.fixing), "data_source": int(settings.data_source) }
+            json_object = json.dumps(data, indent=3)
+            outfile.write(json_object)
+                
+    except Exception as e:
+        print(f"An error occurred in saveSettings_JSON: {e}. Trying again")
+        errors.errorNumber += 1
+        createDefaultSettings(settings, errors)
         
 
 
 
 
 ## zapisuje ustawienia domyślne w pliku JSON 
-def createDefaultSettings(settings):
+def createDefaultSettings(settings, errors):
     settings.currency = 'PLN'
     settings.fixing = 1
     settings.data_source = 1
 
-    if os.path.exists("outputs") == False: os.mkdir("outputs") 
-    with open("outputs\\settings.json", "w") as outfile:
-        data = { "currency": settings.currency, "fixing": settings.fixing, "data_source": settings.data_source }
-        json_object = json.dumps(data, indent=3)
-        outfile.write(json_object)
+    try:
+        if os.path.exists("outputs") == False: os.mkdir("outputs") 
+        with open("outputs\\settings.json", "w") as outfile:
+            data = { "currency": str(settings.currency), "fixing": int(settings.fixing), "data_source": int(settings.data_source) }
+            json_object = json.dumps(data, indent=3)
+            outfile.write(json_object)
+
+    except Exception as e:
+        print(f"An error occurred in createDefaultSettings: {e}. Trying again")
+        errors.errorNumber += 1
 
 
 
 
 
 ## ładuje ustawienia z pliku JSON
-def loadSettings(settings):
+def loadSettings(settings, errors):
     filePath = "outputs\\settings.json"
     
-    if os.path.exists(filePath):  ## jeśli plik istnieje 
-        fileSize = os.path.getsize(filePath)
-        if fileSize >= 55  and  fileSize <= 75:  ## jeśli plik ma w sobie jakieś dane
-            with open(filePath) as outfile:
-                data = json.load(outfile)
+    try:
+        if os.path.exists(filePath):  ## jeśli plik istnieje 
+            fileSize = os.path.getsize(filePath)
+            if fileSize >= 55  and  fileSize <= 75:  ## jeśli plik ma w sobie jakieś dane
+                with open(filePath) as outfile:
+                    data = json.load(outfile)
 
-                settings.currency = data["currency"]
-                settings.fixing = data["fixing"]
-                settings.data_source = data["data_source"]
-        else: 
-            createDefaultSettings(settings)
-    else:
-        createDefaultSettings(settings)
+                    settings.currency = str(data["currency"])
+                    settings.fixing = int(data["fixing"])
+                    settings.data_source = int(data["data_source"])
+            else: 
+                createDefaultSettings(settings, errors)
+        else:
+            createDefaultSettings(settings, errors)
+        
+    except Exception as e:
+        print(f"An error occurred in loadSettings: {e}. Trying again")
+        errors.errorNumber += 1
+        createDefaultSettings(settings, errors)
     

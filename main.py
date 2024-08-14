@@ -1,5 +1,4 @@
 import tkinter as tk
-from tkinter import END
 from pyModbusTCP.server import ModbusServer, DataBank
 import matplotlib
 import matplotlib.pyplot
@@ -14,7 +13,7 @@ from dataOperations.createJSON import createJSON
 from dataOperations.createHTML import createHTML
 from dataOperations.createCSV import createCSV
 from dataOperations.sendToSQLite import sendToSQLite
-from utils import Settings, PlotValues, PlotObj, CheckboxStatus
+from utils import Settings, PlotValues, PlotObj, CheckboxStatus, Errors, checkNumberOfErrors
 from settingsOperations import saveSettings_JSON, loadSettings
 
 
@@ -22,6 +21,11 @@ from settingsOperations import saveSettings_JSON, loadSettings
 
 
 class EnergyPrices:
+    errors = Errors()
+    close = False
+
+    window = None
+
     objectList_entsoe = list()
     objectList_entsoe_next = list()
     objectList_tge = list()
@@ -40,11 +44,16 @@ class EnergyPrices:
 
     def main(self):
         print("Loading..")
+
+
+
         self.server = ModbusServer(host='0.0.0.0', port=502, no_block=True, data_bank=self.dataBank)
         self.server.start()
 
         inteager_thread = threading.Thread(target=self.increaseInteger, daemon = True)
         inteager_thread.start()
+
+        self.errors.errorNumber = 0
 
 
         # self.date = datetime.datetime(2024, 8, 13, 8, 0, 0)
@@ -53,14 +62,14 @@ class EnergyPrices:
 
         ## ładuje ustawienia z pliku
         self.settings = Settings()
-        loadSettings(self.settings)
+        loadSettings(self.settings, self.errors)
 
 
         ## pobiera dane z entsoe i tge dla dnia dzisiejszego i następnego
-        parse_entsoe_thread = threading.Thread(target=parseENTSOE, args=(self.date, self.objectList_entsoe,))
-        parse_tge_thread = threading.Thread(target=parseTGE, args=(self.date, self.objectList_tge,))
-        parse_entsoe_next = threading.Thread(target=parseENTSOE, args=(self.date_plus_day, self.objectList_entsoe_next,))
-        parse_tge_next = threading.Thread(target=parseTGE, args=(self.date_plus_day, self.objectList_tge_next,))
+        parse_entsoe_thread = threading.Thread(target=parseENTSOE, args=(self.date, self.objectList_entsoe, self.errors, self.settings, self.window, ), daemon = True)
+        parse_tge_thread = threading.Thread(target=parseTGE, args=(self.date, self.objectList_tge, self.errors, self.settings, self.window, ), daemon = True)
+        parse_entsoe_next = threading.Thread(target=parseENTSOE, args=(self.date_plus_day, self.objectList_entsoe_next, self.errors, self.settings, self.window, ), daemon = True)
+        parse_tge_next = threading.Thread(target=parseTGE, args=(self.date_plus_day, self.objectList_tge_next, self.errors, self.settings, self.window, ), daemon = True)
 
         parse_entsoe_thread.start()
         parse_tge_thread.start()
@@ -79,6 +88,11 @@ class EnergyPrices:
         if self.objectList_tge[0].fixing != self.settings.fixing:   self.changeFixing()
         
         self.getDifference()
+
+        # print(len(self.objectList_tge))
+        # print(len(self.objectList_tge_next))
+        # print(self.objectList_tge[0].printProps())
+        # print(self.objectList_tge_next[0].printProps())
 
         self.sendToModbus()
 
@@ -116,22 +130,23 @@ class EnergyPrices:
 
     ## wysyła podane dane przez Modbus
     def sendToModbus(self):
-        date = datetime.datetime.now()
-
-        objectList= list()
-        objectListNext= list()
-
-        if self.settings.data_source == 1:
-            objectList = self.objectList_entsoe
-            objectListNext = self.objectList_entsoe_next
-        else:
-            objectList = self.objectList_tge
-            objectListNext = self.objectList_tge_next
-
-        
         try: 
+            date = datetime.datetime.now()
+
+
+            objectList= list()
+            objectListNext= list()
+
+            if self.settings.data_source == 1:
+                objectList = self.objectList_entsoe
+                objectListNext = self.objectList_entsoe_next
+            else:
+                objectList = self.objectList_tge
+                objectListNext = self.objectList_tge_next
+
+
             blancList = []
-            for i in range(120): blancList += [0] 
+            for i in range(120):   blancList += [0] 
             self.dataBank.set_input_registers(address=0, word_list=blancList)
 
 
@@ -145,21 +160,28 @@ class EnergyPrices:
             
 
             currentDayList = [] 
-            for object in objectList: currentDayList += [float(object.price)] 
-            self.dataBank.set_input_registers(address=10, word_list=currentDayList)  ## dane z dzisiaj 
-            self.dataBank.set_input_registers(address=34, word_list=[1])  ## data_ok
-            self.dataBank.set_input_registers(address=35, word_list=[min(currentDayList)])  ## min
-            self.dataBank.set_input_registers(address=36, word_list=[max(currentDayList)])  ## max
+            for object in objectList:   
+                if object.hour != -1: 
+                    currentDayList += [float(object.price)] 
+            if len(currentDayList) != 0: 
+                self.dataBank.set_input_registers(address=10, word_list=currentDayList)  ## dane z dzisiaj 
+                self.dataBank.set_input_registers(address=34, word_list=[1])  ## data_ok
+                self.dataBank.set_input_registers(address=35, word_list=[min(currentDayList)])  ## min
+                self.dataBank.set_input_registers(address=36, word_list=[max(currentDayList)])  ## max
+            # print(currentDayList)
 
 
             nextDayList = []
-            for object in objectListNext: 
-                if object.price!=0: 
+            for object in objectListNext:   
+                if object.hour != -1: 
                     nextDayList += [float(object.price)] 
-                    self.dataBank.set_input_registers(address=40, word_list=nextDayList)  ## dane z jutra
-                    self.dataBank.set_input_registers(address=64, word_list=[1])  ## data_ok
-                    self.dataBank.set_input_registers(address=65, word_list=[min(nextDayList)])  ## min
-                    self.dataBank.set_input_registers(address=66, word_list=[max(nextDayList)])  ## max
+            if len(nextDayList) != 0: 
+                self.dataBank.set_input_registers(address=40, word_list=nextDayList)  ## dane z jutra
+                self.dataBank.set_input_registers(address=64, word_list=[1])  ## data_ok
+                self.dataBank.set_input_registers(address=65, word_list=[min(nextDayList)])  ## min
+                self.dataBank.set_input_registers(address=66, word_list=[max(nextDayList)])  ## max
+            # print(nextDayList)
+
 
             currency = 0
             if objectList[0].currency == 'PLN': currency = 1
@@ -168,13 +190,14 @@ class EnergyPrices:
             self.dataBank.set_input_registers(address=123, word_list=[objectList[0].fixing])  ## określa z którego fixingu pochodzą dane (1-fixing1 / 2-fixing2)
             self.dataBank.set_input_registers(address=124, word_list=[objectList[0].data_source])  ## określa z jakiego źródła pochodzą dane (1-entsoe / 2-tge)
 
-
-
         except Exception as e:
+            print(f"An error occurred in sendToModbus: {e}. Trying again")
             self.server.stop()
-            print(f"An error occurred: {e}")
-            self.server.start()
-            self.sendToModbus()
+            self.errors.errorNumber += 1
+            if self.errors.errorNumber <= 20: 
+                self.server.start()
+                self.sendToModbus()
+            else:   checkNumberOfErrors(self.errors, self.settings, self.window)
     
 
 
@@ -233,9 +256,14 @@ class EnergyPrices:
 
                     print("settings updated")
                 time.sleep(1)
-        except:
+
+        except Exception as e:
+            print(f"An error occurred in checkSettingsChange: {e}.")
+            self.errors.errorNumber += 1
+            if self.errors.errorNumber <= 20: 
+                self.checkSettingsChange()
+            else:   checkNumberOfErrors(self.errors, self.settings, self.window)
             time.sleep(1)
-            self.checkSettingsChange()
 
 
 
@@ -248,6 +276,8 @@ class EnergyPrices:
 
     ## obliczenie różnic entsoe i tge
     def getDifference(self):
+        self.objectList_diff.clear()
+        self.objectList_diff_next.clear()
         for i in range(len(self.objectList_entsoe)):
             self.objectList_diff.insert(len(self.objectList_diff), round(float(self.objectList_entsoe[i].price) - float(self.objectList_tge[i].price), 2))
             self.objectList_diff_next.insert(len(self.objectList_diff_next), round(float(self.objectList_entsoe_next[i].price) - float(self.objectList_tge_next[i].price), 2))
@@ -374,7 +404,7 @@ class EnergyPrices:
 
 
 
-    ## uaktualnienie danych na wykresie (po przełączeniu któregoś z checkboxów)
+    ## uaktualnienie danych na wykresie (po przełączeniu któregoś z checkboxów, lub po pobraniu nowych danych)
     def updateGraph(self):
         hour = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23)
         plotValues = PlotValues()
@@ -432,17 +462,6 @@ class EnergyPrices:
 
 
 
-    # def downloadData():
-
-
-
-
-
-
-
-
-
-
     ## tworzy interfejs
     def createInterface(self):
         ## stworzenie okna
@@ -463,6 +482,8 @@ class EnergyPrices:
         ## sprawdza czy przez Modbusa została przesłana chęć zmiany ustawień
         checkSettingsChange_thread = threading.Thread(target=self.checkSettingsChange, daemon=True)
         checkSettingsChange_thread.start()
+
+
 
 
 
@@ -523,6 +544,8 @@ class EnergyPrices:
     
 
 
+
+
         ## ustawienie przegród tabeli
         tk.Frame(bg='black', width=1, height=70).grid(row=0, column=1)
         tk.Frame(bg='black', width=1, height=70).grid(row=0, column=4)
@@ -568,10 +591,10 @@ class EnergyPrices:
 
 
         ## zapisywaine danych do plików
-        def JSON(): createJSON(self.objectList_entsoe, self.objectList_tge, self.objectList_entsoe_next, self.objectList_tge_next)
-        def HTML(): createHTML(self.objectList_entsoe, self.objectList_tge, self.objectList_entsoe_next, self.objectList_tge_next)
-        def CSV(): createCSV(self.objectList_entsoe, self.objectList_tge, self.objectList_entsoe_next, self.objectList_tge_next)
-        def database(): sendToSQLite(self.objectList_entsoe, self.objectList_tge, self.objectList_entsoe_next, self.objectList_tge_next)
+        def JSON(): createJSON(self.objectList_entsoe, self.objectList_tge, self.objectList_entsoe_next, self.objectList_tge_next, self.errors, self.settings, self.window)
+        def HTML(): createHTML(self.objectList_entsoe, self.objectList_tge, self.objectList_entsoe_next, self.objectList_tge_next, self.errors, self.settings, self.window)
+        def CSV(): createCSV(self.objectList_entsoe, self.objectList_tge, self.objectList_entsoe_next, self.objectList_tge_next, self.errors, self.settings, self.window)
+        def database(): sendToSQLite(self.objectList_entsoe, self.objectList_tge, self.objectList_entsoe_next, self.objectList_tge_next, self.errors, self.settings, self.window)
 
         JSONbutton = tk.Button(self.managementFrame, text="JSON", command=JSON)
         HTMLbutton = tk.Button(self.managementFrame, text="HTML", command=HTML)
@@ -586,6 +609,7 @@ class EnergyPrices:
                 self.settings.currency = self.currencyStringVar.get()
                 self.changeCurrency()
             
+            self.getDifference()
             self.reloadElements()
             self.updateGraph()
             self.sendToModbus()
@@ -606,6 +630,7 @@ class EnergyPrices:
                 self.settings.currency = self.currencyStringVar.get()
                 self.changeCurrency()
 
+            self.getDifference()
             self.reloadElements()
             self.updateGraph()
             self.sendToModbus()
@@ -619,8 +644,8 @@ class EnergyPrices:
 
         ## wybieranie źródłą danych dla Modbusa - entsoe / tge
         def modbusDataSourceSelected():
-            if self.modbusSourceVar.get()=="entsoe": self.settings.data_source = 1
-            elif self.modbusSourceVar.get()=="tge": self.settings.data_source = 2
+            if self.modbusSourceVar.get()=="entsoe":   self.settings.data_source = 1
+            elif self.modbusSourceVar.get()=="tge":   self.settings.data_source = 2
             self.sendToModbus()
         modbusSourceVar_defaultvalue = 'entsoe'
         if self.settings.data_source == 1: modbusSourceVar_defaultvalue = 'entsoe'
@@ -662,60 +687,79 @@ class EnergyPrices:
 
 
         def updateData():
-            if datetime.datetime.now().hour != self.prev_hour: 
-                print("\nupdating..")
-                print(datetime.datetime.now())
+            try:
+                # if datetime.datetime.now().hour != self.prev_hour: 
+                    print("\nupdating..")
+                    self.errors.errorNumber = 0
+                    print(datetime.datetime.now())
 
-                self.date = datetime.datetime.now()
-                self.date_plus_day = datetime.datetime.now() + datetime.timedelta(days=1)
+                    self.date = datetime.datetime.now()
+                    self.date_plus_day = datetime.datetime.now() + datetime.timedelta(days=1)
 
 
-                parse_entsoe_thread = threading.Thread(target=parseENTSOE, args=(self.date, self.objectList_entsoe,))
-                parse_tge_thread = threading.Thread(target=parseTGE, args=(self.date, self.objectList_tge,))
-                parse_entsoe_next = threading.Thread(target=parseENTSOE, args=(self.date_plus_day, self.objectList_entsoe_next,))
-                parse_tge_next = threading.Thread(target=parseTGE, args=(self.date_plus_day, self.objectList_tge_next,))
+                    parse_entsoe_thread = threading.Thread(target=parseENTSOE, args=(self.date, self.objectList_entsoe, self.errors, self.settings, self.window, ), daemon = True)
+                    parse_tge_thread = threading.Thread(target=parseTGE, args=(self.date, self.objectList_tge, self.errors, self.settings, self.window, ), daemon = True)
+                    parse_entsoe_next = threading.Thread(target=parseENTSOE, args=(self.date_plus_day, self.objectList_entsoe_next, self.errors, self.settings, self.window, ), daemon = True)
+                    parse_tge_next = threading.Thread(target=parseTGE, args=(self.date_plus_day, self.objectList_tge_next, self.errors, self.settings, self.window, ), daemon = True)
 
-                parse_entsoe_thread.start()
-                parse_tge_thread.start()
-                parse_entsoe_next.start()
-                parse_tge_next.start()
+                    parse_entsoe_thread.start()
+                    parse_tge_thread.start()
+                    parse_entsoe_next.start()
+                    parse_tge_next.start()
 
-                parse_entsoe_thread.join()
-                parse_tge_thread.join()
-                parse_entsoe_next.join()
-                parse_tge_next.join()
+                    parse_entsoe_thread.join()
+                    parse_tge_thread.join()
+                    parse_entsoe_next.join()
+                    parse_tge_next.join()
 
-                ## ustawienie waluty pobranej z pliku
-                if self.objectList_entsoe[0].currency != self.settings.currency:   self.changeCurrency()
 
-                ## ustawienie fixingu pobranego z pliku
-                if self.objectList_tge[0].fixing != self.settings.fixing:   self.changeFixing()
-                
-                self.getDifference()
+                    ## ustawienie waluty pobranej z pliku
+                    if self.objectList_entsoe[0].currency != self.settings.currency:   self.changeCurrency()
 
-                sendToSQLite(self.objectList_entsoe, self.objectList_tge, self.objectList_entsoe_next, self.objectList_tge_next)
-                
-                self.reloadElements()
-                self.updateGraph()
-                self.sendToModbus()
+                    ## ustawienie fixingu pobranego z pliku
+                    if self.objectList_tge[0].fixing != self.settings.fixing:   self.changeFixing()
+                    
+                    self.getDifference()
 
-                
-                self.prev_hour = datetime.datetime.now().hour
-                
-                print("update finished")
-            self.window.after(60000, updateData)
+                    
+                    self.reloadElements()
+                    self.updateGraph()
+                    self.sendToModbus()
+                    sendToSQLite(self.objectList_entsoe, self.objectList_tge, self.objectList_entsoe_next, self.objectList_tge_next, self.errors, self.settings, self.window)
+
+
+                    self.prev_hour = datetime.datetime.now().hour
+                    
+                    print("update finished")
+                    
+                    if self.errors.errorNumber <= 20:   self.window.after(10000, updateData) ##########################################################################################
+                    else:   checkNumberOfErrors(self.errors, self.settings, self.window) ##########################################################################################
+
+
+
+
+                # if self.errors.errorNumber <= 20:   self.window.after(60000, updateData) 
+                # else:   checkNumberOfErrors(self.errors, self.settings, self.window)
+            
+            except Exception as e:
+                print(f"An error occurred in updateData: {e}. Trying again")
+                self.errors.errorNumber += 1
+                if self.errors.errorNumber <= 20:   updateData()
+                else:   checkNumberOfErrors(self.errors, self.settings, self.window)
+                time.sleep(1)
 
 
 
         self.prev_hour = self.date.hour
-        self.window.after(15000, updateData)
+        self.window.after(10000, updateData)
 
 
 
 
 
         def closeWindow():  
-            saveSettings_JSON(self.settings)
+            saveSettings_JSON(self.settings, self.errors)
+            self.close = True
             self.window.destroy()
 
         self.window.protocol("WM_DELETE_WINDOW", closeWindow)
@@ -731,20 +775,24 @@ class EnergyPrices:
 
 
 if __name__ == '__main__':
-    energyPrices = EnergyPrices()
-    energyPrices.main()
+    while True:
+        energyPrices = EnergyPrices()
+        energyPrices.main()
+        
+        if energyPrices.close == True:   break
 
 
 
 
+## testowanie: 
+#       wysyłanie modbusem
+#       - zmiana ustawień modbusem
+#       - gdy dane są nieprawidłowe / niepełne
+#       gdy nie ma internetu
+#       działanie ciągłe przez dłuższy czas
+#       zmiana dnia
+#       update o godzinie 
 
-## testy wszystkiego
+## wysyłanie modbusem danych z dziś i jutro (jakie wysyła 'dataok'? szczególnie gdy nie ma danych)
 
-# wysyłanie modbusem
-# zmiana ustawień 
-# zmiana ustawień modbusem
-# update o godzinie 
-# zmiana dnia
-
-
-## pozabezpieczać funkcje  try / except
+## -sprawdzanie errorów w każdej funkcji 

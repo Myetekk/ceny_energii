@@ -1,9 +1,10 @@
 import pandas as pd
 import time
 from entsoe import EntsoeRawClient
+import datetime
 from xml.dom.minidom import parseString
 
-from utils import getEUR, increaseOneDay
+from utils import getEUR, increaseOneDay, checkNumberOfErrors
 
 
 
@@ -11,16 +12,18 @@ from utils import getEUR, increaseOneDay
 
 ## klasa przechowująca dane zparsowane z entsoe
 class Entsoe:
-    data_source = 1
-    date = None
+    date = datetime.datetime(2024, 7, 1)
     hour = 0
     price = 0
     euro = 1
     currency = 'PLN'
-    fixing = 1  ## 1-fixing pierwszy, 2-fixing frugi
+    fixing = 1  ## dla entsoe tylko fixing pierwszy
+    data_source = 1
 
     def printProps(self):
         print(self.hour, ", ", self.price, ", ", self.date)
+
+
 
 
 
@@ -49,13 +52,15 @@ def getDataFromAPI_oneDay(date):
 
 
 ## parsuje dane pobrane z entsoe
-def parseENTSOE(date, objectList):
-    euro = getEUR(str(date)[:10].split('-'))
+def parseENTSOE(date, objectList, errors, settings, window):
+    euro = getEUR(str(date)[:10].split('-'), errors, settings, window)
     
     string = getDataFromAPI_oneDay(date)
+    
 
     try:
         objectList.clear()
+
         if string=="":
             for index in range(24): 
                 entsoe = Entsoe()
@@ -71,8 +76,6 @@ def parseENTSOE(date, objectList):
 
             for index in range(24):
                 entsoe = Entsoe()
-                # hour = document.getElementsByTagName("position")[index].firstChild.nodeValue
-                # hour = str(int(hour)-1) + ":00-" + hour + ":00"
                 price = document.getElementsByTagName("price.amount")[index].firstChild.nodeValue
                 date = document.getElementsByTagName("end")[1].firstChild.nodeValue
 
@@ -82,8 +85,11 @@ def parseENTSOE(date, objectList):
                 entsoe.euro = euro
 
                 objectList.insert(len(objectList), entsoe)
+        print("entsoe parsed")
+
     except Exception as e:
-        print(f"An error occurred in entsoe: {e}. Trying again")
+        print(f"An error occurred in parseENTSOE: {e}. Trying again")
+        errors.errorNumber += 1
+        if errors.errorNumber <= 20:   parseENTSOE(date, objectList, errors, settings, window)
+        else:   return
         time.sleep(1)
-        parseENTSOE(date, objectList)
-    print("entsoe parsed")
