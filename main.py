@@ -56,9 +56,6 @@ class EnergyPrices:
         self.errors.errorNumber = 0
 
 
-        # self.date = datetime.datetime(2024, 8, 13, 8, 0, 0)
-        # self.date_plus_day = datetime.datetime(2024, 8, 13, 8, 0, 0) + datetime.timedelta(days=1)
-
 
         ## ładuje ustawienia z pliku
         self.settings = Settings()
@@ -88,11 +85,6 @@ class EnergyPrices:
         if self.objectList_tge[0].fixing != self.settings.fixing:   self.changeFixing()
         
         self.getDifference()
-
-        # print(len(self.objectList_tge))
-        # print(len(self.objectList_tge_next))
-        # print(self.objectList_tge[0].printProps())
-        # print(self.objectList_tge_next[0].printProps())
 
         self.sendToModbus()
 
@@ -168,7 +160,6 @@ class EnergyPrices:
                 self.dataBank.set_input_registers(address=34, word_list=[1])  ## data_ok
                 self.dataBank.set_input_registers(address=35, word_list=[min(currentDayList)])  ## min
                 self.dataBank.set_input_registers(address=36, word_list=[max(currentDayList)])  ## max
-            # print(currentDayList)
 
 
             nextDayList = []
@@ -180,7 +171,6 @@ class EnergyPrices:
                 self.dataBank.set_input_registers(address=64, word_list=[1])  ## data_ok
                 self.dataBank.set_input_registers(address=65, word_list=[min(nextDayList)])  ## min
                 self.dataBank.set_input_registers(address=66, word_list=[max(nextDayList)])  ## max
-            # print(nextDayList)
 
 
             currency = 0
@@ -788,7 +778,7 @@ if __name__ == '__main__':
 #       wysyłanie modbusem
 #       - zmiana ustawień modbusem
 #       - gdy dane są nieprawidłowe / niepełne
-#       gdy nie ma internetu
+#       - gdy nie ma internetu
 #       działanie ciągłe przez dłuższy czas
 #       zmiana dnia
 #       update o godzinie 

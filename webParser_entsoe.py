@@ -3,6 +3,7 @@ import time
 from entsoe import EntsoeRawClient
 import datetime
 from xml.dom.minidom import parseString
+from urllib import request
 
 from utils import getEUR, increaseOneDay, checkNumberOfErrors
 
@@ -14,8 +15,8 @@ from utils import getEUR, increaseOneDay, checkNumberOfErrors
 class Entsoe:
     date = datetime.datetime(2024, 7, 1)
     hour = 0
-    price = 0
-    euro = 1
+    price = 0.0
+    euro = 1.0
     currency = 'PLN'
     fixing = 1  ## dla entsoe tylko fixing pierwszy
     data_source = 1
@@ -46,6 +47,19 @@ def getDataFromAPI_oneDay(date):
     except:
         ## jeśli napotka jakiś błąd (najpewniej brak danych dla podanego dnia) zwraca pusty string, co w funkcji 'parseENTSOE' przypisuje wartości '0' dla wszystkich godzin
         return ""
+
+
+
+
+
+def tryInternetConnection():
+    try:
+        request.urlopen('https://www.google.com', timeout=1)
+        return True
+    
+    except request.URLError as err: 
+        print('no internet connection')
+        return False
         
 
 
@@ -53,9 +67,13 @@ def getDataFromAPI_oneDay(date):
 
 ## parsuje dane pobrane z entsoe
 def parseENTSOE(date, objectList, errors, settings, window):
-    euro = getEUR(str(date)[:10].split('-'), errors, settings, window)
-    
-    string = getDataFromAPI_oneDay(date)
+    internetConn = tryInternetConnection()
+    if internetConn:
+        euro = getEUR(str(date)[:10].split('-'), errors, settings, window)
+        string = getDataFromAPI_oneDay(date)
+    else: 
+        euro = 1.0
+        string = ''
     
 
     try:
@@ -65,7 +83,7 @@ def parseENTSOE(date, objectList, errors, settings, window):
             for index in range(24): 
                 entsoe = Entsoe()
                 
-                entsoe.hour = index
+                entsoe.hour = -1
                 entsoe.price = 0.0
                 entsoe.date = str(date)[0:10]
                 entsoe.euro = euro
@@ -85,7 +103,7 @@ def parseENTSOE(date, objectList, errors, settings, window):
                 entsoe.euro = euro
 
                 objectList.insert(len(objectList), entsoe)
-        print("entsoe parsed")
+        if internetConn:   print("entsoe parsed")
 
     except Exception as e:
         print(f"An error occurred in parseENTSOE: {e}. Trying again")
