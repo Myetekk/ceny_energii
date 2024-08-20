@@ -55,6 +55,9 @@ class EnergyPrices:
 
         self.errors.errorNumber = 0
 
+        # self.date = datetime.datetime(2024, 8, 18, 23, 59) #################################################################################
+        # self.date_plus_day = self.date + datetime.timedelta(days=1) #################################################################################
+
 
 
         ## ładuje ustawienia z pliku
@@ -722,7 +725,7 @@ class EnergyPrices:
                     
                     print("update finished")
                     
-                    if self.errors.errorNumber <= 20:   self.window.after(10000, updateData) ##########################################################################################
+                    if self.errors.errorNumber <= 20:   self.window.after(15000, updateData) ##########################################################################################
                     else:   checkNumberOfErrors(self.errors, self.settings, self.window) ##########################################################################################
 
 
@@ -741,7 +744,7 @@ class EnergyPrices:
 
 
         self.prev_hour = self.date.hour
-        self.window.after(10000, updateData)
+        self.window.after(15000, updateData)
 
 
 
@@ -774,15 +777,15 @@ if __name__ == '__main__':
 
 
 
+
 ## testowanie: 
-#       wysyłanie modbusem
 #       - zmiana ustawień modbusem
 #       - gdy dane są nieprawidłowe / niepełne
 #       - gdy nie ma internetu
+#       - zmiana dnia
+#       - wysyłanie modbusem
+#       - czy wysyła dobre 'dataok'
 #       działanie ciągłe przez dłuższy czas
-#       zmiana dnia
-#       update o godzinie 
 
-## wysyłanie modbusem danych z dziś i jutro (jakie wysyła 'dataok'? szczególnie gdy nie ma danych)
 
-## -sprawdzanie errorów w każdej funkcji 
+## if w updacie

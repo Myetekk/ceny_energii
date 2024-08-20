@@ -67,43 +67,41 @@ def tryInternetConnection():
 
 ## parsuje dane pobrane z entsoe
 def parseENTSOE(date, objectList, errors, settings, window):
-    internetConn = tryInternetConnection()
-    if internetConn:
-        euro = getEUR(str(date)[:10].split('-'), errors, settings, window)
-        string = getDataFromAPI_oneDay(date)
-    else: 
-        euro = 1.0
-        string = ''
-    
-
     try:
-        objectList.clear()
+        internetConn = tryInternetConnection()
+        if internetConn:
+            objectList.clear()
 
-        if string=="":
-            for index in range(24): 
-                entsoe = Entsoe()
-                
-                entsoe.hour = -1
-                entsoe.price = 0.0
-                entsoe.date = str(date)[0:10]
-                entsoe.euro = euro
-                
-                objectList.insert(len(objectList), entsoe)
-        else:
-            document = parseString(string)
+            euro = getEUR(str(date)[:10].split('-'), errors, settings, window)
+            string = getDataFromAPI_oneDay(date)
 
-            for index in range(24):
-                entsoe = Entsoe()
-                price = document.getElementsByTagName("price.amount")[index].firstChild.nodeValue
-                date = document.getElementsByTagName("end")[1].firstChild.nodeValue
+            if string=="":
+                for index in range(24): 
+                    entsoe = Entsoe()
+                    
+                    entsoe.hour = -1
+                    entsoe.price = 0.0
+                    entsoe.date = str(date)[0:10]
+                    entsoe.euro = euro
+                    
+                    objectList.append(entsoe)
+            else:
+                document = parseString(string)
 
-                entsoe.hour = index
-                entsoe.price = round(float(price) * euro, 2)
-                entsoe.date = date[0:10]
-                entsoe.euro = euro
+                for index in range(24):
+                    entsoe = Entsoe()
+                    price = document.getElementsByTagName("price.amount")[index].firstChild.nodeValue
+                    date = document.getElementsByTagName("end")[1].firstChild.nodeValue
 
-                objectList.insert(len(objectList), entsoe)
-        if internetConn:   print("entsoe parsed")
+                    entsoe.hour = index
+                    entsoe.price = round(float(price) * euro, 2)
+                    entsoe.date = date[0:10]
+                    entsoe.euro = euro
+
+                    objectList.append(entsoe)
+            if internetConn:   print("entsoe parsed")
+        else: 
+            return
 
     except Exception as e:
         print(f"An error occurred in parseENTSOE: {e}. Trying again")
