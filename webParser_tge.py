@@ -20,6 +20,7 @@ class Tge:
     currency = 'PLN'
     fixing = 1  ## 1-fixing pierwszy, 2-fixing drugi
     data_source = 2
+    status = False  ## False- bad, True- good
     
 
     def printProps(self):
@@ -30,7 +31,7 @@ class Tge:
 
 
 ## wyciąga dane z linijek i przypisuje do odpowiednich wartości
-def getInfo(source_data, html_class_name, object, type_of_data, date, euro):
+def getInfo(source_data, html_class_name, object, type_of_data, date, euro, settings):
     data_pattern = re.findall(html_class_name, source_data, re.DOTALL)
 
     if data_pattern != []: 
@@ -45,8 +46,12 @@ def getInfo(source_data, html_class_name, object, type_of_data, date, euro):
             object.date = date
             object.pricef1 = round(float(data_pattern[0]), 2)
             object.pricef2 = round(float(data_pattern[2]), 2)
-            object.price = round(float(data_pattern[0]), 2)
+
+            if settings.fixing == 1:   object.price = round(float(data_pattern[0]), 2)
+            elif settings.fixing == 2:   object.price = round(float(data_pattern[2]), 2)
+
             object.euro = euro
+            object.status = True
 
 
 
@@ -70,11 +75,12 @@ def resetData(RDNList):
     
     for i in range(24):
         tge = Tge()
-        tge.hour = -1  
+        tge.hour = i  
         tge.pricef1 = 0.0
         tge.pricef2 = 0.0
         tge.price = 0.0
         tge.euro = 1.0
+        tge.status = False
 
         RDNList.append(tge)
 
@@ -109,7 +115,7 @@ def parseTGE(date, RDNList, errors, settings, window):
             else:
                 ## aby obejść (prawdopodobne) blokowanie przez strone zbyt częstych wejść
                 inteager = 0
-                while(True):
+                while (True):
                     try:
                         ## tworzy odpowiedni link dla podanej daty
                         date_link = date[2] + "-" + date[1] + "-" + date[0]
@@ -129,15 +135,21 @@ def parseTGE(date, RDNList, errors, settings, window):
                         prices = re.findall('<tbody.*?>.*?</tbody.*?>', html, re.DOTALL)
                         prices = re.findall('<tr.*?>.*?</tr.*?>', prices[2], re.DOTALL)
                         
+                        
+                        date_new_ = date_new.split('-')
+                        date_link_ = date_link.split('-')
+                        date_new_ = datetime.datetime(int(date_new_[2]), int(date_new_[1]), int(date_new_[0]))
+                        date_link_ = datetime.datetime(int(date_link_[2]), int(date_link_[1]), int(date_link_[0])) + datetime.timedelta(days=1)
 
-                        if date_new == date_link:
+
+                        if date_new == date_link  or  date_link_ >= ( datetime.datetime.now() + datetime.timedelta(days=1) ):
                             resetData(RDNList)
                         else:
                             ## wyciąga pojedyńcze dane z wierszy tabeli
                             for price in prices:
                                 tge = Tge()
-                                getInfo(price, '<td.*?class="footable-visible footable-first-column.*?">.*?</td.*?>', tge, "time", original_date, euro)  ## godziny
-                                getInfo(price, '<td style="display: table-cell;" class="footable-visible.*?>.*?</td.*?>', tge, "rate", original_date, euro)  ## wartości
+                                getInfo(price, '<td.*?class="footable-visible footable-first-column.*?">.*?</td.*?>', tge, "time", original_date, euro, settings)  ## godziny
+                                getInfo(price, '<td style="display: table-cell;" class="footable-visible.*?>.*?</td.*?>', tge, "rate", original_date, euro, settings)  ## wartości
                                 
                                 # if tge.hour != 0:
                                 RDNList.append(tge)

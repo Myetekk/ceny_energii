@@ -156,7 +156,7 @@ class EnergyPrices:
 
             currentDayList = [] 
             for object in objectList:   
-                if object.hour != -1: 
+                if object.status == True: 
                     currentDayList += [float(object.price)] 
             if len(currentDayList) != 0: 
                 self.dataBank.set_input_registers(address=10, word_list=currentDayList)  ## dane z dzisiaj 
@@ -167,7 +167,7 @@ class EnergyPrices:
 
             nextDayList = []
             for object in objectListNext:   
-                if object.hour != -1: 
+                if object.status == True: 
                     nextDayList += [float(object.price)] 
             if len(nextDayList) != 0: 
                 self.dataBank.set_input_registers(address=40, word_list=nextDayList)  ## dane z jutra
@@ -777,14 +777,16 @@ if __name__ == '__main__':
 
 
 
+## pobieranie tak jak w PSE
+
 
 ## testowanie: 
 #       - zmiana ustawień modbusem
 #       - gdy dane są nieprawidłowe / niepełne
 #       - gdy nie ma internetu
 #       - zmiana dnia
-#       - wysyłanie modbusem
-#       - czy wysyła dobre 'dataok'
+#       wysyłanie modbusem
+#       czy wysyła dobre 'dataok'
 #       działanie ciągłe przez dłuższy czas
 
 

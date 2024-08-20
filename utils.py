@@ -208,7 +208,7 @@ class CheckboxStatus:
 
 class Settings:
     currency = 'PLN'
-    fixing = 1
+    fixing = 2
     data_source = 1
     
 

@@ -20,6 +20,8 @@ class Entsoe:
     currency = 'PLN'
     fixing = 1  ## dla entsoe tylko fixing pierwszy
     data_source = 1
+    status = False  ## False- bad, True- good
+
 
     def printProps(self):
         print(self.hour, ", ", self.price, ", ", self.date)
@@ -79,10 +81,11 @@ def parseENTSOE(date, objectList, errors, settings, window):
                 for index in range(24): 
                     entsoe = Entsoe()
                     
-                    entsoe.hour = -1
+                    entsoe.hour = index
                     entsoe.price = 0.0
                     entsoe.date = str(date)[0:10]
                     entsoe.euro = euro
+                    entsoe.status = False
                     
                     objectList.append(entsoe)
             else:
@@ -97,6 +100,7 @@ def parseENTSOE(date, objectList, errors, settings, window):
                     entsoe.price = round(float(price) * euro, 2)
                     entsoe.date = date[0:10]
                     entsoe.euro = euro
+                    entsoe.status = True
 
                     objectList.append(entsoe)
             if internetConn:   print("entsoe parsed")
