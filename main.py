@@ -9,6 +9,7 @@ import time
 
 from webParser_entsoe import parseENTSOE
 from webParser_tge import parseTGE
+from windowTimeInterval import EnergyPrices_timeInterval
 from dataOperations.createJSON import createJSON
 from dataOperations.createHTML import createHTML
 from dataOperations.createCSV import createCSV
@@ -37,6 +38,11 @@ class EnergyPrices:
 
     date = datetime.datetime.now()
     date_plus_day = datetime.datetime.now() + datetime.timedelta(days=1)
+
+
+
+
+
 
 
 
@@ -588,11 +594,16 @@ class EnergyPrices:
         def HTML(): createHTML(self.objectList_entsoe, self.objectList_tge, self.objectList_entsoe_next, self.objectList_tge_next, self.errors, self.settings, self.window)
         def CSV(): createCSV(self.objectList_entsoe, self.objectList_tge, self.objectList_entsoe_next, self.objectList_tge_next, self.errors, self.settings, self.window)
         def database(): sendToSQLite(self.objectList_entsoe, self.objectList_tge, self.objectList_entsoe_next, self.objectList_tge_next, self.errors, self.settings, self.window)
+        def combinedData(): 
+            self.energyPrices_timeInterval = EnergyPrices_timeInterval()
+            energyPrices_timeInterval_thread = threading.Thread(target=self.energyPrices_timeInterval.createInterface, args=(self.errors, self.settings, ))
+            energyPrices_timeInterval_thread.start()
 
         JSONbutton = tk.Button(self.managementFrame, text="JSON", command=JSON)
         HTMLbutton = tk.Button(self.managementFrame, text="HTML", command=HTML)
         CSVbutton = tk.Button(self.managementFrame, text="CSV", command=CSV)
         databaseButton = tk.Button(self.managementFrame, text="database", command=database)
+        combinedDataButton = tk.Button(self.managementFrame, text="combined data", command=combinedData)
 
 
 
@@ -659,10 +670,11 @@ class EnergyPrices:
 
 
         ## umiejscowienie wszystkich elementów frama
-        JSONbutton.pack(side='left', padx=5)
-        HTMLbutton.pack(side='left', padx=5)
-        CSVbutton.pack(side='left', padx=5)
-        databaseButton.pack(side='left', padx=5)
+        JSONbutton.pack(side='left', padx=10)
+        HTMLbutton.pack(side='left', padx=10)
+        CSVbutton.pack(side='left', padx=10)
+        databaseButton.pack(side='left', padx=(10, 50))
+        combinedDataButton.pack(side='left', padx=(10, 50))
         currencyFrame.pack(side='left', padx=(5, 20))
         fixingFrame.pack(side='left', padx=(5, 20))
         modbusSourceFrame.pack(side='left', padx=(5, 20))
@@ -670,6 +682,7 @@ class EnergyPrices:
         self.managementFrame.grid(row=0, column=11) 
 
         self.updateGraph()
+
 
 
 
@@ -723,7 +736,7 @@ class EnergyPrices:
 
                     self.prev_hour = datetime.datetime.now().hour
                     
-                    print("update finished")
+                    print("update finished\n\n")
                     
                     if self.errors.errorNumber <= 20:   self.window.after(15000, updateData) ##########################################################################################
                     else:   checkNumberOfErrors(self.errors, self.settings, self.window) ##########################################################################################
@@ -752,6 +765,13 @@ class EnergyPrices:
 
         def closeWindow():  
             saveSettings_JSON(self.settings, self.errors)
+
+            try:   self.energyPrices_timeInterval.window
+            except:   print()
+            else:   
+                del_energyPrices_timeInterval_thread = threading.Thread(target=self.energyPrices_timeInterval.__del__, daemon=True)
+                del_energyPrices_timeInterval_thread.start()
+
             self.close = True
             self.window.destroy()
 
@@ -777,7 +797,8 @@ if __name__ == '__main__':
 
 
 
-## pobieranie tak jak w PSE
+
+## wybór waluty i fixingu w energyPrices_timeInterval
 
 
 ## testowanie: 
@@ -785,9 +806,12 @@ if __name__ == '__main__':
 #       - gdy dane są nieprawidłowe / niepełne
 #       - gdy nie ma internetu
 #       - zmiana dnia
-#       wysyłanie modbusem
-#       czy wysyła dobre 'dataok'
+#       - wysyłanie modbusem
+#       - czy wysyła dobre 'dataok'
+#       - zmiana ustawień modbusem
 #       działanie ciągłe przez dłuższy czas
 
 
 ## if w updacie
+
+## przy braku internetu wysyłać 'dataok' 0 czy 1

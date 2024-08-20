@@ -1,3 +1,5 @@
+import tkinter as tk
+from tkinter import BOTH
 import re
 import time
 from urllib.request import urlopen
@@ -170,6 +172,21 @@ def checkNumberOfErrors(errors, settings, window):
         print('Too much errors  \n\nRestarting app\n\n')
         saveSettings_JSON(settings, errors)
         if window != None:   window.destroy()
+
+
+
+
+
+## tworzy okienko z podaną wiadomością i przyciskiem do zamknięcia
+def errorWindow(message, windowTitle):
+    print(message)
+    errorWindow = tk.Tk()
+    errorWindow.title(windowTitle)
+    errorWindow.resizable(False, False)
+    errorWindow.configure(background='#bfbfbf')
+    tk.Label(errorWindow, text=message, font='22').pack(fill=BOTH, padx=40, pady=10)
+    tk.Button(errorWindow, text="ok", command=errorWindow.destroy, font='20').pack(padx=50, pady=(10, 15))
+    errorWindow.mainloop()
 
 
 

@@ -7,11 +7,12 @@ import datetime
 import pandas
 import time
 import csv
+import json
 import os
 
 from webParser_entsoe import parseENTSOE
 from webParser_tge import parseTGE
-from utils import Settings, Errors
+from utils import Settings, Errors, errorWindow
 
 
 
@@ -21,6 +22,11 @@ class EnergyPrices_timeInterval:
     window = None
     frame_table = None
     frame_header = None
+
+    
+    date_start = (datetime.datetime.now() - datetime.timedelta(days=1))
+    # date_start = datetime.datetime.now()
+    date_stop = datetime.datetime.now()
 
     CalendarStart = None
     CalendarStop = None
@@ -36,13 +42,13 @@ class EnergyPrices_timeInterval:
         date_stop_ = self.date_stop
 
 
-        def calendar_onChange(*args):
+        def calendar_onChange():
             self.dataList.clear()
-            self.date_start = self.CalendarStart_variable.get()
-            self.date_stop = self.CalendarStop_variable.get()
+            self.date_start = self.CalendarStart.get_date()
+            self.date_stop = self.CalendarStop.get_date()
             
-            self.getData()
-        
+            if self.date_start <= self.date_stop:   self.getData()
+            else:   errorWindow('nieprawidłowa data', 'error')
 
         
         self.CalendarStart_variable = tk.StringVar()
@@ -64,13 +70,12 @@ class EnergyPrices_timeInterval:
         CalendarStop_frame.pack()
 
 
+        tk.Button(self.frame_header, text=' RELOAD', command=calendar_onChange).pack(pady=(20, 30), ipadx=3, ipady=3)
 
-        # tk.Button(self.frame_header, text='export', command=self.exportToCSV).pack(pady=20, ipadx=3, ipady=3)
-            
+
+        tk.Button(self.frame_header, text='JSON', command=self.exportToJSON).pack(pady=(20, 10), ipadx=3, ipady=3)
+        tk.Button(self.frame_header, text='CSV', command=self.exportToCSV).pack(pady=(10, 20), ipadx=3, ipady=3)
         
-        ## jakoś zmienić
-        self.CalendarStart_variable.trace_add('write', calendar_onChange) #######################################
-        self.CalendarStop_variable.trace_add('write', calendar_onChange) #######################################
 
 
         self.frame_header.pack(side=LEFT, anchor=N, padx=(0, 15))
@@ -81,9 +86,11 @@ class EnergyPrices_timeInterval:
 
     ## ładuje dane z bazy danych, w tym czasie pokazuje loading screan
     def getData(self):
+        print('\n\nLoading combinedData window..')
+
         for widget in self.frame_table.winfo_children(): widget.destroy() 
         
-        tk.Label(self.frame_table, text='Loading..').pack()
+        tk.Label(self.frame_table, text='Loading..', font='Helvetica 14', background='#e6f2ec').pack()
         self.frame_table.pack()
 
         ## tworzy listę dat i dla każdej z nich pobiera dane
@@ -98,6 +105,8 @@ class EnergyPrices_timeInterval:
 
             parse_entsoe_thread.join()
             parse_tge_thread.join()
+
+            print('\n')
 
             self.dataList.append(oneDayObject.copy())
 
@@ -125,7 +134,7 @@ class EnergyPrices_timeInterval:
         self.canvas.pack(side=TOP, fill=BOTH, expand=True)
         self.frame_table.pack(side=RIGHT, fill=BOTH, expand=1)
 
-        print('\n\nLoaded')
+        print('Loaded combinedData window')
 
 
 
@@ -182,8 +191,59 @@ class EnergyPrices_timeInterval:
         parse_pse_thread.start()
 
 
-        self.window.protocol("WM_DELETE_WINDOW")
         self.window.mainloop()
+    
+
+
+
+
+    ## tworzy plik CSV z danymi
+    def exportToCSV(self):
+        if os.path.exists("outputs") == False: os.mkdir("outputs") 
+        if os.path.exists("outputs\\" + str(self.date_start)[:10] + "__" + str(self.date_stop)[:10]) == False: os.mkdir("outputs\\" + str(self.date_start)[:10] + "__" + str(self.date_stop)[:10]) 
+        fileName = "outputs\\" + str(self.date_start)[:10] + "__" + str(self.date_stop)[:10] + '\\' + str(self.date_start)[:10] + "__" + str(self.date_stop)[:10] + ".csv"
+
+        with open(fileName, "w", newline='') as file:
+            writer = csv.writer(file)
+            
+            writer.writerow(["date", "hour", "entsoe", "tge"])
+            for obj in self.dataList:
+                for i in range(24):
+                    writer.writerow([obj.objectList_entsoe[i].date, obj.objectList_entsoe[i].hour, obj.objectList_entsoe[i].price, obj.objectList_tge[i].price])
+    
+
+
+
+
+    ## tworzy plik JSON z danymi
+    def exportToJSON(self):
+        if os.path.exists("outputs") == False: os.mkdir("outputs") 
+        if os.path.exists("outputs\\" + str(self.date_start)[:10] + "__" + str(self.date_stop)[:10]) == False: os.mkdir("outputs\\" + str(self.date_start)[:10] + "__" + str(self.date_stop)[:10]) 
+        fileName = "outputs\\" + str(self.date_start)[:10] + "__" + str(self.date_stop)[:10] + '\\' + str(self.date_start)[:10] + "__" + str(self.date_stop)[:10] + ".json"
+
+        with open(fileName, "w", newline='') as file:
+            file.write('[\n\n')
+            
+            index = 0
+            for obj in self.dataList:
+                file.write('[\n\n')
+                for i in range(24):
+                    data = { "date": obj.objectList_entsoe[i].date, "hour": obj.objectList_entsoe[i].hour, "entsoe": obj.objectList_entsoe[i].price, "tge": obj.objectList_tge[i].price }
+                    json_object = json.dumps(data, indent=3)
+                    file.write(json_object)
+                    if obj.objectList_entsoe[i].hour != 23: file.write(", \n")
+                if index < len(self.dataList)-1:   file.write('\n\n], \n\n')
+                else:   file.write('\n\n] \n\n')
+                index += 1
+                
+            file.write(']\n\n')
+
+
+
+
+
+    def __del__(self):
+        self.window.destroy()
 
 
 
@@ -229,8 +289,4 @@ if __name__ == '__main__':
 
 
 
-## zmiana z 'DateEntry' na 'Calendar'
-## error przy zmianie dnia
-## export do plików 
-
-## integracja z główną aplikacją 
+## wybór waluty i fixingu
