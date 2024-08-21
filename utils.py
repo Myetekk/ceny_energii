@@ -11,7 +11,7 @@ from settingsOperations import saveSettings_JSON
 
 
 ## pobiera dane o kursie euro w danym dniu
-def getEUR(date, errors, settings, window): 
+def getEUR(date): 
     # try:
         date_prev_start = decreaseOneDay(date)
         date_prev_end = decreaseOneDay(date_prev_start)
@@ -232,3 +232,4 @@ class Settings:
 
 class Errors:
     errorNumber = 0
+    entsoeErrorNumber = 0

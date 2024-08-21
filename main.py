@@ -33,6 +33,8 @@ class EnergyPrices:
     objectList_tge_next = list()
     objectList_diff = list()
     objectList_diff_next = list() 
+
+    combinedDataList = list() 
     
     dataBank = DataBank()
 
@@ -56,7 +58,7 @@ class EnergyPrices:
         self.server = ModbusServer(host='0.0.0.0', port=502, no_block=True, data_bank=self.dataBank)
         self.server.start()
 
-        inteager_thread = threading.Thread(target=self.increaseInteger, daemon = True)
+        inteager_thread = threading.Thread(target=self.increaseInteger, daemon=True)
         inteager_thread.start()
 
         self.errors.errorNumber = 0
@@ -72,10 +74,10 @@ class EnergyPrices:
 
 
         ## pobiera dane z entsoe i tge dla dnia dzisiejszego i następnego
-        parse_entsoe_thread = threading.Thread(target=parseENTSOE, args=(self.date, self.objectList_entsoe, self.errors, self.settings, self.window, ), daemon = True)
-        parse_tge_thread = threading.Thread(target=parseTGE, args=(self.date, self.objectList_tge, self.errors, self.settings, self.window, ), daemon = True)
-        parse_entsoe_next = threading.Thread(target=parseENTSOE, args=(self.date_plus_day, self.objectList_entsoe_next, self.errors, self.settings, self.window, ), daemon = True)
-        parse_tge_next = threading.Thread(target=parseTGE, args=(self.date_plus_day, self.objectList_tge_next, self.errors, self.settings, self.window, ), daemon = True)
+        parse_entsoe_thread = threading.Thread(target=parseENTSOE, args=(self.date, self.objectList_entsoe, self.errors, ), daemon = True)
+        parse_tge_thread = threading.Thread(target=parseTGE, args=(self.date, self.objectList_tge, self.errors, self.settings, ), daemon = True)
+        parse_entsoe_next = threading.Thread(target=parseENTSOE, args=(self.date_plus_day, self.objectList_entsoe_next, self.errors, ), daemon = True)
+        parse_tge_next = threading.Thread(target=parseTGE, args=(self.date_plus_day, self.objectList_tge_next, self.errors, self.settings, ), daemon = True)
 
         parse_entsoe_thread.start()
         parse_tge_thread.start()
@@ -588,6 +590,9 @@ class EnergyPrices:
         
 
 
+        saveInLabel = tk.Label(self.managementFrame, text='Save in:')
+
+
 
         ## zapisywaine danych do plików
         def JSON(): createJSON(self.objectList_entsoe, self.objectList_tge, self.objectList_entsoe_next, self.objectList_tge_next, self.errors, self.settings, self.window)
@@ -595,15 +600,18 @@ class EnergyPrices:
         def CSV(): createCSV(self.objectList_entsoe, self.objectList_tge, self.objectList_entsoe_next, self.objectList_tge_next, self.errors, self.settings, self.window)
         def database(): sendToSQLite(self.objectList_entsoe, self.objectList_tge, self.objectList_entsoe_next, self.objectList_tge_next, self.errors, self.settings, self.window)
         def combinedData(): 
+            # self.combinedDataButton.configure(state='disabled')
             self.energyPrices_timeInterval = EnergyPrices_timeInterval()
-            energyPrices_timeInterval_thread = threading.Thread(target=self.energyPrices_timeInterval.createInterface, args=(self.errors, self.settings, ))
-            energyPrices_timeInterval_thread.start()
+            self.energyPrices_timeInterval.createInterface(self.combinedDataButton)
+
+            self.combinedDataList.clear()
+            self.combinedDataList.append(self.energyPrices_timeInterval)
 
         JSONbutton = tk.Button(self.managementFrame, text="JSON", command=JSON)
         HTMLbutton = tk.Button(self.managementFrame, text="HTML", command=HTML)
         CSVbutton = tk.Button(self.managementFrame, text="CSV", command=CSV)
         databaseButton = tk.Button(self.managementFrame, text="database", command=database)
-        combinedDataButton = tk.Button(self.managementFrame, text="combined data", command=combinedData)
+        self.combinedDataButton = tk.Button(self.managementFrame, text="combined data", command=combinedData)
 
 
 
@@ -670,11 +678,12 @@ class EnergyPrices:
 
 
         ## umiejscowienie wszystkich elementów frama
-        JSONbutton.pack(side='left', padx=10)
-        HTMLbutton.pack(side='left', padx=10)
-        CSVbutton.pack(side='left', padx=10)
+        saveInLabel.pack(side='left')
+        JSONbutton.pack(side='left', padx=(10, 0))
+        HTMLbutton.pack(side='left', padx=(10, 0))
+        CSVbutton.pack(side='left', padx=(10, 0))
         databaseButton.pack(side='left', padx=(10, 50))
-        combinedDataButton.pack(side='left', padx=(10, 50))
+        self.combinedDataButton.pack(side='left', padx=(10, 50))
         currencyFrame.pack(side='left', padx=(5, 20))
         fixingFrame.pack(side='left', padx=(5, 20))
         modbusSourceFrame.pack(side='left', padx=(5, 20))
@@ -703,10 +712,10 @@ class EnergyPrices:
                     self.date_plus_day = datetime.datetime.now() + datetime.timedelta(days=1)
 
 
-                    parse_entsoe_thread = threading.Thread(target=parseENTSOE, args=(self.date, self.objectList_entsoe, self.errors, self.settings, self.window, ), daemon = True)
-                    parse_tge_thread = threading.Thread(target=parseTGE, args=(self.date, self.objectList_tge, self.errors, self.settings, self.window, ), daemon = True)
-                    parse_entsoe_next = threading.Thread(target=parseENTSOE, args=(self.date_plus_day, self.objectList_entsoe_next, self.errors, self.settings, self.window, ), daemon = True)
-                    parse_tge_next = threading.Thread(target=parseTGE, args=(self.date_plus_day, self.objectList_tge_next, self.errors, self.settings, self.window, ), daemon = True)
+                    parse_entsoe_thread = threading.Thread(target=parseENTSOE, args=(self.date, self.objectList_entsoe, self.errors, ), daemon = True)
+                    parse_tge_thread = threading.Thread(target=parseTGE, args=(self.date, self.objectList_tge, self.errors, self.settings, ), daemon = True)
+                    parse_entsoe_next = threading.Thread(target=parseENTSOE, args=(self.date_plus_day, self.objectList_entsoe_next, self.errors, ), daemon = True)
+                    parse_tge_next = threading.Thread(target=parseTGE, args=(self.date_plus_day, self.objectList_tge_next, self.errors, self.settings, ), daemon = True)
 
                     parse_entsoe_thread.start()
                     parse_tge_thread.start()
@@ -763,19 +772,19 @@ class EnergyPrices:
 
 
 
-        def closeWindow():  
+        def closeWindows():  
             saveSettings_JSON(self.settings, self.errors)
 
             try:   self.energyPrices_timeInterval.window
             except:   print()
             else:   
-                del_energyPrices_timeInterval_thread = threading.Thread(target=self.energyPrices_timeInterval.__del__, daemon=True)
+                del_energyPrices_timeInterval_thread = threading.Thread(target=self.energyPrices_timeInterval.window.destroy, daemon=True)
                 del_energyPrices_timeInterval_thread.start()
 
             self.close = True
             self.window.destroy()
 
-        self.window.protocol("WM_DELETE_WINDOW", closeWindow)
+        self.window.protocol("WM_DELETE_WINDOW", closeWindows)
         self.window.mainloop()
         
 
@@ -797,11 +806,14 @@ if __name__ == '__main__':
 
 
 
+## - pozabezpieczać 'windowTimeInterval'
+## miejsce wyświetlania okienek (w jakiej części ekranu)
+## 12.08-23.08  wszystkie tge się wyzerowały
+## każde uruchomienie 'windowTimeInterval' dokłada ok 3MB
 
-## wybór waluty i fixingu w energyPrices_timeInterval
 
 
-## testowanie: 
+## TESTOWANIE: 
 #       - zmiana ustawień modbusem
 #       - gdy dane są nieprawidłowe / niepełne
 #       - gdy nie ma internetu
@@ -812,6 +824,14 @@ if __name__ == '__main__':
 #       działanie ciągłe przez dłuższy czas
 
 
-## if w updacie
 
-## przy braku internetu wysyłać 'dataok' 0 czy 1
+### PYTANIA
+#       przy braku internetu wysyłać 'dataok' 0 czy 1,   w teorii jest błąd, więc powinno być '0', ale cały czas wysyła dane więc '1', ale dane nie są aktualizowane, więc po jakimś (dłuższym) czasie się przedawnią, więc '1'
+#       pobieranie danych na wątkach czy wszystkie razem?  -  (co ważniejsze czas, czy obciążenie procesora)
+
+
+
+### PRZED WYSŁANIEM: 
+##      if w updacie
+##      '.after' w updacie
+##      sprawdzić daty (czy przypisuje '.now', czy jakieś na sztywno)

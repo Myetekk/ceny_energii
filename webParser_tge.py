@@ -90,12 +90,12 @@ def resetData(RDNList):
 
 
 ## parsuje dane pobrane z TGE
-def parseTGE(date, RDNList, errors, settings, window):
+def parseTGE(date, RDNList, errors, settings):
     try:
         if tryInternetConnection():
             RDNList.clear()
 
-            euro = getEUR(str(date)[:10].split('-'), errors, settings, window)
+            euro = getEUR(str(date)[:10].split('-'))
 
             original_date = str(date)[:10]
             date = decreaseOneDay(str(date)[:10].split('-'))
@@ -169,6 +169,6 @@ def parseTGE(date, RDNList, errors, settings, window):
     except Exception as e:
         print(f"An error occurred in parseTGE: {e}. Trying again")
         errors.errorNumber += 1
-        if errors.errorNumber <= 20:   parseTGE(date, RDNList, errors, settings, window)
+        if errors.errorNumber <= 20:   parseTGE(date, RDNList, errors, settings)
         else:   return
         time.sleep(1)

@@ -31,7 +31,7 @@ class Entsoe:
 
 
 ## łączy się z API entsoe i pobiera info o danym dniu
-def getDataFromAPI_oneDay(date):
+def getDataFromAPI_oneDay(date, errors):
     try:
         country_code = 'PL'
         
@@ -48,7 +48,12 @@ def getDataFromAPI_oneDay(date):
     
     except:
         ## jeśli napotka jakiś błąd (najpewniej brak danych dla podanego dnia) zwraca pusty string, co w funkcji 'parseENTSOE' przypisuje wartości '0' dla wszystkich godzin
-        return ""
+        if date > datetime.datetime.now():   return ""
+        else:   
+            errors.entsoeErrorNumber += 1
+            if errors.entsoeErrorNumber <= 5:   getDataFromAPI_oneDay(date, errors)
+            else:   return ""
+            time.sleep(1)
 
 
 
@@ -68,14 +73,15 @@ def tryInternetConnection():
 
 
 ## parsuje dane pobrane z entsoe
-def parseENTSOE(date, objectList, errors, settings, window):
+def parseENTSOE(date, objectList, errors):
+    errors.entsoeErrorNumber = 0
     try:
         internetConn = tryInternetConnection()
         if internetConn:
             objectList.clear()
 
-            euro = getEUR(str(date)[:10].split('-'), errors, settings, window)
-            string = getDataFromAPI_oneDay(date)
+            euro = getEUR(str(date)[:10].split('-'))
+            string = getDataFromAPI_oneDay(date, errors)
 
             if string=="":
                 for index in range(24): 
@@ -110,6 +116,6 @@ def parseENTSOE(date, objectList, errors, settings, window):
     except Exception as e:
         print(f"An error occurred in parseENTSOE: {e}. Trying again")
         errors.errorNumber += 1
-        if errors.errorNumber <= 20:   parseENTSOE(date, objectList, errors, settings, window)
+        if errors.errorNumber <= 20:   parseENTSOE(date, objectList, errors)
         else:   return
         time.sleep(1)
