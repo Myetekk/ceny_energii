@@ -2,8 +2,6 @@ import json
 import os
 import datetime
 
-# from utils import saveError
-
 
 
 
@@ -13,7 +11,7 @@ def saveSettings_JSON(settings, errors):
     try:
         if os.path.exists("outputs") == False: os.mkdir("outputs") 
         with open("outputs\\settings.json", "w") as outfile:
-            data = { "currency": str(settings.currency), "fixing": int(settings.fixing), "data_source": int(settings.data_source) }
+            data = { "currency": str(settings.currency), "fixing": int(settings.fixing), "data_source": int(settings.data_source), "updateTime": int(settings.updateTime) }
             json_object = json.dumps(data, indent=3)
             outfile.write(json_object)
                 
@@ -36,7 +34,7 @@ def createDefaultSettings(settings, errors):
     try:
         if os.path.exists("outputs") == False: os.mkdir("outputs") 
         with open("outputs\\settings.json", "w") as outfile:
-            data = { "currency": str(settings.currency), "fixing": int(settings.fixing), "data_source": int(settings.data_source) }
+            data = { "currency": str(settings.currency), "fixing": int(settings.fixing), "data_source": int(settings.data_source), "updateTime": int(settings.updateTime) }
             json_object = json.dumps(data, indent=3)
             outfile.write(json_object)
 
@@ -56,13 +54,14 @@ def loadSettings(settings, errors):
     try:
         if os.path.exists(filePath):  ## jeśli plik istnieje 
             fileSize = os.path.getsize(filePath)
-            if fileSize >= 55  and  fileSize <= 75:  ## jeśli plik ma w sobie jakieś dane
+            if fileSize >= 80  and  fileSize <= 100:  ## jeśli plik ma w sobie jakieś dane
                 with open(filePath) as outfile:
                     data = json.load(outfile)
 
                     settings.currency = str(data["currency"])
                     settings.fixing = int(data["fixing"])
                     settings.data_source = int(data["data_source"])
+                    settings.updateTime = int(data["updateTime"])
             else: 
                 createDefaultSettings(settings, errors)
         else:
@@ -83,6 +82,7 @@ def loadSettings(settings, errors):
 
 
 
+## loguje errory do pliku .txt;   ta sama funkcja co w 'utils.py', poniewać circular import
 def saveError(message):
     try:
         if os.path.exists("outputs") == False: os.mkdir("outputs") 

@@ -14,32 +14,24 @@ from settingsOperations import saveSettings_JSON
 
 ## pobiera dane o kursie euro w danym dniu
 def getEUR(date): 
-    # try:
-        date_prev_start = decreaseOneDay(date)
-        date_prev_end = decreaseOneDay(date_prev_start)
-        date_prev_end = decreaseOneDay(date_prev_end)
-        date_prev_end = decreaseOneDay(date_prev_end)
-        date_prev_start = date_prev_start[0] + "-" + date_prev_start[1] + "-" + date_prev_start[2]
-        date_prev_end = date_prev_end[0] + "-" + date_prev_end[1] + "-" + date_prev_end[2]
+    date_prev_start = decreaseOneDay(date)
+    date_prev_end = decreaseOneDay(date_prev_start)
+    date_prev_end = decreaseOneDay(date_prev_end)
+    date_prev_end = decreaseOneDay(date_prev_end)
+    date_prev_start = date_prev_start[0] + "-" + date_prev_start[1] + "-" + date_prev_start[2]
+    date_prev_end = date_prev_end[0] + "-" + date_prev_end[1] + "-" + date_prev_end[2]
 
-        url = "https://www.money.pl/pieniadze/nbparch/srednie/?symbol=EUR.n&from=" + date_prev_end + "&to=" + date_prev_start
-        page = request.urlopen(url)
-        html = page.read().decode("utf-8")
+    url = "https://www.money.pl/pieniadze/nbparch/srednie/?symbol=EUR.n&from=" + date_prev_end + "&to=" + date_prev_start
+    page = request.urlopen(url)
+    html = page.read().decode("utf-8")
 
-        html_class_name = """<div class="rt-td" role="gridcell".*?><div style="text-align:right">.*?</div></div>"""
-        eur = re.findall(html_class_name, html, re.DOTALL)
-        eur = re.sub('</div></div>', "", eur[0])
-        eur = re.sub('<.*>', "", eur)
-        eur = re.sub(',', ".", eur)
-    
-        return float(eur)
+    html_class_name = """<div class="rt-td" role="gridcell".*?><div style="text-align:right">.*?</div></div>"""
+    eur = re.findall(html_class_name, html, re.DOTALL)
+    eur = re.sub('</div></div>', "", eur[0])
+    eur = re.sub('<.*>', "", eur)
+    eur = re.sub(',', ".", eur)
 
-    # except Exception as e:
-    #     print(f"An error occurred in getEUR: {e}. Trying again")
-    #     errors.errorNumber += 1
-    #     if errors.errorNumber <= 20:   getEUR(date, errors, settings, window)
-    #     else:   checkNumberOfErrors(errors, settings, window)
-    #     time.sleep(1)
+    return float(eur)
 
 
 
@@ -180,7 +172,7 @@ def checkNumberOfErrors(errors, settings, window):
 ## sprawdza czy ma połączenie z internetem
 def tryInternetConnection():
     try:
-        request.urlopen('https://www.google.com', timeout=1)
+        request.urlopen('https://www.google.com', timeout=5)
         return True
     
     except request.URLError as err: 
@@ -198,8 +190,9 @@ def errorWindow(message, windowTitle):
     errorWindow = tk.Tk()
     errorWindow.title(windowTitle)
     errorWindow.resizable(False, False)
+    errorWindow.geometry("+500+500")
     errorWindow.configure(background='#bfbfbf')
-    tk.Label(errorWindow, text=message, font='22').pack(fill=BOTH, padx=40, pady=10)
+    tk.Label(errorWindow, text=message, font='Helvetica 16').pack(fill=BOTH, padx=40, pady=10)
     tk.Button(errorWindow, text="ok", command=errorWindow.destroy, font='20').pack(padx=50, pady=(10, 15))
     errorWindow.mainloop()
 
@@ -207,6 +200,7 @@ def errorWindow(message, windowTitle):
 
 
 
+## zapisuje error do pliku .txt
 def saveError(message):
     try:
         if os.path.exists("outputs") == False: os.mkdir("outputs") 
@@ -259,6 +253,7 @@ class Settings:
     currency = 'PLN'
     fixing = 2
     data_source = 1
+    updateTime = 15  ## w sekundach
     
 
 

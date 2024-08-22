@@ -24,6 +24,7 @@ from settingsOperations import saveSettings_JSON, loadSettings
 class EnergyPrices:
     errors = Errors()
     close = False
+    # updateTime = 15  ## w sekundach
 
     window = None
 
@@ -53,8 +54,6 @@ class EnergyPrices:
     def main(self):
         print("Loading..")
 
-
-
         self.server = ModbusServer(host='0.0.0.0', port=502, no_block=True, data_bank=self.dataBank)
         self.server.start()
 
@@ -63,7 +62,7 @@ class EnergyPrices:
 
         self.errors.errorNumber = 0
 
-        # self.date = datetime.datetime(2024, 8, 21, 23, 59) #################################################################################
+        # self.date = datetime.datetime(2024, 8, 18, 12, 00) #################################################################################
         # self.date_plus_day = self.date + datetime.timedelta(days=1) #################################################################################
 
 
@@ -72,8 +71,9 @@ class EnergyPrices:
         self.settings = Settings()
         loadSettings(self.settings, self.errors)
 
+        ## sprawdza połączenie z internetem
         if tryInternetConnection():
-            ## pobiera dane z entsoe i tge dla dnia dzisiejszego i następnego
+            ## jeśli ma połączenie z internetem  -->  pobiera dane z entsoe i tge dla dnia dzisiejszego i następnego
             parse_entsoe_thread = threading.Thread(target=parseENTSOE, args=(self.date, self.objectList_entsoe, self.errors, ), daemon = True)
             parse_tge_thread = threading.Thread(target=parseTGE, args=(self.date, self.objectList_tge, self.errors, self.settings, ), daemon = True)
             parse_entsoe_next = threading.Thread(target=parseENTSOE, args=(self.date_plus_day, self.objectList_entsoe_next, self.errors, ), daemon = True)
@@ -89,9 +89,9 @@ class EnergyPrices:
             parse_entsoe_next.join()
             parse_tge_next.join()
         else:   
+            ## jeśli nie ma połączenia z internetem  -->  informuje o tym użytkownika i przypisuje zerowe dane aby program dalej działał
             errorWindow('no internet connection', 'error')
 
-            ## jeśli nie ma internetu - przypisuje zerowe dane
             for i in range(24):
                 entsoe = Entsoe()
                 tge = Tge()
@@ -109,7 +109,7 @@ class EnergyPrices:
                 self.objectList_tge_next.append(tge)
 
 
-                    
+                
 
         ## ustawienie waluty pobranej z pliku
         if self.objectList_entsoe[0].currency != self.settings.currency:   self.changeCurrency()
@@ -117,12 +117,15 @@ class EnergyPrices:
         ## ustawienie fixingu pobranego z pliku
         if self.objectList_tge[0].fixing != self.settings.fixing:   self.changeFixing()
         
+        ## liczy różnice między Entsoe i Tge
         self.getDifference()
 
+        ## wysyła dane modbusem
         self.sendToModbus()
 
         print("Loaded")
 
+        ## tworzy cały interfejs graficzny
         self.createInterface()
 
 
@@ -134,7 +137,7 @@ class EnergyPrices:
     
 
 
-    ## zmienianie liczby co sekunde (żeby zauważyć kiedy program się zetnie)
+    ## zmienianie liczby co sekunde (żeby zauważyć kiedy program się wysypie)
     def increaseInteger(self):
         integer = 0
         while True:
@@ -238,8 +241,8 @@ class EnergyPrices:
                 settingsListener = self.dataBank.get_holding_registers(122, 3)
                 
                 currency_number = 1
-                if self.settings.currency == 'PLN': currency_number = 1
-                elif self.settings.currency == 'EUR': currency_number = 2
+                if self.settings.currency == 'PLN':   currency_number = 1
+                elif self.settings.currency == 'EUR':   currency_number = 2
                     
                 if settingsListener != [0, 0, 0]  and  settingsListener != [currency_number, int(self.settings.fixing), self.settings.data_source]:
                     print("\nupdating settings..")
@@ -303,8 +306,8 @@ class EnergyPrices:
         self.objectList_diff.clear()
         self.objectList_diff_next.clear()
         for i in range(len(self.objectList_entsoe)):
-            self.objectList_diff.insert(len(self.objectList_diff), round(float(self.objectList_entsoe[i].price) - float(self.objectList_tge[i].price), 2))
-            self.objectList_diff_next.insert(len(self.objectList_diff_next), round(float(self.objectList_entsoe_next[i].price) - float(self.objectList_tge_next[i].price), 2))
+            self.objectList_diff.append(round(float(self.objectList_entsoe[i].price) - float(self.objectList_tge[i].price), 2))
+            self.objectList_diff_next.append(round(float(self.objectList_entsoe_next[i].price) - float(self.objectList_tge_next[i].price), 2))
     
 
 
@@ -413,12 +416,12 @@ class EnergyPrices:
 
             ## wpisuje nowe wartości
             for i in range(24):            
-                tk.Label(text=(round(self.objectList_entsoe[i].price, 2))).grid(row=i+2, column=2)
-                tk.Label(text=(round(self.objectList_entsoe_next[i].price, 2))).grid(row=i+2, column=3)
-                tk.Label(text=(round(self.objectList_tge[i].price, 2))).grid(row=i+2, column=5)
-                tk.Label(text=(round(self.objectList_tge_next[i].price, 2))).grid(row=i+2, column=6)
-                tk.Label(text=(self.objectList_diff[i])).grid(row=i+2, column=8)
-                tk.Label(text=(self.objectList_diff_next[i])).grid(row=i+2, column=9)
+                tk.Label(text=( round(self.objectList_entsoe[i].price, 2) )).grid(row=i+2, column=2)
+                tk.Label(text=( round(self.objectList_entsoe_next[i].price, 2) )).grid(row=i+2, column=3)
+                tk.Label(text=( round(self.objectList_tge[i].price, 2) )).grid(row=i+2, column=5)
+                tk.Label(text=( round(self.objectList_tge_next[i].price, 2) )).grid(row=i+2, column=6)
+                tk.Label(text=( round(self.objectList_diff[i], 2) )).grid(row=i+2, column=8)
+                tk.Label(text=( round(self.objectList_diff_next[i], 2) )).grid(row=i+2, column=9)
 
         except Exception as e:
             print(f"An error occurred in reloadElements: {e}. Trying again")
@@ -454,7 +457,7 @@ class EnergyPrices:
             self.plotObj.plot.clear()
             self.plotObj.plot.set_xlabel("hour")
             self.plotObj.plot.set_ylabel("price")
-            self.plotObj.plot.set_title(str(self.objectList_entsoe[0].date) + ",   EUR to PLN: " + str(self.objectList_entsoe[0].euro))
+            self.plotObj.plot.set_title(str(self.objectList_entsoe[0].date) + "  -  " + str(self.objectList_entsoe_next[0].date) + ",   EUR to PLN: " + str(self.objectList_entsoe[0].euro))
             self.plotObj.plot.grid(which='both')
 
             ## nałożenie na wykres danych, które są uruchomione domyślnie
@@ -511,6 +514,7 @@ class EnergyPrices:
             self.window = tk.Tk()
             self.window.title('Energy prices')
             self.window.resizable(False, False)
+            self.window.geometry("+100+100")
 
 
         
@@ -612,12 +616,12 @@ class EnergyPrices:
                 hour = str(i) + ":00 - " + str(i+1) + ":00"
                 tk.Label(text=hour).grid(row=i+2, column=0)
 
-                tk.Label(text=round(float(self.objectList_entsoe[i].price), 2)).grid(row=i+2, column=2)
-                tk.Label(text=round(float(self.objectList_entsoe_next[i].price), 2)).grid(row=i+2, column=3)
-                tk.Label(text=round(float(self.objectList_tge[i].price), 2)).grid(row=i+2, column=5)
-                tk.Label(text=round(float(self.objectList_tge_next[i].price), 2)).grid(row=i+2, column=6)
-                tk.Label(text=round(float(self.objectList_diff[i]), 2)).grid(row=i+2, column=8)
-                tk.Label(text=round(float(self.objectList_diff_next[i]), 2)).grid(row=i+2, column=9)
+                tk.Label(text=round( float(self.objectList_entsoe[i].price), 2 )).grid(row=i+2, column=2)
+                tk.Label(text=round( float(self.objectList_entsoe_next[i].price), 2 )).grid(row=i+2, column=3)
+                tk.Label(text=round( float(self.objectList_tge[i].price), 2 )).grid(row=i+2, column=5)
+                tk.Label(text=round( float(self.objectList_tge_next[i].price), 2 )).grid(row=i+2, column=6)
+                tk.Label(text=round( float(self.objectList_diff[i]), 2 )).grid(row=i+2, column=8)
+                tk.Label(text=round( float(self.objectList_diff_next[i]), 2 )).grid(row=i+2, column=9)
                 
                 tk.Frame(bg='black', width=1, height=27).grid(row=i+2, column=1)
                 tk.Frame(bg='black', width=1, height=27).grid(row=i+2, column=4)
@@ -649,12 +653,42 @@ class EnergyPrices:
                     self.combinedDataList.clear()
                     self.combinedDataList.append(self.energyPrices_timeInterval)
                 else:   errorWindow('no internet connection', 'error')
+            def updateTime_onChange():
+                try:
+                    if int(self.updateTimeVariable.get()) >= 7200:   self.updateTimeVariable.set(7200)
+                    elif int(self.updateTimeVariable.get()) <= 0:   self.updateTimeVariable.set(15)
 
+                    self.window.after_cancel(self.afterFunc)
+                    self.window.after(int(self.updateTimeVariable.get())*1000, updateData)
+
+                    self.settings.updateTime = int(self.updateTimeVariable.get())
+                except: 
+                    self.updateTimeVariable.set(60)
+                    self.window.after_cancel(self.afterFunc)
+
+                    self.window.after(int(self.updateTimeVariable.get())*1000, updateData)
+                    self.settings.updateTime = int(self.updateTimeVariable.get())
+
+
+            ## przyciski exportu do plików
             JSONbutton = tk.Button(self.managementFrame, text="JSON", command=JSON)
             HTMLbutton = tk.Button(self.managementFrame, text="HTML", command=HTML)
             CSVbutton = tk.Button(self.managementFrame, text="CSV", command=CSV)
             databaseButton = tk.Button(self.managementFrame, text="database", command=database)
             self.combinedDataButton = tk.Button(self.managementFrame, text="combined data", command=combinedData)
+
+
+
+            ## wybieranie czasu między updatami
+            self.updateTime_frame = tk.Frame(self.managementFrame)
+            self.updateTimeVariable = tk.IntVar(self.updateTime_frame, self.settings.updateTime)
+            # self.updateTime_Step = tk.IntVar(self.updateTime_frame, int(self.settings.updateTime))
+            self.updateTime = tk.Spinbox(self.updateTime_frame, from_=15, to=7200, increment=15, textvariable=self.updateTimeVariable, command=updateTime_onChange, width=7)
+            self.updateTime_label = tk.Label(self.updateTime_frame, text="update time")
+
+            self.updateTime_label.pack(side='top', pady=5)
+            self.updateTime.pack(side='bottom', pady=5)
+
 
 
 
@@ -727,6 +761,7 @@ class EnergyPrices:
             CSVbutton.pack(side='left', padx=(10, 0))
             databaseButton.pack(side='left', padx=(10, 50))
             self.combinedDataButton.pack(side='left', padx=(10, 50))
+            self.updateTime_frame.pack(side='left', padx=(10, 50))
             currencyFrame.pack(side='left', padx=(5, 20))
             fixingFrame.pack(side='left', padx=(5, 20))
             modbusSourceFrame.pack(side='left', padx=(5, 20))
@@ -747,9 +782,7 @@ class EnergyPrices:
 
             def updateData():
                 try:
-                    # if datetime.datetime.now().hour != self.prev_hour: 
-                    ## i minuta większa niż 10 (bo dane nie wychodzą o równej godzinie )
-                        if datetime.datetime.now().hour != self.prev_hour  and  datetime.datetime.now().minute > 10:   print("teraz byłby update ")  ###############################################################
+                    # if datetime.datetime.now().hour != self.prev_hour  and  datetime.datetime.now().minute > 10: # add #########################################################################################
 
                         print("\nupdating..")
                         self.errors.errorNumber = 0
@@ -757,6 +790,13 @@ class EnergyPrices:
 
                         self.date = datetime.datetime.now()
                         self.date_plus_day = datetime.datetime.now() + datetime.timedelta(days=1)
+
+                        # self.date = self.date + datetime.timedelta(days=1) # del #########################################################################################
+                        # self.date_plus_day = self.date + datetime.timedelta(days=1) # del #########################################################################################
+
+
+                        ## sprawdza czy 'updateTime' mieści się w zakresie 
+                        updateTime_onChange()
 
 
                         parse_entsoe_thread = threading.Thread(target=parseENTSOE, args=(self.date, self.objectList_entsoe, self.errors, ), daemon = True)
@@ -794,27 +834,27 @@ class EnergyPrices:
                         
                         print("update finished\n\n")
                         
-                        if self.errors.errorNumber <= 20:   self.window.after(15000, updateData) ##########################################################################################
-                        else:   checkNumberOfErrors(self.errors, self.settings, self.window) ##########################################################################################
+                        if self.errors.errorNumber <= 20:   self.afterFunc = self.window.after(int(self.updateTimeVariable.get())*1000, updateData) # del #########################################################################################
+                        else:   checkNumberOfErrors(self.errors, self.settings, self.window) # del #########################################################################################
 
 
 
 
-                    # if self.errors.errorNumber <= 20:   self.window.after(60000, updateData) 
-                    # else:   checkNumberOfErrors(self.errors, self.settings, self.window)
+                    # if self.errors.errorNumber <= 20:   self.afterFunc = self.window.after(int(self.updateTimeVariable.get())*1000, updateData) # add #########################################################################################
+                    # else:   checkNumberOfErrors(self.errors, self.settings, self.window) # add #########################################################################################
                 
                 except Exception as e:
                     print(f"An error occurred in updateData: {e}. Trying again")
                     saveError(str(e) + "  in updateData")
                     self.errors.errorNumber += 1
-                    if self.errors.errorNumber <= 20:   self.window.after(15000, updateData)
+                    if self.errors.errorNumber <= 20:   self.afterFunc = self.window.after(int(self.updateTimeVariable.get())*1000, updateData)
                     else:   checkNumberOfErrors(self.errors, self.settings, self.window)
                     time.sleep(1)
 
 
 
             self.prev_hour = self.date.hour
-            self.window.after(15000, updateData)
+            self.afterFunc = self.window.after(int(self.updateTimeVariable.get())*1000, updateData)
 
 
 
@@ -870,6 +910,18 @@ if __name__ == '__main__':
 
 
 
+## - parametr co ile update
+## - ma zapisywać w ustawieniach
+## ma logować do bazy
+## ma wysyłać modbusem
+## - w sekundach
+## - do 7200 sekund
+## potestować
+## funkcja na enter  
+
+
+
+## sprawdzić czy wszędzie jest logowanie errorów
 ## każde uruchomienie 'windowTimeInterval' dokłada ok 3MB (Python usuwa, ale dopiero po jakimś czasie)
 ## przycisk usuwania obiektu 'EnergyPrices_timeInterval' (tylko do testów, żeby sprawdzić czy to on dokłada te 3MB do RAM)
 
@@ -881,8 +933,8 @@ if __name__ == '__main__':
 #       - odpalenie bez internetu
 #       - zmiana dnia
 #       - zmiana ustawień modbusem
-#       wysyłanie modbusem
-#       czy wysyła dobre 'dataok'
+#       - wysyłanie modbusem
+#       - czy wysyła dobre 'dataok'
 #       działanie ciągłe przez dłuższy czas
 
 
@@ -897,3 +949,11 @@ if __name__ == '__main__':
 ##      if w updacie  (żeby restartował co godzine)
 ##      '.after' w updacie  (żeby restartował co godzine)
 ##      sprawdzić daty (czy wszędzie przypisuje '.now', czy jakieś nie są na sztywno)
+
+
+
+
+#  11:47 - 124.5MB
+#  12:35 - 112.5MB
+#  12:47 - 100.6MB
+## usuwa po ok godzinie 

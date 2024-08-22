@@ -796,3 +796,95 @@
 2024-08-22 10:53:18.332528  TEST TEST TEST TEST TEST  in changeCurrency
 2024-08-22 10:53:18.334049  TEST TEST TEST TEST TEST  in changeCurrency
 2024-08-22 10:53:18.334049  TEST TEST TEST TEST TEST  in changeCurrency
+2024-08-22 12:14:38.411536  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-22 12:14:38.427153  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-22 12:14:38.575894  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-22 12:14:38.599285  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-22 12:14:38.600355  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-22 12:14:38.602371  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-22 12:14:38.602371  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-22 12:14:38.602371  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-22 12:14:38.602371  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-22 12:14:38.602371  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-22 12:14:38.602371  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-22 12:14:38.609643  can't invoke "destroy" command: application has been destroyed  in restartWindow in combinedData
+2024-08-22 12:38:05.498085  bad geometry specifier "++100+100"  in createInterface
+2024-08-22 12:38:06.828605  bad geometry specifier "++100+100"  in createInterface
+2024-08-22 12:38:08.228983  bad geometry specifier "++100+100"  in createInterface
+2024-08-22 12:38:27.386503  bad geometry specifier "1000+1000+100+100"  in createInterface
+2024-08-22 12:38:28.797837  bad geometry specifier "1000+1000+100+100"  in createInterface
+2024-08-22 12:38:48.155968  bad geometry specifier "x+100+100"  in createInterface
+2024-08-22 12:38:49.596962  bad geometry specifier "x+100+100"  in createInterface
+2024-08-22 13:57:19.536573  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-22 13:57:19.537574  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-22 13:57:19.538909  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-22 13:57:19.539909  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-22 13:57:19.540907  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-22 13:57:19.541927  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-22 13:57:19.541994  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-22 13:57:19.542993  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-22 13:57:19.543990  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-22 13:57:19.544990  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-22 13:57:19.545985  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-22 13:57:19.547979  can't invoke "destroy" command: application has been destroyed  in restartWindow in combinedData
+2024-08-22 14:12:35.439054  'updateTime'  in loadSettings
+2024-08-22 14:12:36.868886  'EnergyPrices' object has no attribute 'self'  in createInterface
+2024-08-22 14:12:38.758174  'EnergyPrices' object has no attribute 'self'  in createInterface
+2024-08-22 14:12:40.996846  'EnergyPrices' object has no attribute 'self'  in createInterface
+2024-08-22 14:12:42.797785  'EnergyPrices' object has no attribute 'self'  in createInterface
+2024-08-22 14:12:51.279122  'EnergyPrices' object has no attribute 'self'  in createInterface
+2024-08-22 14:13:28.222624  unsupported operand type(s) for *: 'Spinbox' and 'int'  in updateData
+2024-08-22 14:31:39.557660  int() argument must be a string, a bytes-like object or a real number, not 'IntVar'  in createInterface
+2024-08-22 14:31:51.919829  int() argument must be a string, a bytes-like object or a real number, not 'IntVar'  in createInterface
+2024-08-22 14:34:33.812206  int() argument must be a string, a bytes-like object or a real number, not 'method'  in createInterface
+2024-08-22 14:34:35.419018  int() argument must be a string, a bytes-like object or a real number, not 'method'  in createInterface
+2024-08-22 14:42:37.099256  int() argument must be a string, a bytes-like object or a real number, not 'StringVar'  in createInterface
+2024-08-22 14:42:38.833050  int() argument must be a string, a bytes-like object or a real number, not 'StringVar'  in createInterface
+2024-08-22 14:42:40.538158  int() argument must be a string, a bytes-like object or a real number, not 'StringVar'  in createInterface
+2024-08-22 14:43:07.549363  int() argument must be a string, a bytes-like object or a real number, not 'IntVar'  in createInterface
+2024-08-22 14:43:09.521918  int() argument must be a string, a bytes-like object or a real number, not 'IntVar'  in createInterface
+2024-08-22 14:44:00.736369  int() argument must be a string, a bytes-like object or a real number, not 'IntVar'  in createInterface
+2024-08-22 14:54:05.998641  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:05.998641  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:05.998641  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:05.998641  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:05.998641  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:05.998641  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:05.998641  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:05.998641  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:05.998641  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:05.998641  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:06.013469  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:06.013469  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:06.013469  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:06.013469  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:06.013469  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:06.027568  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:06.028094  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:06.028094  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:06.028094  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:06.028094  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:06.028094  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:06.033458  can't invoke "destroy" command: application has been destroyed  in updateData
+2024-08-22 14:54:58.758074  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:58.758438  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:58.759435  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:58.760256  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:58.760256  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:58.761263  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:58.762262  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:58.762262  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:58.763380  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:58.763380  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:58.763380  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:58.763380  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:58.763380  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:58.763380  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:58.763380  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:58.763380  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:58.763380  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:58.763380  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:58.763380  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:58.770662  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:58.770662  can't invoke "grid" command: application has been destroyed  in reloadElements
+2024-08-22 14:54:58.772661  can't invoke "destroy" command: application has been destroyed  in updateData

@@ -199,7 +199,7 @@ class EnergyPrices_timeInterval:
             ## wizualizuje dane dla kazdego dnia
             for index in range(len(self.dataList), 0, -1):
                 self.loadOneDay(index-1)
-                
+            
 
             self.canvas.xview_moveto(0.0)
             self.scrollbar.configure(command=self.canvas.xview)
@@ -224,33 +224,24 @@ class EnergyPrices_timeInterval:
 
     ## ładuje dane w formie tabelki
     def loadOneDay(self, index):
-        # try:
-            self.frame_table_inner = tk.Frame(self.scrollable_frame, background='#666666')
+        self.frame_table_inner = tk.Frame(self.scrollable_frame, background='#666666')
+        
+        headerBackground = '#cccccc'
+        tk.Label(self.frame_table_inner, text=(self.dataList[index].objectList_entsoe[0].date), font='Helvetica 10', background=headerBackground).grid(row=0, column=0, padx=1, pady=1, ipadx=2, ipady=2, sticky=NSEW)
+        tk.Label(self.frame_table_inner, text='entsoe', font='Helvetica 10 bold', background=headerBackground, width=5).grid(row=0, column=1, padx=1, pady=1, ipadx=2, ipady=2, sticky=NSEW)
+        tk.Label(self.frame_table_inner, text='tge', font='Helvetica 10 bold', background=headerBackground, width=5).grid(row=0, column=3, padx=1, pady=1, ipadx=2, ipady=2, sticky=NSEW)
+
+
+        self.backgroundColor = '#d9cece'
+        for i in range(24):
+            if i%2 == 0:   self.backgroundColor = '#d4d9ce'
+            else:   self.backgroundColor = '#d9cece'
             
-            headerBackground = '#cccccc'
-            tk.Label(self.frame_table_inner, text=(self.dataList[index].objectList_entsoe[0].date), font='Helvetica 10', background=headerBackground).grid(row=0, column=0, padx=1, pady=1, ipadx=2, ipady=2, sticky=NSEW)
-            tk.Label(self.frame_table_inner, text='entsoe', font='Helvetica 10 bold', background=headerBackground, width=5).grid(row=0, column=1, padx=1, pady=1, ipadx=2, ipady=2, sticky=NSEW)
-            tk.Label(self.frame_table_inner, text='tge', font='Helvetica 10 bold', background=headerBackground, width=5).grid(row=0, column=3, padx=1, pady=1, ipadx=2, ipady=2, sticky=NSEW)
+            tk.Label(self.frame_table_inner, text=str(self.dataList[index].objectList_entsoe[i].hour)[:2], font='Helvetica 11 bold', background=self.backgroundColor).grid(row=i+1, column=0, padx=1, pady=1, ipadx=2, ipady=2, sticky=NSEW)
+            tk.Label(self.frame_table_inner, text=round(self.dataList[index].objectList_entsoe[i].price, 2), font='Helvetica 10', background=self.backgroundColor).grid(row=i+1, column=1, padx=1, pady=1, ipadx=2, ipady=2, sticky=NSEW)
+            tk.Label(self.frame_table_inner, text=round(self.dataList[index].objectList_tge[i].price, 2), font='Helvetica 10', background=self.backgroundColor).grid(row=i+1, column=3, padx=1, pady=1, ipadx=2, ipady=2, sticky=NSEW)
 
-
-            self.backgroundColor = '#d9cece'
-            for i in range(24):
-                if i%2 == 0:   self.backgroundColor = '#d4d9ce'
-                else:   self.backgroundColor = '#d9cece'
-                
-                tk.Label(self.frame_table_inner, text=str(self.dataList[index].objectList_entsoe[i].hour)[:2], font='Helvetica 11 bold', background=self.backgroundColor).grid(row=i+1, column=0, padx=1, pady=1, ipadx=2, ipady=2, sticky=NSEW)
-                tk.Label(self.frame_table_inner, text=round(self.dataList[index].objectList_entsoe[i].price, 2), font='Helvetica 10', background=self.backgroundColor).grid(row=i+1, column=1, padx=1, pady=1, ipadx=2, ipady=2, sticky=NSEW)
-                tk.Label(self.frame_table_inner, text=round(self.dataList[index].objectList_tge[i].price, 2), font='Helvetica 10', background=self.backgroundColor).grid(row=i+1, column=3, padx=1, pady=1, ipadx=2, ipady=2, sticky=NSEW)
-
-            self.frame_table_inner.pack(side=RIGHT, fill=BOTH, expand=1, padx=10, pady=10)
-            
-        # except Exception as e:
-        #     print(f"An error occurred in loadOneDay in combinedData: {e}.")
-        #     self.errors.errorNumber += 1
-        #     if self.errors.errorNumber <= 10: 
-        #         self.reloadElements()
-        #     else:   
-        #         self.restartWindow()
+        self.frame_table_inner.pack(side=RIGHT, fill=BOTH, expand=1, padx=10, pady=10)
 
 
 
@@ -260,7 +251,7 @@ class EnergyPrices_timeInterval:
     def createInterface(self, combinedDataButton):
         self.window = tk.Tk()
         self.window.title('Energy prices - combined data')
-        self.window.geometry('1200x810')
+        self.window.geometry('1200x810+100+100')
         self.window.resizable(False, False)
         self.window.configure(padx=10, pady=10)
         self.window.configure(background='#e6f2ec')
@@ -434,6 +425,7 @@ class EnergyPrices_timeInterval:
             self.window.destroy()
             self.energyPrices_timeInterval = EnergyPrices_timeInterval()
             self.energyPrices_timeInterval.createInterface(self.combinedDataButton)
+
         except Exception as e:
             print(f"An error occurred in restartWindow in combinedData: {e}.")
             saveError(str(e) + "  in restartWindow in combinedData")
@@ -457,21 +449,3 @@ class OneDayObject:
         oneDayObject_temp.objectList_tge = self.objectList_tge[:]
 
         return oneDayObject_temp
-
-
-
-
-
-
-
-
-
-
-if __name__ == '__main__':
-    energyPrices_timeInterval = EnergyPrices_timeInterval()
-    energyPrices_timeInterval.createInterface()
-
-
-
-
-

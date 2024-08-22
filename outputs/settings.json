@@ -1,5 +1,6 @@
 {
-   "currency": "EUR",
+   "currency": "PLN",
    "fixing": 2,
-   "data_source": 1
+   "data_source": 2,
+   "updateTime": 15
 }

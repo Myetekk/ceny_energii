@@ -97,7 +97,7 @@ def parseTGE(date, RDNList, errors, settings):
 
 
             if original_date_ <= minimum_date: 
-                ## gdy data jest zbyt daleko w tyle (TGE podaje dane tylko 3 mesiące wstacz)
+                ## gdy data jest zbyt daleko w tyle (TGE podaje dane tylko 2 mesiące wstacz)
                 resetData(RDNList)
             else:
                 ## aby obejść (prawdopodobne) blokowanie przez strone zbyt częstych wejść

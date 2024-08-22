@@ -50,8 +50,8 @@ def send(objectList_entsoe, objectList_tge, objectList_entsoe_next, objectList_t
             sql ='''INSERT INTO odczyt_''' + str(date)[:10] + ''' 
                     (hours, price_entsoe, price_entsoe_next, price_tge, price_tge_next, date, upload_time) 
                     VALUES (?, ?, ?, ?, ?, ?, ?);'''
-
             table = [str(objectList_entsoe[i].hour), str(objectList_entsoe[i].price), str(objectList_entsoe_next[i].price), str(objectList_tge[i].price), str(objectList_tge_next[i].price), str(objectList_entsoe[i].date), str(datetime.datetime.now())[:19]]
+
             cur.execute(sql, table)
 
         
