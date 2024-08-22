@@ -177,6 +177,7 @@ def checkNumberOfErrors(errors, settings, window):
 
 
 
+## sprawdza czy ma połączenie z internetem
 def tryInternetConnection():
     try:
         request.urlopen('https://www.google.com', timeout=1)
