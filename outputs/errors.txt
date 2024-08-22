@@ -1,0 +1,635 @@
+2024-08-22 08:29:09.240750 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:09.240750 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:09.240750 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:09.240750 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:09.240750 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:09.240750 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:09.240750 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:09.240750 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:09.246471 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:09.246471 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:09.246471 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:09.246471 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:09.247470 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:09.247470 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:09.247470 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:09.248466 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:09.248866 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:09.249432 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:09.249432 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:09.250143 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:09.250143 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:09.250470 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:09.250470 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:09.250470 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:14.253576 list index out of range
+2024-08-22 08:29:15.386493 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:15.386493 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:15.386493 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:15.386493 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:15.386493 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:15.386493 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:15.386493 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:15.386493 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:15.393154 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:15.393154 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:15.394151 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:15.394151 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:15.394151 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:15.395148 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:15.395396 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:15.395396 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:15.396065 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:15.396509 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:15.396635 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:15.397041 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:15.397041 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:15.397041 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:15.397966 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:29:15.397966 <urlopen error [Errno 11001] getaddrinfo failed>
+2024-08-22 08:31:42.801954 no internet connection
+2024-08-22 08:31:43.006842 no internet connection
+2024-08-22 08:32:00.220344 no internet connection
+2024-08-22 08:32:00.597301 no internet connection
+2024-08-22 08:32:17.855505 no internet connection
+2024-08-22 08:32:18.197845 no internet connection
+2024-08-22 08:32:41.721539 no internet connection
+2024-08-22 08:32:41.721539 no internet connection
+2024-08-22 08:33:00.613622 no internet connection
+2024-08-22 08:33:00.613622 no internet connection
+2024-08-22 08:33:15.833722 no internet connection
+2024-08-22 08:33:15.833722 no internet connection
+2024-08-22 08:33:30.984038 no internet connection
+2024-08-22 08:33:30.984038 no internet connection
+2024-08-22 08:33:46.151153 no internet connection
+2024-08-22 08:33:46.151153 no internet connection
+2024-08-22 08:34:01.330540 no internet connection
+2024-08-22 08:34:01.330540 no internet connection
+2024-08-22 08:54:02.288324    no internet connection in parseTGE
+2024-08-22 08:54:02.288324    no internet connection in parseTGE
+2024-08-22 08:54:02.288324    no internet connection in parseTGE
+2024-08-22 08:54:02.288324    no internet connection in parseTGE
+2024-08-22 08:54:16.920010    no internet connection in parseTGE
+2024-08-22 08:54:16.920010    no internet connection in parseTGE
+2024-08-22 08:54:16.922994    no internet connection in parseTGE
+2024-08-22 08:54:16.922994    no internet connection in parseTGE
+2024-08-22 08:54:16.924147  list index out of range  in GetData in combinedData
+2024-08-22 08:54:16.931856    no internet connection in parseTGE
+2024-08-22 08:54:16.931856    no internet connection in parseTGE
+2024-08-22 08:54:16.934551    no internet connection in parseTGE
+2024-08-22 08:54:16.934551    no internet connection in parseTGE
+2024-08-22 08:54:16.936545  list index out of range  in GetData in combinedData
+2024-08-22 08:54:16.942279    no internet connection in parseTGE
+2024-08-22 08:54:16.942279    no internet connection in parseTGE
+2024-08-22 08:54:16.943275    no internet connection in parseTGE
+2024-08-22 08:54:16.943275    no internet connection in parseTGE
+2024-08-22 08:54:16.945268  list index out of range  in GetData in combinedData
+2024-08-22 08:54:16.949789    no internet connection in parseTGE
+2024-08-22 08:54:16.949789    no internet connection in parseTGE
+2024-08-22 08:54:16.950786    no internet connection in parseTGE
+2024-08-22 08:54:16.950786    no internet connection in parseTGE
+2024-08-22 08:54:16.952779  list index out of range  in GetData in combinedData
+2024-08-22 08:54:16.958629    no internet connection in parseTGE
+2024-08-22 08:54:16.959614    no internet connection in parseTGE
+2024-08-22 08:54:16.960612    no internet connection in parseTGE
+2024-08-22 08:54:16.960612    no internet connection in parseTGE
+2024-08-22 08:54:16.963465  list index out of range  in GetData in combinedData
+2024-08-22 08:54:16.964531    no internet connection in parseTGE
+2024-08-22 08:54:16.964531    no internet connection in parseTGE
+2024-08-22 08:54:16.968882    no internet connection in parseTGE
+2024-08-22 08:54:16.968882    no internet connection in parseTGE
+2024-08-22 08:54:16.971876  list index out of range  in GetData in combinedData
+2024-08-22 08:54:16.973593    no internet connection in parseTGE
+2024-08-22 08:54:16.973593    no internet connection in parseTGE
+2024-08-22 08:54:16.979151    no internet connection in parseTGE
+2024-08-22 08:54:16.979151    no internet connection in parseTGE
+2024-08-22 08:54:16.981146  list index out of range  in GetData in combinedData
+2024-08-22 08:54:16.984154    no internet connection in parseTGE
+2024-08-22 08:54:16.984154    no internet connection in parseTGE
+2024-08-22 08:54:16.985205    no internet connection in parseTGE
+2024-08-22 08:54:16.986203    no internet connection in parseTGE
+2024-08-22 08:54:16.988197  list index out of range  in GetData in combinedData
+2024-08-22 08:54:16.994026    no internet connection in parseTGE
+2024-08-22 08:54:16.994026    no internet connection in parseTGE
+2024-08-22 08:54:16.995993    no internet connection in parseTGE
+2024-08-22 08:54:16.995993    no internet connection in parseTGE
+2024-08-22 08:54:16.997988  list index out of range  in GetData in combinedData
+2024-08-22 08:54:16.999003    no internet connection in parseTGE
+2024-08-22 08:54:16.999003    no internet connection in parseTGE
+2024-08-22 08:54:16.999003    no internet connection in parseTGE
+2024-08-22 08:54:16.999003    no internet connection in parseTGE
+2024-08-22 08:54:17.007584  list index out of range  in GetData in combinedData
+2024-08-22 08:54:17.012276    no internet connection in parseTGE
+2024-08-22 08:54:17.012276    no internet connection in parseTGE
+2024-08-22 08:54:17.014253    no internet connection in parseTGE
+2024-08-22 08:54:17.014253    no internet connection in parseTGE
+2024-08-22 08:54:17.016327  list index out of range  in GetData in combinedData
+2024-08-22 08:54:17.254682    no internet connection in parseTGE
+2024-08-22 08:54:17.254682    no internet connection in parseTGE
+2024-08-22 08:54:17.265223    no internet connection in parseTGE
+2024-08-22 08:54:17.265223    no internet connection in parseTGE
+2024-08-22 08:54:17.279831  list index out of range  in GetData in combinedData
+2024-08-22 08:54:17.284851    no internet connection in parseTGE
+2024-08-22 08:54:17.285144    no internet connection in parseTGE
+2024-08-22 08:54:17.285144    no internet connection in parseTGE
+2024-08-22 08:54:17.286903    no internet connection in parseTGE
+2024-08-22 08:54:17.291508  list index out of range  in GetData in combinedData
+2024-08-22 08:54:17.296491    no internet connection in parseTGE
+2024-08-22 08:54:17.297509    no internet connection in parseTGE
+2024-08-22 08:54:17.298398    no internet connection in parseTGE
+2024-08-22 08:54:17.299398    no internet connection in parseTGE
+2024-08-22 08:54:17.301175  list index out of range  in GetData in combinedData
+2024-08-22 08:54:17.305166    no internet connection in parseTGE
+2024-08-22 08:54:17.306179    no internet connection in parseTGE
+2024-08-22 08:54:17.308852    no internet connection in parseTGE
+2024-08-22 08:54:17.309862    no internet connection in parseTGE
+2024-08-22 08:54:17.312327  list index out of range  in GetData in combinedData
+2024-08-22 08:54:17.313345    no internet connection in parseTGE
+2024-08-22 08:54:17.313345    no internet connection in parseTGE
+2024-08-22 08:54:17.317788    no internet connection in parseTGE
+2024-08-22 08:54:17.318786    no internet connection in parseTGE
+2024-08-22 08:54:17.319783  list index out of range  in GetData in combinedData
+2024-08-22 08:54:17.325201    no internet connection in parseTGE
+2024-08-22 08:54:17.325201    no internet connection in parseTGE
+2024-08-22 08:54:17.327196    no internet connection in parseTGE
+2024-08-22 08:54:17.327196    no internet connection in parseTGE
+2024-08-22 08:54:17.328590  list index out of range  in GetData in combinedData
+2024-08-22 08:54:17.330604    no internet connection in parseTGE
+2024-08-22 08:54:17.330604    no internet connection in parseTGE
+2024-08-22 08:54:17.333122    no internet connection in parseTGE
+2024-08-22 08:54:17.333122    no internet connection in parseTGE
+2024-08-22 08:54:17.335116  list index out of range  in GetData in combinedData
+2024-08-22 08:54:17.339671    no internet connection in parseTGE
+2024-08-22 08:54:17.343286    no internet connection in parseTGE
+2024-08-22 08:54:17.343286    no internet connection in parseTGE
+2024-08-22 08:54:17.345280  list index out of range  in GetData in combinedData
+2024-08-22 08:54:17.348181    no internet connection in parseTGE
+2024-08-22 08:54:17.348181    no internet connection in parseTGE
+2024-08-22 08:54:17.348181    no internet connection in parseTGE
+2024-08-22 08:54:17.348181  list index out of range  in GetData in combinedData
+2024-08-22 08:54:17.356778    no internet connection in parseTGE
+2024-08-22 08:54:17.356778    no internet connection in parseTGE
+2024-08-22 08:54:17.356778    no internet connection in parseTGE
+2024-08-22 08:54:17.356778    no internet connection in parseTGE
+2024-08-22 08:54:17.363503  list index out of range  in GetData in combinedData
+2024-08-22 08:54:17.367238    no internet connection in parseTGE
+2024-08-22 08:54:17.367830    no internet connection in parseTGE
+2024-08-22 08:54:17.367830    no internet connection in parseTGE
+2024-08-22 08:54:17.367830    no internet connection in parseTGE
+2024-08-22 08:54:17.371286  list index out of range  in GetData in combinedData
+2024-08-22 08:54:17.504682    no internet connection in parseTGE
+2024-08-22 08:54:17.504682    no internet connection in parseTGE
+2024-08-22 08:54:17.504682    no internet connection in parseTGE
+2024-08-22 08:54:17.504682    no internet connection in parseTGE
+2024-08-22 08:54:32.696144    no internet connection in parseTGE
+2024-08-22 08:54:32.696144    no internet connection in parseTGE
+2024-08-22 08:54:32.696144    no internet connection in parseTGE
+2024-08-22 08:54:32.696144    no internet connection in parseTGE
+2024-08-22 08:54:35.324144    no internet connection in parseTGE
+2024-08-22 08:54:35.324144    no internet connection in parseTGE
+2024-08-22 08:54:35.324144    no internet connection in parseTGE
+2024-08-22 08:54:35.324144    no internet connection in parseTGE
+2024-08-22 08:54:35.324144  list index out of range  in GetData in combinedData
+2024-08-22 08:54:35.341187    no internet connection in parseTGE
+2024-08-22 08:54:35.343111    no internet connection in parseTGE
+2024-08-22 08:54:35.343111    no internet connection in parseTGE
+2024-08-22 08:54:35.348092  list index out of range  in GetData in combinedData
+2024-08-22 08:54:35.351919    no internet connection in parseTGE
+2024-08-22 08:54:35.352497    no internet connection in parseTGE
+2024-08-22 08:54:35.352497    no internet connection in parseTGE
+2024-08-22 08:54:35.352497    no internet connection in parseTGE
+2024-08-22 08:54:35.360417  list index out of range  in GetData in combinedData
+2024-08-22 08:54:35.364488    no internet connection in parseTGE
+2024-08-22 08:54:35.364488    no internet connection in parseTGE
+2024-08-22 08:54:35.367180    no internet connection in parseTGE
+2024-08-22 08:54:35.367180    no internet connection in parseTGE
+2024-08-22 08:54:35.370173  list index out of range  in GetData in combinedData
+2024-08-22 08:54:35.371687    no internet connection in parseTGE
+2024-08-22 08:54:35.379861    no internet connection in parseTGE
+2024-08-22 08:54:35.379861    no internet connection in parseTGE
+2024-08-22 08:54:35.381856  list index out of range  in GetData in combinedData
+2024-08-22 08:54:35.384848    no internet connection in parseTGE
+2024-08-22 08:54:35.384848    no internet connection in parseTGE
+2024-08-22 08:54:35.385826    no internet connection in parseTGE
+2024-08-22 08:54:35.385826    no internet connection in parseTGE
+2024-08-22 08:54:35.385826  list index out of range  in GetData in combinedData
+2024-08-22 08:54:35.395996    no internet connection in parseTGE
+2024-08-22 08:54:35.395996    no internet connection in parseTGE
+2024-08-22 08:54:35.397005    no internet connection in parseTGE
+2024-08-22 08:54:35.397005    no internet connection in parseTGE
+2024-08-22 08:54:35.399147  list index out of range  in GetData in combinedData
+2024-08-22 08:54:35.402380    no internet connection in parseTGE
+2024-08-22 08:54:35.402380    no internet connection in parseTGE
+2024-08-22 08:54:35.402380    no internet connection in parseTGE
+2024-08-22 08:54:35.410765  list index out of range  in GetData in combinedData
+2024-08-22 08:54:35.415083    no internet connection in parseTGE
+2024-08-22 08:54:35.415083    no internet connection in parseTGE
+2024-08-22 08:54:35.415948    no internet connection in parseTGE
+2024-08-22 08:54:35.415948    no internet connection in parseTGE
+2024-08-22 08:54:35.418305  list index out of range  in GetData in combinedData
+2024-08-22 08:54:35.423969    no internet connection in parseTGE
+2024-08-22 08:54:35.423969    no internet connection in parseTGE
+2024-08-22 08:54:35.426413    no internet connection in parseTGE
+2024-08-22 08:54:35.426413    no internet connection in parseTGE
+2024-08-22 08:54:35.428407  list index out of range  in GetData in combinedData
+2024-08-22 08:54:35.431399    no internet connection in parseTGE
+2024-08-22 08:54:35.432122    no internet connection in parseTGE
+2024-08-22 08:54:35.432122    no internet connection in parseTGE
+2024-08-22 08:54:35.432122    no internet connection in parseTGE
+2024-08-22 08:54:35.434865  list index out of range  in GetData in combinedData
+2024-08-22 08:54:35.674475    no internet connection in parseTGE
+2024-08-22 08:54:35.674475    no internet connection in parseTGE
+2024-08-22 08:54:35.677475    no internet connection in parseTGE
+2024-08-22 08:54:35.677475    no internet connection in parseTGE
+2024-08-22 08:54:35.687963  list index out of range  in GetData in combinedData
+2024-08-22 08:54:35.700406    no internet connection in parseTGE
+2024-08-22 08:54:35.701300    no internet connection in parseTGE
+2024-08-22 08:54:35.703228    no internet connection in parseTGE
+2024-08-22 08:54:35.703228    no internet connection in parseTGE
+2024-08-22 08:54:35.706612  list index out of range  in GetData in combinedData
+2024-08-22 08:54:35.713965    no internet connection in parseTGE
+2024-08-22 08:54:35.714795    no internet connection in parseTGE
+2024-08-22 08:54:35.714795    no internet connection in parseTGE
+2024-08-22 08:54:35.714795    no internet connection in parseTGE
+2024-08-22 08:54:35.717250  list index out of range  in GetData in combinedData
+2024-08-22 08:54:35.721503    no internet connection in parseTGE
+2024-08-22 08:54:35.725739    no internet connection in parseTGE
+2024-08-22 08:54:35.726755    no internet connection in parseTGE
+2024-08-22 08:54:35.727764  list index out of range  in GetData in combinedData
+2024-08-22 08:54:35.731082    no internet connection in parseTGE
+2024-08-22 08:54:35.731082    no internet connection in parseTGE
+2024-08-22 08:54:35.731082    no internet connection in parseTGE
+2024-08-22 08:54:35.731082    no internet connection in parseTGE
+2024-08-22 08:54:35.735455  list index out of range  in GetData in combinedData
+2024-08-22 08:54:35.739463    no internet connection in parseTGE
+2024-08-22 08:54:35.739463    no internet connection in parseTGE
+2024-08-22 08:54:35.739463    no internet connection in parseTGE
+2024-08-22 08:54:35.739463    no internet connection in parseTGE
+2024-08-22 08:54:35.746171  list index out of range  in GetData in combinedData
+2024-08-22 08:54:35.749182    no internet connection in parseTGE
+2024-08-22 08:54:35.750162    no internet connection in parseTGE
+2024-08-22 08:54:35.750821    no internet connection in parseTGE
+2024-08-22 08:54:35.750821    no internet connection in parseTGE
+2024-08-22 08:54:35.754266  list index out of range  in GetData in combinedData
+2024-08-22 08:54:35.760495    no internet connection in parseTGE
+2024-08-22 08:54:35.761517    no internet connection in parseTGE
+2024-08-22 08:54:35.762485    no internet connection in parseTGE
+2024-08-22 08:54:35.763488    no internet connection in parseTGE
+2024-08-22 08:54:35.763512  list index out of range  in GetData in combinedData
+2024-08-22 08:54:35.769384    no internet connection in parseTGE
+2024-08-22 08:54:35.769384    no internet connection in parseTGE
+2024-08-22 08:54:35.771381    no internet connection in parseTGE
+2024-08-22 08:54:35.772146    no internet connection in parseTGE
+2024-08-22 08:54:35.772146  list index out of range  in GetData in combinedData
+2024-08-22 08:54:35.780230    no internet connection in parseTGE
+2024-08-22 08:54:35.780230    no internet connection in parseTGE
+2024-08-22 08:54:35.781226    no internet connection in parseTGE
+2024-08-22 08:54:35.781226    no internet connection in parseTGE
+2024-08-22 08:54:35.783259  list index out of range  in GetData in combinedData
+2024-08-22 08:54:35.788398    no internet connection in parseTGE
+2024-08-22 08:54:35.788398    no internet connection in parseTGE
+2024-08-22 08:54:35.788398    no internet connection in parseTGE
+2024-08-22 08:54:35.791865    no internet connection in parseTGE
+2024-08-22 08:54:35.794188  list index out of range  in GetData in combinedData
+2024-08-22 08:54:47.846369    no internet connection in parseTGE
+2024-08-22 08:54:47.846369    no internet connection in parseTGE
+2024-08-22 08:54:47.846369    no internet connection in parseTGE
+2024-08-22 08:54:47.847496    no internet connection in parseTGE
+2024-08-22 08:55:03.011298    no internet connection in parseTGE
+2024-08-22 08:55:03.011298    no internet connection in parseTGE
+2024-08-22 08:55:03.011298    no internet connection in parseTGE
+2024-08-22 08:55:03.011298    no internet connection in parseTGE
+2024-08-22 08:55:18.203588    no internet connection in parseTGE
+2024-08-22 08:55:18.203588    no internet connection in parseTGE
+2024-08-22 08:55:18.203588    no internet connection in parseTGE
+2024-08-22 08:55:18.203588    no internet connection in parseTGE
+2024-08-22 08:55:33.351933    no internet connection in parseTGE
+2024-08-22 08:55:33.352936    no internet connection in parseTGE
+2024-08-22 08:55:33.352936    no internet connection in parseTGE
+2024-08-22 08:55:33.352936    no internet connection in parseTGE
+2024-08-22 08:57:40.527511    no internet connection in parseTGE
+2024-08-22 08:57:40.527511    no internet connection in parseTGE
+2024-08-22 08:57:40.527511    no internet connection in parseTGE
+2024-08-22 08:57:40.527511    no internet connection in parseTGE
+2024-08-22 08:57:55.699801    no internet connection in parseTGE
+2024-08-22 08:57:55.699801    no internet connection in parseTGE
+2024-08-22 08:57:55.699801    no internet connection in parseTGE
+2024-08-22 08:57:55.699801    no internet connection in parseTGE
+2024-08-22 08:57:58.582335    no internet connection in parseTGE
+2024-08-22 08:58:10.867332    no internet connection in parseTGE
+2024-08-22 08:58:10.867332    no internet connection in parseTGE
+2024-08-22 08:58:10.867332    no internet connection in parseTGE
+2024-08-22 08:58:10.867332    no internet connection in parseTGE
+2024-08-22 08:58:26.033623    no internet connection in parseTGE
+2024-08-22 08:58:26.033623    no internet connection in parseTGE
+2024-08-22 08:58:26.033623    no internet connection in parseTGE
+2024-08-22 08:58:26.033623    no internet connection in parseTGE
+2024-08-22 08:58:41.211621    no internet connection in parseTGE
+2024-08-22 08:58:41.212621    no internet connection in parseTGE
+2024-08-22 08:58:41.212621    no internet connection in parseTGE
+2024-08-22 08:58:41.213452    no internet connection in parseTGE
+2024-08-22 08:58:56.375509    no internet connection in parseTGE
+2024-08-22 08:58:56.375509    no internet connection in parseTGE
+2024-08-22 08:58:56.375509    no internet connection in parseTGE
+2024-08-22 08:58:56.375509    no internet connection in parseTGE
+2024-08-22 08:59:11.547000    no internet connection in parseTGE
+2024-08-22 08:59:11.547000    no internet connection in parseTGE
+2024-08-22 08:59:11.547000    no internet connection in parseTGE
+2024-08-22 08:59:11.547000    no internet connection in parseTGE
+2024-08-22 08:59:26.725242    no internet connection in parseTGE
+2024-08-22 08:59:26.725242    no internet connection in parseTGE
+2024-08-22 08:59:26.725242    no internet connection in parseTGE
+2024-08-22 08:59:26.725242    no internet connection in parseTGE
+2024-08-22 08:59:29.784867    no internet connection in parseTGE
+2024-08-22 08:59:40.339721    no internet connection in parseTGE
+2024-08-22 08:59:40.941349    no internet connection in parseTGE
+2024-08-22 08:59:41.257931    no internet connection in parseTGE
+2024-08-22 08:59:41.458584    no internet connection in parseTGE
+2024-08-22 08:59:41.905754    no internet connection in parseTGE
+2024-08-22 08:59:41.905754    no internet connection in parseTGE
+2024-08-22 08:59:41.905754    no internet connection in parseTGE
+2024-08-22 08:59:41.905754    no internet connection in parseTGE
+2024-08-22 08:59:42.212514    no internet connection in parseTGE
+2024-08-22 08:59:42.273234    no internet connection in parseTGE
+2024-08-22 08:59:43.315580    no internet connection in parseTGE
+2024-08-22 08:59:43.494044    no internet connection in parseTGE
+2024-08-22 08:59:43.647316    no internet connection in parseTGE
+2024-08-22 08:59:43.948030    no internet connection in parseTGE
+2024-08-22 08:59:44.248369    no internet connection in parseTGE
+2024-08-22 08:59:44.409495    no internet connection in parseTGE
+2024-08-22 08:59:44.548824    no internet connection in parseTGE
+2024-08-22 08:59:44.717818    no internet connection in parseTGE
+2024-08-22 08:59:44.880735    no internet connection in parseTGE
+2024-08-22 08:59:45.034158    no internet connection in parseTGE
+2024-08-22 08:59:45.181341    no internet connection in parseTGE
+2024-08-22 08:59:45.350072    no internet connection in parseTGE
+2024-08-22 08:59:45.496518    no internet connection in parseTGE
+2024-08-22 08:59:45.635062    no internet connection in parseTGE
+2024-08-22 08:59:45.779882    no internet connection in parseTGE
+2024-08-22 08:59:57.076186    no internet connection in parseTGE
+2024-08-22 08:59:57.076186    no internet connection in parseTGE
+2024-08-22 08:59:57.076186    no internet connection in parseTGE
+2024-08-22 08:59:57.076186    no internet connection in parseTGE
+2024-08-22 09:00:12.251337    no internet connection in parseTGE
+2024-08-22 09:00:12.251337    no internet connection in parseTGE
+2024-08-22 09:00:12.251337    no internet connection in parseTGE
+2024-08-22 09:00:12.251337    no internet connection in parseTGE
+2024-08-22 09:00:27.441509    no internet connection in parseTGE
+2024-08-22 09:00:27.441509    no internet connection in parseTGE
+2024-08-22 09:00:27.441509    no internet connection in parseTGE
+2024-08-22 09:00:27.441509    no internet connection in parseTGE
+2024-08-22 09:03:22.639227    no internet connection
+2024-08-22 09:03:22.639227    no internet connection
+2024-08-22 09:03:22.639227    no internet connection
+2024-08-22 09:03:22.639227    no internet connection
+2024-08-22 09:03:37.844055    no internet connection
+2024-08-22 09:03:37.844055    no internet connection
+2024-08-22 09:03:37.844055    no internet connection
+2024-08-22 09:03:37.844055    no internet connection
+2024-08-22 09:03:53.021198    no internet connection
+2024-08-22 09:03:53.021198    no internet connection
+2024-08-22 09:03:53.021198    no internet connection
+2024-08-22 09:03:53.021198    no internet connection
+2024-08-22 09:04:01.160314    no internet connection
+2024-08-22 09:04:08.174425    no internet connection
+2024-08-22 09:04:08.174425    no internet connection
+2024-08-22 09:04:08.174425    no internet connection
+2024-08-22 09:04:08.174425    no internet connection
+2024-08-22 09:04:09.075789    no internet connection
+2024-08-22 09:04:23.326140    no internet connection
+2024-08-22 09:04:23.326140    no internet connection
+2024-08-22 09:04:23.326140    no internet connection
+2024-08-22 09:04:23.326140    no internet connection
+2024-08-22 09:04:36.985240    no internet connection
+2024-08-22 09:04:38.487477    no internet connection
+2024-08-22 09:04:38.487477    no internet connection
+2024-08-22 09:04:38.487477    no internet connection
+2024-08-22 09:04:53.661826    no internet connection
+2024-08-22 09:04:53.661826    no internet connection
+2024-08-22 09:04:53.661826    no internet connection
+2024-08-22 09:04:53.661826    no internet connection
+2024-08-22 09:05:08.823711    no internet connection
+2024-08-22 09:05:08.823711    no internet connection
+2024-08-22 09:05:08.823711    no internet connection
+2024-08-22 09:05:08.823711    no internet connection
+2024-08-22 09:05:23.992024    no internet connection
+2024-08-22 09:05:23.992024    no internet connection
+2024-08-22 09:05:23.992024    no internet connection
+2024-08-22 09:05:23.992024    no internet connection
+2024-08-22 09:05:39.159357    no internet connection
+2024-08-22 09:05:39.159357    no internet connection
+2024-08-22 09:05:39.159357    no internet connection
+2024-08-22 09:05:39.159357    no internet connection
+2024-08-22 09:08:49.806696    no internet connection
+2024-08-22 09:08:49.806696    no internet connection
+2024-08-22 09:08:49.806696    no internet connection
+2024-08-22 09:08:49.806696    no internet connection
+2024-08-22 09:08:53.584689    no internet connection
+2024-08-22 09:08:53.584689    no internet connection
+2024-08-22 09:08:53.584689    no internet connection
+2024-08-22 09:08:53.584689    no internet connection
+2024-08-22 09:09:04.995001    no internet connection
+2024-08-22 09:09:04.995001    no internet connection
+2024-08-22 09:09:04.995001    no internet connection
+2024-08-22 09:09:20.193938    no internet connection
+2024-08-22 09:09:20.193938    no internet connection
+2024-08-22 09:09:20.193938    no internet connection
+2024-08-22 09:09:20.193938    no internet connection
+2024-08-22 09:09:35.343520    no internet connection
+2024-08-22 09:09:35.343520    no internet connection
+2024-08-22 09:09:35.344357    no internet connection
+2024-08-22 09:09:35.344357    no internet connection
+2024-08-22 09:09:50.527590    no internet connection
+2024-08-22 09:09:50.527590    no internet connection
+2024-08-22 09:09:50.527590    no internet connection
+2024-08-22 09:09:50.527590    no internet connection
+2024-08-22 09:10:05.739457    no internet connection
+2024-08-22 09:10:05.739457    no internet connection
+2024-08-22 09:10:05.739457    no internet connection
+2024-08-22 09:10:05.739457    no internet connection
+2024-08-22 09:10:20.899576    no internet connection
+2024-08-22 09:10:20.900577    no internet connection
+2024-08-22 09:10:20.900577    no internet connection
+2024-08-22 09:10:20.901398    no internet connection
+2024-08-22 09:10:36.054957    no internet connection
+2024-08-22 09:10:36.054957    no internet connection
+2024-08-22 09:10:36.054957    no internet connection
+2024-08-22 09:10:36.054957    no internet connection
+2024-08-22 09:10:51.246591    no internet connection
+2024-08-22 09:10:51.246591    no internet connection
+2024-08-22 09:10:51.246591    no internet connection
+2024-08-22 09:10:51.246591    no internet connection
+2024-08-22 09:11:06.440611    no internet connection
+2024-08-22 09:11:06.440611    no internet connection
+2024-08-22 09:11:06.440611    no internet connection
+2024-08-22 09:11:06.440611    no internet connection
+2024-08-22 09:11:21.640307    no internet connection
+2024-08-22 09:11:21.640307    no internet connection
+2024-08-22 09:11:21.640307    no internet connection
+2024-08-22 09:11:21.640307    no internet connection
+2024-08-22 09:11:36.828169    no internet connection
+2024-08-22 09:11:36.828169    no internet connection
+2024-08-22 09:11:36.828169    no internet connection
+2024-08-22 09:11:36.828169    no internet connection
+2024-08-22 09:17:03.907595    no internet connection
+2024-08-22 09:17:03.907595    no internet connection
+2024-08-22 09:17:03.907595    no internet connection
+2024-08-22 09:17:03.907595    no internet connection
+2024-08-22 09:17:06.767642    no internet connection
+2024-08-22 09:17:06.767642    no internet connection
+2024-08-22 09:17:06.767642    no internet connection
+2024-08-22 09:17:06.767642    no internet connection
+2024-08-22 09:17:19.089080    no internet connection
+2024-08-22 09:17:19.089080    no internet connection
+2024-08-22 09:17:19.089080    no internet connection
+2024-08-22 09:17:34.243837    no internet connection
+2024-08-22 09:17:34.243837    no internet connection
+2024-08-22 09:17:34.243837    no internet connection
+2024-08-22 09:17:34.243837    no internet connection
+2024-08-22 09:17:49.414165    no internet connection
+2024-08-22 09:17:49.414165    no internet connection
+2024-08-22 09:17:49.414165    no internet connection
+2024-08-22 09:17:49.414165    no internet connection
+2024-08-22 09:18:04.598337    no internet connection
+2024-08-22 09:18:04.598337    no internet connection
+2024-08-22 09:18:04.598337    no internet connection
+2024-08-22 09:18:04.598337    no internet connection
+2024-08-22 09:18:19.774045    no internet connection
+2024-08-22 09:18:19.774045    no internet connection
+2024-08-22 09:18:19.774045    no internet connection
+2024-08-22 09:18:19.774045    no internet connection
+2024-08-22 09:19:28.466147    no internet connection
+2024-08-22 09:19:28.466147    no internet connection
+2024-08-22 09:19:28.466147    no internet connection
+2024-08-22 09:19:28.466147    no internet connection
+2024-08-22 09:19:31.320960    no internet connection
+2024-08-22 09:19:31.320960    no internet connection
+2024-08-22 09:19:31.332301    no internet connection
+2024-08-22 09:19:31.332301    no internet connection
+2024-08-22 09:19:43.635100    no internet connection
+2024-08-22 09:19:43.635100    no internet connection
+2024-08-22 09:19:43.635100    no internet connection
+2024-08-22 09:19:43.635100    no internet connection
+2024-08-22 09:19:47.495302    no internet connection
+2024-08-22 09:19:47.495302    no internet connection
+2024-08-22 09:19:47.495302    no internet connection
+2024-08-22 09:19:47.495302    no internet connection
+2024-08-22 09:19:48.603767    no internet connection
+2024-08-22 09:19:48.603767    no internet connection
+2024-08-22 09:19:48.603767    no internet connection
+2024-08-22 09:19:48.603767    no internet connection
+2024-08-22 09:19:49.216982    no internet connection
+2024-08-22 09:19:49.216982    no internet connection
+2024-08-22 09:19:49.217978    no internet connection
+2024-08-22 09:19:49.217978    no internet connection
+2024-08-22 09:19:58.813334    no internet connection
+2024-08-22 09:19:58.813334    no internet connection
+2024-08-22 09:19:58.813334    no internet connection
+2024-08-22 09:19:58.813334    no internet connection
+2024-08-22 09:20:13.967958    no internet connection
+2024-08-22 09:20:13.967958    no internet connection
+2024-08-22 09:20:13.967958    no internet connection
+2024-08-22 09:20:13.967958    no internet connection
+2024-08-22 09:20:29.157960    no internet connection
+2024-08-22 09:20:29.157960    no internet connection
+2024-08-22 09:20:29.157960    no internet connection
+2024-08-22 09:20:29.157960    no internet connection
+2024-08-22 09:20:44.342275    no internet connection
+2024-08-22 09:20:44.342275    no internet connection
+2024-08-22 09:20:44.342275    no internet connection
+2024-08-22 09:20:44.342275    no internet connection
+2024-08-22 09:20:57.150906    no internet connection
+2024-08-22 09:20:57.150906    no internet connection
+2024-08-22 09:20:57.151895    no internet connection
+2024-08-22 09:20:57.151895    no internet connection
+2024-08-22 09:27:22.783223    no internet connection
+2024-08-22 09:27:30.141701    no internet connection
+2024-08-22 09:27:39.748731    no internet connection
+2024-08-22 09:27:39.749727    no internet connection
+2024-08-22 09:27:39.749727    no internet connection
+2024-08-22 09:27:39.749727    no internet connection
+2024-08-22 09:27:54.927408    no internet connection
+2024-08-22 09:27:54.927408    no internet connection
+2024-08-22 09:27:54.927408    no internet connection
+2024-08-22 09:27:54.927408    no internet connection
+2024-08-22 09:28:10.097126    no internet connection
+2024-08-22 09:28:10.097126    no internet connection
+2024-08-22 09:28:10.097126    no internet connection
+2024-08-22 09:28:10.097126    no internet connection
+2024-08-22 09:28:25.268344    no internet connection
+2024-08-22 09:28:25.268344    no internet connection
+2024-08-22 09:28:25.268344    no internet connection
+2024-08-22 09:28:25.268344    no internet connection
+2024-08-22 09:32:47.114971    no internet connection
+2024-08-22 09:32:47.114971    no internet connection
+2024-08-22 09:32:47.114971    no internet connection
+2024-08-22 09:32:47.114971    no internet connection
+2024-08-22 09:32:56.921656    no internet connection
+2024-08-22 09:33:02.260617    no internet connection
+2024-08-22 09:33:02.260617    no internet connection
+2024-08-22 09:33:02.260617    no internet connection
+2024-08-22 09:33:02.260617    no internet connection
+2024-08-22 09:33:17.423553    no internet connection
+2024-08-22 09:33:17.423553    no internet connection
+2024-08-22 09:33:17.423553    no internet connection
+2024-08-22 09:33:17.423553    no internet connection
+2024-08-22 09:33:32.589250    no internet connection
+2024-08-22 09:33:32.589250    no internet connection
+2024-08-22 09:33:32.589250    no internet connection
+2024-08-22 09:33:32.589250    no internet connection
+2024-08-22 09:33:47.755608    no internet connection
+2024-08-22 09:33:47.755608    no internet connection
+2024-08-22 09:33:47.755608    no internet connection
+2024-08-22 09:33:47.755608    no internet connection
+2024-08-22 09:34:02.907277    no internet connection
+2024-08-22 09:34:02.907277    no internet connection
+2024-08-22 09:34:02.907277    no internet connection
+2024-08-22 09:34:02.907277    no internet connection
+2024-08-22 09:34:18.067935    no internet connection
+2024-08-22 09:34:18.067935    no internet connection
+2024-08-22 09:34:18.067935    no internet connection
+2024-08-22 09:34:18.067935    no internet connection
+2024-08-22 09:36:43.561910    no internet connection
+2024-08-22 09:36:43.561910    no internet connection
+2024-08-22 09:36:43.561910    no internet connection
+2024-08-22 09:36:43.561910    no internet connection
+2024-08-22 09:36:48.226631    no internet connection
+2024-08-22 09:36:58.711972    no internet connection
+2024-08-22 09:36:58.711972    no internet connection
+2024-08-22 09:36:58.711972    no internet connection
+2024-08-22 09:36:58.711972    no internet connection
+2024-08-22 09:37:07.125436    no internet connection
+2024-08-22 09:37:25.113620    no internet connection
+2024-08-22 09:37:25.113620    no internet connection
+2024-08-22 09:37:25.113620    no internet connection
+2024-08-22 09:37:25.113620    no internet connection
+2024-08-22 09:37:40.306626    no internet connection
+2024-08-22 09:37:40.306626    no internet connection
+2024-08-22 09:37:40.306626    no internet connection
+2024-08-22 09:37:40.306626    no internet connection
+2024-08-22 09:37:55.493545    no internet connection
+2024-08-22 09:37:55.493545    no internet connection
+2024-08-22 09:37:55.493545    no internet connection
+2024-08-22 09:37:55.493545    no internet connection
+2024-08-22 09:38:43.006314    no internet connection
+2024-08-22 09:38:47.407143    no internet connection
+2024-08-22 09:38:51.204704    no internet connection
+2024-08-22 09:39:00.877965    no internet connection
+2024-08-22 09:39:00.877965    no internet connection
+2024-08-22 09:39:00.877965    no internet connection
+2024-08-22 09:39:00.877965    no internet connection
+2024-08-22 09:39:16.042486    no internet connection
+2024-08-22 09:39:16.042486    no internet connection
+2024-08-22 09:39:16.042486    no internet connection
+2024-08-22 09:39:16.042486    no internet connection
+2024-08-22 09:39:31.216793    no internet connection
+2024-08-22 09:39:31.216793    no internet connection
+2024-08-22 09:39:31.216793    no internet connection
+2024-08-22 09:39:31.216793    no internet connection
+2024-08-22 09:39:46.387622    no internet connection
+2024-08-22 09:39:46.387622    no internet connection
+2024-08-22 09:39:46.387622    no internet connection
+2024-08-22 09:40:01.560928    no internet connection
+2024-08-22 09:40:01.560928    no internet connection
+2024-08-22 09:40:01.560928    no internet connection
+2024-08-22 09:40:01.560928    no internet connection

@@ -3,9 +3,8 @@ import time
 from entsoe import EntsoeRawClient
 import datetime
 from xml.dom.minidom import parseString
-from urllib import request
 
-from utils import getEUR, increaseOneDay, checkNumberOfErrors
+from utils import getEUR, increaseOneDay, saveError, tryInternetConnection
 
 
 
@@ -46,7 +45,7 @@ def getDataFromAPI_oneDay(date, errors):
         apiAnswer = client.query_day_ahead_prices(country_code, start, end)
         return apiAnswer
     
-    except:
+    except :
         ## jeśli napotka jakiś błąd (najpewniej brak danych dla podanego dnia) zwraca pusty string, co w funkcji 'parseENTSOE' przypisuje wartości '0' dla wszystkich godzin
         if date > datetime.datetime.now():   return ""
         else:   
@@ -54,19 +53,6 @@ def getDataFromAPI_oneDay(date, errors):
             if errors.entsoeErrorNumber <= 5:   getDataFromAPI_oneDay(date, errors)
             else:   return ""
             time.sleep(1)
-
-
-
-
-
-def tryInternetConnection():
-    try:
-        request.urlopen('https://www.google.com', timeout=1)
-        return True
-    
-    except request.URLError as err: 
-        print('no internet connection')
-        return False
         
 
 
@@ -115,6 +101,7 @@ def parseENTSOE(date, objectList, errors):
 
     except Exception as e:
         print(f"An error occurred in parseENTSOE: {e}. Trying again")
+        saveError(str(e) + "  in parseENTSOE")
         errors.errorNumber += 1
         if errors.errorNumber <= 20:   parseENTSOE(date, objectList, errors)
         else:   return

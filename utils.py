@@ -1,8 +1,10 @@
 import tkinter as tk
 from tkinter import BOTH
 import re
-import time
-from urllib.request import urlopen
+import os
+import datetime
+# from urllib.request import urlopen
+from urllib import request
 
 from settingsOperations import saveSettings_JSON
 
@@ -21,7 +23,7 @@ def getEUR(date):
         date_prev_end = date_prev_end[0] + "-" + date_prev_end[1] + "-" + date_prev_end[2]
 
         url = "https://www.money.pl/pieniadze/nbparch/srednie/?symbol=EUR.n&from=" + date_prev_end + "&to=" + date_prev_start
-        page = urlopen(url)
+        page = request.urlopen(url)
         html = page.read().decode("utf-8")
 
         html_class_name = """<div class="rt-td" role="gridcell".*?><div style="text-align:right">.*?</div></div>"""
@@ -29,9 +31,6 @@ def getEUR(date):
         eur = re.sub('</div></div>', "", eur[0])
         eur = re.sub('<.*>', "", eur)
         eur = re.sub(',', ".", eur)
-
-        # print(float(eur))
-        # raise Exception("TESTING")
     
         return float(eur)
 
@@ -167,11 +166,26 @@ def increaseOneMonth(date_data):
 
 
 
+## sprawdza ilość errorów i jeśli trzeba to restartuje apke
 def checkNumberOfErrors(errors, settings, window):
     if errors.errorNumber >= 20:
         print('Too much errors  \n\nRestarting app\n\n')
         saveSettings_JSON(settings, errors)
         if window != None:   window.destroy()
+
+
+
+
+
+def tryInternetConnection():
+    try:
+        request.urlopen('https://www.google.com', timeout=1)
+        return True
+    
+    except request.URLError as err: 
+        print('no internet connection')
+        saveError('  no internet connection')
+        return False
 
 
 
@@ -187,6 +201,23 @@ def errorWindow(message, windowTitle):
     tk.Label(errorWindow, text=message, font='22').pack(fill=BOTH, padx=40, pady=10)
     tk.Button(errorWindow, text="ok", command=errorWindow.destroy, font='20').pack(padx=50, pady=(10, 15))
     errorWindow.mainloop()
+
+
+
+
+
+def saveError(message):
+    try:
+        if os.path.exists("outputs") == False: os.mkdir("outputs") 
+        fileName = "outputs\\errors.txt"
+
+        file = open(fileName, "a")
+        errorText = str(datetime.datetime.now()) + "  " + str(message) + "\n"
+        file.write(errorText)
+        file.close()
+
+    except Exception as e:
+        print(f"An error occurred in saveError: {e}.")
 
 
 

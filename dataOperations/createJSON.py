@@ -1,7 +1,7 @@
 import json
 import os
 
-from utils import checkNumberOfErrors
+from utils import checkNumberOfErrors, saveError
 
 
 
@@ -22,6 +22,7 @@ def createJSON(objectList_entsoe, objectList_tge, objectList_entsoe_next, object
     
     except Exception as e:
         print(f"An error occurred in createJSON: {e}.")
+        saveError(str(e) + "  in createJSON")
         errors.errorNumber += 1
         if errors.errorNumber <= 20:   createJSON(objectList_entsoe, objectList_tge, objectList_entsoe_next, objectList_tge_next, errors, settings, window)
         else:   checkNumberOfErrors(errors, settings, window)

@@ -1,7 +1,7 @@
 import csv
 import os
 
-from utils import checkNumberOfErrors
+from utils import checkNumberOfErrors, saveError
 
 
 
@@ -18,6 +18,7 @@ def createCSV(objectList_entsoe, objectList_tge, objectList_entsoe_next, objectL
 
     except Exception as e:
         print(f"An error occurred in createCSV: {e}.")
+        saveError(str(e) + "  in createCSV")
         errors.errorNumber += 1
         if errors.errorNumber <= 20:   createCSV(objectList_entsoe, objectList_tge, objectList_entsoe_next, objectList_tge_next, errors, settings, window)
         else:   checkNumberOfErrors(errors, settings, window)

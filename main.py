@@ -7,14 +7,14 @@ import datetime
 import threading
 import time
 
-from webParser_entsoe import parseENTSOE
-from webParser_tge import parseTGE
+from webParser_entsoe import parseENTSOE, Entsoe
+from webParser_tge import parseTGE, Tge
 from windowTimeInterval import EnergyPrices_timeInterval
 from dataOperations.createJSON import createJSON
 from dataOperations.createHTML import createHTML
 from dataOperations.createCSV import createCSV
 from dataOperations.sendToSQLite import sendToSQLite
-from utils import Settings, PlotValues, PlotObj, CheckboxStatus, Errors, checkNumberOfErrors
+from utils import Settings, PlotValues, PlotObj, CheckboxStatus, Errors, checkNumberOfErrors, saveError, errorWindow, tryInternetConnection
 from settingsOperations import saveSettings_JSON, loadSettings
 
 
@@ -63,7 +63,7 @@ class EnergyPrices:
 
         self.errors.errorNumber = 0
 
-        # self.date = datetime.datetime(2024, 8, 18, 23, 59) #################################################################################
+        # self.date = datetime.datetime(2024, 8, 21, 23, 59) #################################################################################
         # self.date_plus_day = self.date + datetime.timedelta(days=1) #################################################################################
 
 
@@ -72,22 +72,44 @@ class EnergyPrices:
         self.settings = Settings()
         loadSettings(self.settings, self.errors)
 
+        if tryInternetConnection():
+            ## pobiera dane z entsoe i tge dla dnia dzisiejszego i następnego
+            parse_entsoe_thread = threading.Thread(target=parseENTSOE, args=(self.date, self.objectList_entsoe, self.errors, ), daemon = True)
+            parse_tge_thread = threading.Thread(target=parseTGE, args=(self.date, self.objectList_tge, self.errors, self.settings, ), daemon = True)
+            parse_entsoe_next = threading.Thread(target=parseENTSOE, args=(self.date_plus_day, self.objectList_entsoe_next, self.errors, ), daemon = True)
+            parse_tge_next = threading.Thread(target=parseTGE, args=(self.date_plus_day, self.objectList_tge_next, self.errors, self.settings, ), daemon = True)
 
-        ## pobiera dane z entsoe i tge dla dnia dzisiejszego i następnego
-        parse_entsoe_thread = threading.Thread(target=parseENTSOE, args=(self.date, self.objectList_entsoe, self.errors, ), daemon = True)
-        parse_tge_thread = threading.Thread(target=parseTGE, args=(self.date, self.objectList_tge, self.errors, self.settings, ), daemon = True)
-        parse_entsoe_next = threading.Thread(target=parseENTSOE, args=(self.date_plus_day, self.objectList_entsoe_next, self.errors, ), daemon = True)
-        parse_tge_next = threading.Thread(target=parseTGE, args=(self.date_plus_day, self.objectList_tge_next, self.errors, self.settings, ), daemon = True)
+            parse_entsoe_thread.start()
+            parse_tge_thread.start()
+            parse_entsoe_next.start()
+            parse_tge_next.start()
 
-        parse_entsoe_thread.start()
-        parse_tge_thread.start()
-        parse_entsoe_next.start()
-        parse_tge_next.start()
+            parse_entsoe_thread.join()
+            parse_tge_thread.join()
+            parse_entsoe_next.join()
+            parse_tge_next.join()
+        else:   
+            errorWindow('no internet connection', 'error')
 
-        parse_entsoe_thread.join()
-        parse_tge_thread.join()
-        parse_entsoe_next.join()
-        parse_tge_next.join()
+            ## jeśli nie ma internetu - przypisuje zerowe dane
+            for i in range(24):
+                entsoe = Entsoe()
+                tge = Tge()
+
+                entsoe.hour = i
+                tge.hour = i  
+
+                entsoe.date = str(self.date)[0:10]
+                tge.date = str(self.date)[0:10]
+
+
+                self.objectList_entsoe.append(entsoe)
+                self.objectList_entsoe_next.append(entsoe)
+                self.objectList_tge.append(tge)
+                self.objectList_tge_next.append(tge)
+
+
+                    
 
         ## ustawienie waluty pobranej z pliku
         if self.objectList_entsoe[0].currency != self.settings.currency:   self.changeCurrency()
@@ -110,7 +132,6 @@ class EnergyPrices:
 
 
     
-
 
 
     ## zmienianie liczby co sekunde (żeby zauważyć kiedy program się zetnie)
@@ -193,6 +214,7 @@ class EnergyPrices:
 
         except Exception as e:
             print(f"An error occurred in sendToModbus: {e}. Trying again")
+            saveError(str(e) + "  in sendToModbus")
             self.server.stop()
             self.errors.errorNumber += 1
             if self.errors.errorNumber <= 20: 
@@ -260,6 +282,7 @@ class EnergyPrices:
 
         except Exception as e:
             print(f"An error occurred in checkSettingsChange: {e}.")
+            saveError(str(e) + "  in checkSettingsChange")
             self.errors.errorNumber += 1
             if self.errors.errorNumber <= 20: 
                 self.checkSettingsChange()
@@ -600,12 +623,13 @@ class EnergyPrices:
         def CSV(): createCSV(self.objectList_entsoe, self.objectList_tge, self.objectList_entsoe_next, self.objectList_tge_next, self.errors, self.settings, self.window)
         def database(): sendToSQLite(self.objectList_entsoe, self.objectList_tge, self.objectList_entsoe_next, self.objectList_tge_next, self.errors, self.settings, self.window)
         def combinedData(): 
-            # self.combinedDataButton.configure(state='disabled')
-            self.energyPrices_timeInterval = EnergyPrices_timeInterval()
-            self.energyPrices_timeInterval.createInterface(self.combinedDataButton)
+            if tryInternetConnection():
+                self.energyPrices_timeInterval = EnergyPrices_timeInterval()
+                self.energyPrices_timeInterval.createInterface(self.combinedDataButton)
 
-            self.combinedDataList.clear()
-            self.combinedDataList.append(self.energyPrices_timeInterval)
+                self.combinedDataList.clear()
+                self.combinedDataList.append(self.energyPrices_timeInterval)
+            else:   errorWindow('no internet connection', 'error')
 
         JSONbutton = tk.Button(self.managementFrame, text="JSON", command=JSON)
         HTMLbutton = tk.Button(self.managementFrame, text="HTML", command=HTML)
@@ -704,6 +728,9 @@ class EnergyPrices:
         def updateData():
             try:
                 # if datetime.datetime.now().hour != self.prev_hour: 
+                ## i minuta większa niż 10 (bo dane nie wychodzą o równej godzinie )
+
+
                     print("\nupdating..")
                     self.errors.errorNumber = 0
                     print(datetime.datetime.now())
@@ -758,8 +785,10 @@ class EnergyPrices:
             
             except Exception as e:
                 print(f"An error occurred in updateData: {e}. Trying again")
+                saveError(str(e) + "  in updateData")
                 self.errors.errorNumber += 1
-                if self.errors.errorNumber <= 20:   updateData()
+                # if self.errors.errorNumber <= 20:   updateData()
+                if self.errors.errorNumber <= 20:   self.window.after(15000, updateData)
                 else:   checkNumberOfErrors(self.errors, self.settings, self.window)
                 time.sleep(1)
 
@@ -806,21 +835,20 @@ if __name__ == '__main__':
 
 
 
-## - pozabezpieczać 'windowTimeInterval'
-## miejsce wyświetlania okienek (w jakiej części ekranu)
-## 12.08-23.08  wszystkie tge się wyzerowały
-## każde uruchomienie 'windowTimeInterval' dokłada ok 3MB
+
+## każde uruchomienie 'windowTimeInterval' dokłada ok 3MB (Python usuwa, ale dopiero po jakimś czasie)
+## przycisk usuwania obiektu 'EnergyPrices_timeInterval' (tylko do testów, żeby sprawdzić czy to on dokłada te 3MB do RAM)
 
 
 
 ## TESTOWANIE: 
-#       - zmiana ustawień modbusem
 #       - gdy dane są nieprawidłowe / niepełne
-#       - gdy nie ma internetu
+#       - gdy nie ma internetu różne kombinacje
+#       - odpalenie bez internetu
 #       - zmiana dnia
-#       - wysyłanie modbusem
-#       - czy wysyła dobre 'dataok'
 #       - zmiana ustawień modbusem
+#       wysyłanie modbusem
+#       czy wysyła dobre 'dataok'
 #       działanie ciągłe przez dłuższy czas
 
 
@@ -832,6 +860,6 @@ if __name__ == '__main__':
 
 
 ### PRZED WYSŁANIEM: 
-##      if w updacie
-##      '.after' w updacie
-##      sprawdzić daty (czy przypisuje '.now', czy jakieś na sztywno)
+##      if w updacie  (żeby restartował co godzine)
+##      '.after' w updacie  (żeby restartował co godzine)
+##      sprawdzić daty (czy wszędzie przypisuje '.now', czy jakieś nie są na sztywno)

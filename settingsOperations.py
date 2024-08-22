@@ -1,5 +1,8 @@
 import json
 import os
+import datetime
+
+# from utils import saveError
 
 
 
@@ -16,6 +19,7 @@ def saveSettings_JSON(settings, errors):
                 
     except Exception as e:
         print(f"An error occurred in saveSettings_JSON: {e}. Trying again")
+        saveError(str(e) + "  in saveSettings_JSON")
         errors.errorNumber += 1
         createDefaultSettings(settings, errors)
         
@@ -38,6 +42,7 @@ def createDefaultSettings(settings, errors):
 
     except Exception as e:
         print(f"An error occurred in createDefaultSettings: {e}. Trying again")
+        saveError(str(e) + "  in createDefaultSettings")
         errors.errorNumber += 1
 
 
@@ -65,6 +70,28 @@ def loadSettings(settings, errors):
         
     except Exception as e:
         print(f"An error occurred in loadSettings: {e}. Trying again")
+        saveError(str(e) + "  in loadSettings")
         errors.errorNumber += 1
         createDefaultSettings(settings, errors)
-    
+
+
+
+
+
+
+
+
+
+
+def saveError(message):
+    try:
+        if os.path.exists("outputs") == False: os.mkdir("outputs") 
+        fileName = "outputs\\errors.txt"
+
+        file = open(fileName, "a")
+        errorText = str(datetime.datetime.now()) + "  " + str(message) + "\n"
+        file.write(errorText)
+        file.close()
+
+    except Exception as e:
+        print(f"An error occurred in saveError: {e}.")

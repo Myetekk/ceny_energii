@@ -3,7 +3,7 @@ import time
 import datetime
 from urllib import request
 
-from utils import getEUR, increaseOneDay, decreaseOneDay, decreaseOneMonth, checkNumberOfErrors
+from utils import getEUR, increaseOneDay, decreaseOneDay, decreaseOneMonth, saveError, tryInternetConnection
 
 
 
@@ -52,19 +52,6 @@ def getInfo(source_data, html_class_name, object, type_of_data, date, euro, sett
 
             object.euro = euro
             object.status = True
-
-
-
-
-
-def tryInternetConnection():
-    try:
-        request.urlopen('https://www.google.com', timeout=1)
-        return True
-    
-    except request.URLError as err: 
-        print('no internet connection')
-        return False
 
 
 
@@ -168,6 +155,7 @@ def parseTGE(date, RDNList, errors, settings):
 
     except Exception as e:
         print(f"An error occurred in parseTGE: {e}. Trying again")
+        saveError(str(e) + "  in parseTGE")
         errors.errorNumber += 1
         if errors.errorNumber <= 20:   parseTGE(date, RDNList, errors, settings)
         else:   return

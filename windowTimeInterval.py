@@ -13,7 +13,7 @@ import babel.numbers
 
 from webParser_entsoe import parseENTSOE
 from webParser_tge import parseTGE
-from utils import Settings, Errors, errorWindow
+from utils import Settings, Errors, errorWindow, saveError, tryInternetConnection
 
 
 
@@ -40,12 +40,14 @@ class EnergyPrices_timeInterval:
     ## ładuje nagłówek z wybieraniem przedziału czasu
     def loadHeader(self):
         def calendar_onChange():
-            self.dataList.clear()
-            self.date_start = self.CalendarStart.get_date()
-            self.date_stop = self.CalendarStop.get_date()
-            
-            if self.date_start <= self.date_stop:   self.getData()
-            else:   errorWindow('nieprawidłowa data', 'error')
+            if tryInternetConnection():
+                self.dataList.clear()
+                self.date_start = self.CalendarStart.get_date()
+                self.date_stop = self.CalendarStop.get_date()
+                
+                if self.date_start <= self.date_stop:   self.getData()
+                else:   errorWindow('nieprawidłowa data', 'error')
+            else:   errorWindow('no internet connection', 'error')
 
         
         self.CalendarStart_variable = tk.StringVar()
@@ -209,6 +211,7 @@ class EnergyPrices_timeInterval:
 
         except Exception as e:
             print(f"An error occurred in GetData in combinedData: {e}.")
+            saveError(str(e) + "  in GetData in combinedData")
             self.errors.errorNumber += 1
             if self.errors.errorNumber <= 10: 
                 self.getData()
@@ -359,10 +362,11 @@ class EnergyPrices_timeInterval:
                 writer.writerow(["date", "hour", "entsoe", "tge"])
                 for obj in self.dataList:
                     for i in range(24):
-                        writer.writerow([obj.objectList_entsoe[i].date, obj.objectList_entsoe[i].hour, obj.objectList_entsoe[i].price, obj.objectList_tge[i].price])
+                        writer.writerow([obj.objectList_entsoe[i].date, obj.objectList_entsoe[i].hour, round(obj.objectList_entsoe[i].price, 2), round(obj.objectList_tge[i].price, 2)])
 
         except Exception as e:
             print(f"An error occurred in exportToCSV in combinedData: {e}.")
+            saveError(str(e) + "  in exportToCSV in combinedData")
             self.errors.errorNumber += 1
             if self.errors.errorNumber <= 10: 
                 self.exportToCSV()
@@ -387,7 +391,7 @@ class EnergyPrices_timeInterval:
                 for obj in self.dataList:
                     file.write('[\n\n')
                     for i in range(24):
-                        data = { "date": obj.objectList_entsoe[i].date, "hour": obj.objectList_entsoe[i].hour, "entsoe": obj.objectList_entsoe[i].price, "tge": obj.objectList_tge[i].price }
+                        data = { "date": obj.objectList_entsoe[i].date, "hour": obj.objectList_entsoe[i].hour, "entsoe": round(obj.objectList_entsoe[i].price, 2), "tge": round(obj.objectList_tge[i].price, 2) }
                         json_object = json.dumps(data, indent=3)
                         file.write(json_object)
                         if obj.objectList_entsoe[i].hour != 23: file.write(", \n")
@@ -399,6 +403,7 @@ class EnergyPrices_timeInterval:
 
         except Exception as e:
             print(f"An error occurred in exportToJSON in combinedData: {e}.")
+            saveError(str(e) + "  in exportToJSON in combinedData")
             self.errors.errorNumber += 1
             if self.errors.errorNumber <= 10: 
                 self.exportToJSON()
@@ -415,7 +420,6 @@ class EnergyPrices_timeInterval:
         except: print()
         else:   self.combinedDataButton.configure(state='active')
 
-        # for widget in self.window.winfo_children():   widget.destroy() 
         self.window.destroy()
     
 
@@ -424,11 +428,15 @@ class EnergyPrices_timeInterval:
 
     ## zamyka okno i tworzy nowe
     def restartWindow(self):
-        print('\n\nRestarting combinedData window\n\n')
-        self.combinedDataButton.configure(state='active')
-        self.window.destroy()
-        self.energyPrices_timeInterval = EnergyPrices_timeInterval()
-        self.energyPrices_timeInterval.createInterface(self.combinedDataButton)
+        try:
+            print('\n\nRestarting combinedData window\n\n')
+            self.combinedDataButton.configure(state='active')
+            self.window.destroy()
+            self.energyPrices_timeInterval = EnergyPrices_timeInterval()
+            self.energyPrices_timeInterval.createInterface(self.combinedDataButton)
+        except Exception as e:
+            print(f"An error occurred in restartWindow in combinedData: {e}.")
+            saveError(str(e) + "  in restartWindow in combinedData")
 
 
 
@@ -467,4 +475,3 @@ if __name__ == '__main__':
 
 
 
-# if self.errors.errorNumber == 0  or  self.errors.errorNumber == 1  or  self.errors.errorNumber == 2:   raise Exception("TEST TEST TEST TEST TEST") ####################################################################
