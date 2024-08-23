@@ -30,6 +30,7 @@ def createDefaultSettings(settings, errors):
     settings.currency = 'PLN'
     settings.fixing = 1
     settings.data_source = 1
+    settings.updateTime = 3600
 
     try:
         if os.path.exists("outputs") == False: os.mkdir("outputs") 
@@ -68,7 +69,7 @@ def loadSettings(settings, errors):
             createDefaultSettings(settings, errors)
         
     except Exception as e:
-        print(f"An error occurred in loadSettings: {e}. Trying again")
+        print(f"An error occurred in loadSettings: {e}. Using default settings")
         saveError(str(e) + "  in loadSettings")
         errors.errorNumber += 1
         createDefaultSettings(settings, errors)

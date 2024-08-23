@@ -29,6 +29,24 @@ class Entsoe:
 
 
 
+def resetData(objectList, date):
+    objectList.clear()
+
+    for index in range(24):
+        entsoe = Entsoe()
+                    
+        entsoe.hour = index
+        entsoe.date = str(date)[:10]
+        entsoe.price = 0.0
+        entsoe.euro = 1.0
+        entsoe.status = False
+        
+        objectList.append(entsoe)
+
+
+
+
+
 ## łączy się z API entsoe i pobiera info o danym dniu
 def getDataFromAPI_oneDay(date, errors):
     try:
@@ -69,33 +87,26 @@ def parseENTSOE(date, objectList, errors):
             euro = getEUR(str(date)[:10].split('-'))
             string = getDataFromAPI_oneDay(date, errors)
 
-            if string=="":
-                for index in range(24): 
-                    entsoe = Entsoe()
-                    
-                    entsoe.hour = index
-                    entsoe.price = 0.0
-                    entsoe.date = str(date)[0:10]
-                    entsoe.euro = euro
-                    entsoe.status = False
-                    
-                    objectList.append(entsoe)
+            if string == "":
+                resetData(objectList, date)
             else:
                 document = parseString(string)
 
-                for index in range(24):
-                    entsoe = Entsoe()
-                    price = document.getElementsByTagName("price.amount")[index].firstChild.nodeValue
-                    date = document.getElementsByTagName("end")[1].firstChild.nodeValue
+                if len(document.getElementsByTagName("price.amount")) != 24:   resetData(objectList, date)
+                else:
+                    for index in range(24):
+                        entsoe = Entsoe()
+                        price = document.getElementsByTagName("price.amount")[index].firstChild.nodeValue
+                        date_fromapi = document.getElementsByTagName("end")[1].firstChild.nodeValue
 
-                    entsoe.hour = index
-                    entsoe.price = round(float(price) * euro, 2)
-                    entsoe.date = date[0:10]
-                    entsoe.euro = euro
-                    entsoe.status = True
+                        entsoe.hour = index
+                        entsoe.price = round(float(price) * euro, 2)
+                        entsoe.date = date_fromapi[0:10]
+                        entsoe.euro = euro
+                        entsoe.status = True
 
-                    objectList.append(entsoe)
-            if internetConn:   print("entsoe parsed")
+                        objectList.append(entsoe)
+            if internetConn:   print("entsoe parsed for: ", str(date)[0:10])
         else: 
             return
 

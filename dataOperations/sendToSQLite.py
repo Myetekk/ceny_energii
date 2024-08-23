@@ -7,7 +7,7 @@ from utils import checkNumberOfErrors, saveError
 
 
 
-path = "dataBase.db"
+path = "outputs\\dataBase.db"
 
 def sendToSQLite(objectList_entsoe, objectList_tge, objectList_entsoe_next, objectList_tge_next, errors, settings, window):
     try:

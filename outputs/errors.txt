@@ -888,3 +888,542 @@
 2024-08-22 14:54:58.770662  can't invoke "grid" command: application has been destroyed  in reloadElements
 2024-08-22 14:54:58.770662  can't invoke "grid" command: application has been destroyed  in reloadElements
 2024-08-22 14:54:58.772661  can't invoke "destroy" command: application has been destroyed  in updateData
+2024-08-23 08:10:48.118240  a bytes-like object is required, not 'NoneType'  in parseENTSOE
+2024-08-23 08:30:22.901782    no internet connection
+2024-08-23 08:30:22.901782    no internet connection
+2024-08-23 08:30:22.901782    no internet connection
+2024-08-23 08:30:22.901782    no internet connection
+2024-08-23 08:30:48.414271    no internet connection
+2024-08-23 08:30:48.414271    no internet connection
+2024-08-23 08:30:48.414271    no internet connection
+2024-08-23 08:30:48.414271    no internet connection
+2024-08-23 08:30:53.604503    no internet connection
+2024-08-23 08:30:53.604503    no internet connection
+2024-08-23 08:30:53.604503    no internet connection
+2024-08-23 08:30:53.604503    no internet connection
+2024-08-23 08:30:59.279066    no internet connection
+2024-08-23 08:30:59.279066    no internet connection
+2024-08-23 08:30:59.279066    no internet connection
+2024-08-23 08:30:59.279066    no internet connection
+2024-08-23 08:31:01.467971    no internet connection
+2024-08-23 08:31:01.467971    no internet connection
+2024-08-23 08:31:01.467971    no internet connection
+2024-08-23 08:31:01.467971    no internet connection
+2024-08-23 08:31:03.672157    no internet connection
+2024-08-23 08:31:03.672157    no internet connection
+2024-08-23 08:31:03.672157    no internet connection
+2024-08-23 08:31:03.672157    no internet connection
+2024-08-23 08:31:05.858874    no internet connection
+2024-08-23 08:31:05.858874    no internet connection
+2024-08-23 08:31:05.858874    no internet connection
+2024-08-23 08:31:05.858874    no internet connection
+2024-08-23 08:31:17.570302    no internet connection
+2024-08-23 08:31:17.570302    no internet connection
+2024-08-23 08:31:17.570302    no internet connection
+2024-08-23 08:31:17.570302    no internet connection
+2024-08-23 08:31:27.764364    no internet connection
+2024-08-23 08:31:27.764364    no internet connection
+2024-08-23 08:31:27.764364    no internet connection
+2024-08-23 08:31:27.764364    no internet connection
+2024-08-23 08:31:37.955759    no internet connection
+2024-08-23 08:31:37.955759    no internet connection
+2024-08-23 08:31:37.955759    no internet connection
+2024-08-23 08:31:37.955759    no internet connection
+2024-08-23 08:31:48.258368    no internet connection
+2024-08-23 08:31:48.258368    no internet connection
+2024-08-23 08:31:48.258368    no internet connection
+2024-08-23 08:31:48.258368    no internet connection
+2024-08-23 08:31:58.527600    no internet connection
+2024-08-23 08:31:58.527600    no internet connection
+2024-08-23 08:31:58.527600    no internet connection
+2024-08-23 08:31:58.527600    no internet connection
+2024-08-23 08:32:08.945164    no internet connection
+2024-08-23 08:32:08.945164    no internet connection
+2024-08-23 08:32:08.945164    no internet connection
+2024-08-23 08:32:08.945164    no internet connection
+2024-08-23 08:32:19.114615    no internet connection
+2024-08-23 08:32:19.114615    no internet connection
+2024-08-23 08:32:19.114615    no internet connection
+2024-08-23 08:32:19.114615    no internet connection
+2024-08-23 09:38:02.961782  a bytes-like object is required, not 'NoneType'  in parseENTSOE
+2024-08-23 09:38:02.962322    no internet connection
+2024-08-23 09:38:03.964651  list index out of range  in updateData
+2024-08-23 09:38:18.979314    no internet connection
+2024-08-23 09:38:18.979314    no internet connection
+2024-08-23 09:38:18.979314    no internet connection
+2024-08-23 09:38:18.979314    no internet connection
+2024-08-23 09:38:18.980310  list index out of range  in updateData
+2024-08-23 09:38:33.995316    no internet connection
+2024-08-23 09:38:33.995316    no internet connection
+2024-08-23 09:38:33.995316    no internet connection
+2024-08-23 09:38:33.995316    no internet connection
+2024-08-23 09:38:33.995316  list index out of range  in updateData
+2024-08-23 09:38:49.005869    no internet connection
+2024-08-23 09:38:49.005869    no internet connection
+2024-08-23 09:38:49.005869    no internet connection
+2024-08-23 09:38:49.005869    no internet connection
+2024-08-23 09:38:49.005869  list index out of range  in updateData
+2024-08-23 09:51:06.752138  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:06.753125  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:06.754382  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:06.755380  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:06.756377  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:06.757082  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:06.789187  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:06.789187  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:06.789187  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:06.789187  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:06.789187  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:06.789187  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:06.789187  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:06.815085  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:06.815085  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:06.821918  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:06.823359  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:06.830950  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:06.840099  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:06.846270  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:06.852401  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:15.696893  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:15.696893  can't invoke "label" command: application has been destroyed  in createInterface
+2024-08-23 09:51:15.711636  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:15.712681  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:15.712681  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:15.712681  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:15.716493  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:15.717477  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:15.719470  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:15.720087  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:15.721232  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:15.722230  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:15.723286  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:15.723286  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:15.723286  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:15.725362  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:15.726360  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:15.726360  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:15.727356  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:15.728354  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:15.729351  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:15.730349  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:15.730613  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:15.730613  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:15.730613  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:15.730613  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:15.735439  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:17.194587  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:17.194587  can't invoke "label" command: application has been destroyed  in createInterface
+2024-08-23 09:51:25.544976  can't invoke "label" command: application has been destroyed  in createInterface
+2024-08-23 09:51:25.545973  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:25.546977  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:25.547967  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:25.548965  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:25.550976  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:25.551971  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:25.552954  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:25.553953  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:25.554949  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:25.555947  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:25.556945  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:25.558457  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:25.558457  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:25.558457  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:25.558457  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:25.558457  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:25.558457  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:25.558457  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:25.558457  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:25.566508  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:25.566508  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:25.567529  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:25.568506  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:25.569831  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:25.570830  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:27.182328  can't invoke "label" command: application has been destroyed  in createInterface
+2024-08-23 09:51:27.182328  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:28.589577  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:28.589577  can't invoke "label" command: application has been destroyed  in createInterface
+2024-08-23 09:51:28.589577  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:28.589577  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:28.589577  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:28.597033  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:28.598446  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:28.599447  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:28.600443  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:28.601164  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:28.601164  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:28.601164  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:28.601164  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:28.601164  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:28.601164  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:28.605727  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:28.606672  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:28.606672  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:28.607673  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:28.608669  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:28.608669  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:28.609666  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:28.609666  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:28.610664  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:28.611660  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:28.611660  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:28.612659  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:28.613655  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:30.041256  can't invoke "label" command: application has been destroyed  in createInterface
+2024-08-23 09:51:30.041256  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:31.468010  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:31.468010  can't invoke "label" command: application has been destroyed  in createInterface
+2024-08-23 09:51:31.469009  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:31.470006  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:31.471010  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:31.472998  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:31.473995  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:31.474993  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:31.475992  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:31.476987  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:31.477984  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:31.478983  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:31.479989  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:31.480976  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:31.480976  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:31.481973  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:31.482979  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:31.482979  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:31.483969  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:31.484967  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:31.485963  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:31.485963  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:31.486959  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:31.487957  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:31.487957  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:31.488954  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:31.488954  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:31.489951  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:32.927192  can't invoke "label" command: application has been destroyed  in createInterface
+2024-08-23 09:51:32.927192  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:35.535597  can't invoke "label" command: application has been destroyed  in createInterface
+2024-08-23 09:51:35.536365  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:35.537556  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:35.538479  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:35.539478  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:35.540475  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:35.541736  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:35.543467  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:35.544465  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:35.545464  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:35.547458  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:35.548320  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:35.549317  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:35.550839  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:35.551084  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:35.552082  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:35.553126  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:35.553126  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:35.553126  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:35.556248  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:35.556571  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:35.557570  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:35.557570  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:35.558569  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:35.559564  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:35.559564  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:35.560810  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 09:51:35.561065  cannot access local variable 'currency' where it is not associated with a value  in checkSettingsChange
+2024-08-23 10:07:58.196042  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:58.196042  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:58.197472  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:58.198472  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:58.198472  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:58.199470  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:58.200467  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:58.201472  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:58.201472  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:58.202470  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:58.203466  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:58.204323  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:58.205167  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:58.205990  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:58.205990  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:58.205990  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:58.205990  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:58.205990  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:58.205990  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:58.205990  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:58.205990  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:59.829950  can't invoke "label" command: application has been destroyed  in createInterface
+2024-08-23 10:07:59.829950  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:59.831015  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:59.831015  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:59.831015  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:59.831015  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:59.835474  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:59.836482  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:59.837768  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:59.838167  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:59.839455  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:59.839455  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:59.839455  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:59.839455  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:59.839455  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:59.839455  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:59.839455  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:59.839455  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:59.846066  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:59.846066  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:59.847064  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:59.848061  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:59.848669  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:59.849468  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:59.849468  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:59.849468  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:59.849468  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:07:59.849468  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:08:02.119594  can't invoke "label" command: application has been destroyed  in createInterface
+2024-08-23 10:08:02.119594  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:35.905972  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:35.907961  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:35.907961  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:35.908957  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:35.909954  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:35.910952  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:35.911948  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:35.912948  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:35.913949  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:35.914945  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:35.915941  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:35.916948  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:35.917938  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:35.918932  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:35.919928  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:35.920948  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:35.922921  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:35.923919  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:35.926910  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:35.927915  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:35.929901  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:37.575927  can't invoke "label" command: application has been destroyed  in createInterface
+2024-08-23 10:24:37.575927  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:37.575927  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:37.575927  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:37.575927  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:37.575927  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:37.575927  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:37.575927  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:37.584538  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:37.584538  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:37.585539  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:37.587039  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:37.587039  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:37.588480  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:37.588480  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:37.589478  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:37.590483  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:37.590483  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:37.591838  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:37.592836  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:37.592836  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:37.593833  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:37.594750  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:37.595722  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:37.597470  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:37.597470  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:37.599089  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:37.600087  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:37.600087  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:38.934015  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:38.934015  can't invoke "label" command: application has been destroyed  in createInterface
+2024-08-23 10:24:40.381059  can't invoke "label" command: application has been destroyed  in createInterface
+2024-08-23 10:24:40.381059  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:40.382058  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:40.383071  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:40.384051  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:40.385057  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:40.386047  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:40.387053  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:40.389202  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:40.389202  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:40.391479  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:40.391479  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:40.392476  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:40.393494  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:40.393494  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:40.394996  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:40.396333  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:40.397997  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:40.398994  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:40.399768  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:40.399768  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:40.400745  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:40.401745  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:40.402741  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:40.402741  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:40.403759  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:40.404263  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:40.404263  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:24:40.404263  'EnergyPrices' object has no attribute 'prevSettings'  in checkSettingsChange
+2024-08-23 10:48:13.365468  DataBank.set_holding_registers() missing 1 required positional argument: 'word_list'  in checkSettingsChange
+2024-08-23 14:21:03.121706  list index out of range  in parseENTSOE
+2024-08-23 14:21:04.040281  list index out of range  in parseENTSOE
+2024-08-23 14:21:05.231583  list index out of range  in parseENTSOE
+2024-08-23 14:21:06.247184  list index out of range  in parseENTSOE
+2024-08-23 14:21:08.679722  list index out of range  in parseENTSOE
+2024-08-23 14:21:09.584806  list index out of range  in parseENTSOE
+2024-08-23 14:21:11.487881  list index out of range  in parseENTSOE
+2024-08-23 14:21:15.638784  list index out of range  in parseENTSOE
+2024-08-23 14:21:16.367870  list index out of range  in parseENTSOE
+2024-08-23 14:21:19.419229  list index out of range  in parseENTSOE
+2024-08-23 14:21:20.321974  list index out of range  in parseENTSOE
+2024-08-23 14:21:21.393336  list index out of range  in parseENTSOE
+2024-08-23 14:21:22.793338  list index out of range  in parseENTSOE
+2024-08-23 14:21:24.063715  list index out of range  in parseENTSOE
+2024-08-23 14:21:24.916656  list index out of range  in parseENTSOE
+2024-08-23 14:21:27.088048  list index out of range  in parseENTSOE
+2024-08-23 14:21:28.335755  list index out of range  in parseENTSOE
+2024-08-23 14:21:30.488726  list index out of range  in parseENTSOE
+2024-08-23 14:21:31.906338  list index out of range  in parseENTSOE
+2024-08-23 14:21:32.947211  list index out of range  in parseENTSOE
+2024-08-23 14:21:34.411183  list index out of range  in parseENTSOE
+2024-08-23 14:23:27.514918  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-23 14:23:27.514918  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-23 14:23:27.514918  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-23 14:23:27.514918  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-23 14:23:27.514918  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-23 14:23:27.520389  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-23 14:23:27.521386  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-23 14:23:27.522383  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-23 14:23:27.522383  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-23 14:23:27.523381  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-23 14:23:27.524378  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-23 14:23:27.525332  can't invoke "destroy" command: application has been destroyed  in restartWindow in combinedData
+2024-08-23 14:23:39.906002  list index out of range  in parseENTSOE
+2024-08-23 14:23:44.045642  list index out of range  in parseENTSOE
+2024-08-23 14:23:45.487589  list index out of range  in parseENTSOE
+2024-08-23 14:23:46.708807  list index out of range  in parseENTSOE
+2024-08-23 14:23:48.039095  list index out of range  in parseENTSOE
+2024-08-23 14:23:49.272581  list index out of range  in parseENTSOE
+2024-08-23 14:23:50.431236  list index out of range  in parseENTSOE
+2024-08-23 14:23:51.500089  list index out of range  in parseENTSOE
+2024-08-23 14:23:57.830938  list index out of range  in parseENTSOE
+2024-08-23 14:23:58.849363  list index out of range  in parseENTSOE
+2024-08-23 14:23:59.999404  list index out of range  in parseENTSOE
+2024-08-23 14:24:04.062097  list index out of range  in parseENTSOE
+2024-08-23 14:24:05.349143  list index out of range  in parseENTSOE
+2024-08-23 14:24:07.038312  list index out of range  in parseENTSOE
+2024-08-23 14:24:08.125752  list index out of range  in parseENTSOE
+2024-08-23 14:24:11.024630  list index out of range  in parseENTSOE
+2024-08-23 14:24:12.327152  list index out of range  in parseENTSOE
+2024-08-23 14:24:13.450696  list index out of range  in parseENTSOE
+2024-08-23 14:27:07.266313  list index out of range  in parseENTSOE
+2024-08-23 14:27:08.831227  list index out of range  in parseENTSOE
+2024-08-23 14:27:09.923221  list index out of range  in parseENTSOE
+2024-08-23 14:27:11.021069  list index out of range  in parseENTSOE
+2024-08-23 14:27:12.219922  list index out of range  in parseENTSOE
+2024-08-23 14:29:38.331414  Wrong data from Entsoe  in parseENTSOE
+2024-08-23 14:29:39.581643  Wrong data from Entsoe  in parseENTSOE
+2024-08-23 14:29:40.715767  Wrong data from Entsoe  in parseENTSOE
+2024-08-23 14:29:41.717554  Wrong data from Entsoe  in parseENTSOE
+2024-08-23 14:29:42.773723  Wrong data from Entsoe  in parseENTSOE
+2024-08-23 14:29:43.753515  Wrong data from Entsoe  in parseENTSOE
+2024-08-23 14:29:45.078635  Wrong data from Entsoe  in parseENTSOE
+2024-08-23 14:29:45.955344  Wrong data from Entsoe  in parseENTSOE
+2024-08-23 14:29:47.061621  Wrong data from Entsoe  in parseENTSOE
+2024-08-23 14:29:48.163041  Wrong data from Entsoe  in parseENTSOE
+2024-08-23 14:29:49.054621  Wrong data from Entsoe  in parseENTSOE
+2024-08-23 14:29:50.321795  Wrong data from Entsoe  in parseENTSOE
+2024-08-23 14:29:51.608970  Wrong data from Entsoe  in parseENTSOE
+2024-08-23 14:29:53.035788  Wrong data from Entsoe  in parseENTSOE
+2024-08-23 14:29:54.143432  Wrong data from Entsoe  in parseENTSOE
+2024-08-23 14:29:55.232821  Wrong data from Entsoe  in parseENTSOE
+2024-08-23 14:29:56.377809  Wrong data from Entsoe  in parseENTSOE
+2024-08-23 14:29:57.566704  Wrong data from Entsoe  in parseENTSOE
+2024-08-23 14:29:58.753778  Wrong data from Entsoe  in parseENTSOE
+2024-08-23 14:29:59.936999  Wrong data from Entsoe  in parseENTSOE
+2024-08-23 14:30:01.107402  Wrong data from Entsoe  in parseENTSOE
+2024-08-23 14:30:41.192265  cannot access local variable 'document' where it is not associated with a value  in parseENTSOE
+2024-08-23 14:30:47.559845  cannot access local variable 'document' where it is not associated with a value  in parseENTSOE
+2024-08-23 14:30:47.754966  cannot access local variable 'document' where it is not associated with a value  in parseENTSOE
+2024-08-23 14:30:48.730686  cannot access local variable 'document' where it is not associated with a value  in parseENTSOE
+2024-08-23 14:30:48.779609  cannot access local variable 'document' where it is not associated with a value  in parseENTSOE
+2024-08-23 14:30:55.903139  cannot access local variable 'document' where it is not associated with a value  in parseENTSOE
+2024-08-23 14:30:56.900235  cannot access local variable 'document' where it is not associated with a value  in parseENTSOE
+2024-08-23 14:30:57.277576  cannot access local variable 'document' where it is not associated with a value  in parseENTSOE
+2024-08-23 14:30:58.510536  cannot access local variable 'document' where it is not associated with a value  in parseENTSOE
+2024-08-23 14:30:59.785796  cannot access local variable 'document' where it is not associated with a value  in parseENTSOE
+2024-08-23 14:31:00.924483  cannot access local variable 'document' where it is not associated with a value  in parseENTSOE
+2024-08-23 14:31:01.100140  cannot access local variable 'document' where it is not associated with a value  in parseENTSOE
+2024-08-23 14:31:02.251824  cannot access local variable 'document' where it is not associated with a value  in parseENTSOE
+2024-08-23 14:31:02.887512  cannot access local variable 'document' where it is not associated with a value  in parseENTSOE
+2024-08-23 14:31:03.503817  cannot access local variable 'document' where it is not associated with a value  in parseENTSOE
+2024-08-23 14:31:04.907152  cannot access local variable 'document' where it is not associated with a value  in parseENTSOE
+2024-08-23 14:31:05.264214  cannot access local variable 'document' where it is not associated with a value  in parseENTSOE
+2024-08-23 14:31:06.244246  cannot access local variable 'document' where it is not associated with a value  in parseENTSOE
+2024-08-23 14:31:07.890521  cannot access local variable 'document' where it is not associated with a value  in parseENTSOE
+2024-08-23 14:31:07.963640  cannot access local variable 'document' where it is not associated with a value  in parseENTSOE
+2024-08-23 14:31:09.280281  cannot access local variable 'document' where it is not associated with a value  in parseENTSOE
+2024-08-23 14:31:09.380293  cannot access local variable 'document' where it is not associated with a value  in parseENTSOE
+2024-08-23 14:34:05.237353  resetData() missing 1 required positional argument: 'objectList'  in parseENTSOE
+2024-08-23 14:34:06.491760  resetData() missing 1 required positional argument: 'objectList'  in parseENTSOE
+2024-08-23 14:34:07.597209  resetData() missing 1 required positional argument: 'objectList'  in parseENTSOE
+2024-08-23 14:34:08.795266  resetData() missing 1 required positional argument: 'objectList'  in parseENTSOE
+2024-08-23 14:34:09.968352  resetData() missing 1 required positional argument: 'objectList'  in parseENTSOE
+2024-08-23 14:34:11.172607  resetData() missing 1 required positional argument: 'objectList'  in parseENTSOE
+2024-08-23 14:34:12.299649  resetData() missing 1 required positional argument: 'objectList'  in parseENTSOE
+2024-08-23 14:34:13.679061  resetData() missing 1 required positional argument: 'objectList'  in parseENTSOE
+2024-08-23 14:34:14.975753  resetData() missing 1 required positional argument: 'objectList'  in parseENTSOE
+2024-08-23 14:34:16.355815  resetData() missing 1 required positional argument: 'objectList'  in parseENTSOE
+2024-08-23 14:35:34.678292  Object of type datetime is not JSON serializable  in exportToJSON in combinedData
+2024-08-23 14:35:34.680287  Object of type datetime is not JSON serializable  in exportToJSON in combinedData
+2024-08-23 14:35:34.682091  Object of type datetime is not JSON serializable  in exportToJSON in combinedData
+2024-08-23 14:35:34.683220  Object of type datetime is not JSON serializable  in exportToJSON in combinedData
+2024-08-23 14:35:34.684220  Object of type datetime is not JSON serializable  in exportToJSON in combinedData
+2024-08-23 14:35:34.685230  Object of type datetime is not JSON serializable  in exportToJSON in combinedData
+2024-08-23 14:35:34.686213  Object of type datetime is not JSON serializable  in exportToJSON in combinedData
+2024-08-23 14:35:34.687212  Object of type datetime is not JSON serializable  in exportToJSON in combinedData
+2024-08-23 14:35:34.689203  Object of type datetime is not JSON serializable  in exportToJSON in combinedData
+2024-08-23 14:35:34.690202  Object of type datetime is not JSON serializable  in exportToJSON in combinedData
+2024-08-23 14:35:34.691922  Object of type datetime is not JSON serializable  in exportToJSON in combinedData
+2024-08-23 14:36:15.867273  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-23 14:36:15.867273  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-23 14:36:15.867273  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-23 14:36:15.867273  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-23 14:36:15.867273  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-23 14:36:15.873817  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-23 14:36:15.875486  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-23 14:36:15.876596  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-23 14:36:15.876663  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-23 14:36:15.878657  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-23 14:36:15.879653  can't invoke "winfo" command: application has been destroyed  in GetData in combinedData
+2024-08-23 14:36:15.880679  can't invoke "destroy" command: application has been destroyed  in restartWindow in combinedData
+2024-08-23 14:36:40.088894  Object of type datetime is not JSON serializable  in exportToJSON in combinedData
+2024-08-23 14:36:40.088894  Object of type datetime is not JSON serializable  in exportToJSON in combinedData
+2024-08-23 14:36:40.088894  Object of type datetime is not JSON serializable  in exportToJSON in combinedData
+2024-08-23 14:36:40.088894  Object of type datetime is not JSON serializable  in exportToJSON in combinedData
+2024-08-23 14:36:40.088894  Object of type datetime is not JSON serializable  in exportToJSON in combinedData
+2024-08-23 14:36:40.095797  Object of type datetime is not JSON serializable  in exportToJSON in combinedData
+2024-08-23 14:36:40.096793  Object of type datetime is not JSON serializable  in exportToJSON in combinedData
+2024-08-23 14:36:40.099106  Object of type datetime is not JSON serializable  in exportToJSON in combinedData
+2024-08-23 14:36:40.100430  Object of type datetime is not JSON serializable  in exportToJSON in combinedData
+2024-08-23 14:36:40.101181  Object of type datetime is not JSON serializable  in exportToJSON in combinedData
+2024-08-23 14:36:40.101181  Object of type datetime is not JSON serializable  in exportToJSON in combinedData
+2024-08-23 14:37:53.351943  'datetime.datetime' object has no attribute 'setFeature'  in parseENTSOE
+2024-08-23 14:37:53.351943  'datetime.datetime' object has no attribute 'setFeature'  in parseENTSOE
+2024-08-23 14:37:54.619191  'datetime.datetime' object has no attribute 'setFeature'  in parseENTSOE
+2024-08-23 14:37:55.871560  'datetime.datetime' object has no attribute 'setFeature'  in parseENTSOE
+2024-08-23 14:37:56.955963  'datetime.datetime' object has no attribute 'setFeature'  in parseENTSOE
+2024-08-23 14:37:58.579808  'datetime.datetime' object has no attribute 'setFeature'  in parseENTSOE
+2024-08-23 14:37:59.693838  'datetime.datetime' object has no attribute 'setFeature'  in parseENTSOE
+2024-08-23 14:38:06.652942  'datetime.datetime' object has no attribute 'setFeature'  in parseENTSOE
+2024-08-23 14:38:07.726865  'datetime.datetime' object has no attribute 'setFeature'  in parseENTSOE
+2024-08-23 14:38:07.900325  'datetime.datetime' object has no attribute 'setFeature'  in parseENTSOE
+2024-08-23 14:38:09.018619  'datetime.datetime' object has no attribute 'setFeature'  in parseENTSOE
+2024-08-23 14:38:09.943211  'datetime.datetime' object has no attribute 'setFeature'  in parseENTSOE
+2024-08-23 14:38:10.302526  'datetime.datetime' object has no attribute 'setFeature'  in parseENTSOE
+2024-08-23 14:38:11.217541  'datetime.datetime' object has no attribute 'setFeature'  in parseENTSOE
+2024-08-23 14:38:11.686867  'datetime.datetime' object has no attribute 'setFeature'  in parseENTSOE
+2024-08-23 14:38:12.468808  'datetime.datetime' object has no attribute 'setFeature'  in parseENTSOE
+2024-08-23 14:38:12.802578  'datetime.datetime' object has no attribute 'setFeature'  in parseENTSOE
+2024-08-23 14:38:14.130887  'datetime.datetime' object has no attribute 'setFeature'  in parseENTSOE
+2024-08-23 14:38:14.233817  'datetime.datetime' object has no attribute 'setFeature'  in parseENTSOE
+2024-08-23 14:38:15.465104  'datetime.datetime' object has no attribute 'setFeature'  in parseENTSOE
+2024-08-23 14:38:15.966550  'datetime.datetime' object has no attribute 'setFeature'  in parseENTSOE
+2024-08-23 14:38:16.535209  'datetime.datetime' object has no attribute 'setFeature'  in parseENTSOE

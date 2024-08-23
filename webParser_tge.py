@@ -149,7 +149,7 @@ def parseTGE(date, RDNList, errors, settings):
                         if inteager > 10:  ## jeśli zbyt dużo razy nie udało mu się pobrać danych - ustawia 0 
                             resetData(RDNList)
                             break
-            print("tge parsed")
+            print("tge parsed for: ", original_date)
         else: 
             return
 
