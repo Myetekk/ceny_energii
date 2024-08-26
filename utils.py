@@ -200,7 +200,7 @@ def errorWindow(message, windowTitle):
 
 
 
-## zapisuje error do pliku .txt
+## loguje błędy do pliku .txt
 def saveError(message):
     try:
         if os.path.exists("outputs") == False: os.mkdir("outputs") 
@@ -222,23 +222,8 @@ def saveError(message):
 
 
 
-class PlotValues:
-    value_entsoe = None
-    value_entsoe_next = None
-    value_tge = None
-    value_tge_next = None
-    value_diff = None
-    value_diff_next = None
 
-
-
-class PlotObj:
-    fig = None
-    canvas = None
-    plot = None
-
-
-
+## status zaznaczenia checkboxów odpowiadających za wykres
 class CheckboxStatus:
     entsoe_today_checked = True
     entsoe_tomorrow_checked = False
@@ -249,15 +234,17 @@ class CheckboxStatus:
 
 
 
+## ustawienia aplikacji, zapisują się w pliku .json, a w czasie pracy aplikacji są wysyłane modbusem
 class Settings:
-    currency = 'PLN'
-    fixing = 2
-    data_source = 1
+    currency = 'PLN'  ## waluta - PLN / EUR
+    fixing = 2  ## 1- fixing I, 2- fixing II
+    data_source = 1  ## 1- entsoe, 2- tge
     updateTime = 15  ## w sekundach
-    entsoeKey = 'd2f433b7-ab33-4210-8328-15b9462f7316'
+    entsoeKey = 'd2f433b7-ab33-4210-8328-15b9462f7316'  ## klucz do api entsoe
     
 
 
+## informacje o ilośći errorów
 class Errors:
-    errorNumber = 0
-    entsoeErrorNumber = 0
+    errorNumber = 0  ## ilość errorów
+    entsoeErrorNumber = 0  ## ilosć errorów w entsoe

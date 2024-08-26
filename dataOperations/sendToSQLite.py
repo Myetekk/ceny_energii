@@ -58,6 +58,7 @@ def send(objectList_entsoe, objectList_tge, objectList_entsoe_next, objectList_t
         conn.commit()
         conn.close()
 
+
     except Exception as e:
         print(f"An error occurred in sendToSQLite: {e}.")
         saveError(str(e) + "  in sendToSQLite")

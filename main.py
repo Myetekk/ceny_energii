@@ -14,7 +14,7 @@ from dataOperations.createJSON import createJSON
 from dataOperations.createHTML import createHTML
 from dataOperations.createCSV import createCSV
 from dataOperations.sendToSQLite import sendToSQLite
-from utils import Settings, PlotValues, PlotObj, CheckboxStatus, Errors, checkNumberOfErrors, saveError, errorWindow, tryInternetConnection
+from utils import Settings, CheckboxStatus, Errors, checkNumberOfErrors, saveError, errorWindow, tryInternetConnection
 from settingsOperations import saveSettings_JSON, loadSettings
 
 
@@ -62,11 +62,6 @@ class EnergyPrices:
         inteager_thread.start()
 
         self.errors.errorNumber = 0
-
-
-        ## do testów zmiany dnia
-        # self.date = datetime.datetime(2024, 8, 18, 12, 00) #################################################################################
-        # self.date_plus_day = self.date + datetime.timedelta(days=1) #################################################################################
 
 
 
@@ -216,11 +211,11 @@ class EnergyPrices:
 
             ## ustawienia aplikacji
             currency = 0
-            if objectList[0].currency == 'PLN': currency = 1
-            elif objectList[0].currency == 'EUR': currency = 2
+            if self.settings.currency == 'PLN': currency = 1
+            elif self.settings.currency == 'EUR': currency = 2
             self.dataBank.set_input_registers(address=121, word_list=[currency])  ## określa w jakiej walucie są dane (PLN / EUR)
-            self.dataBank.set_input_registers(address=122, word_list=[objectList[0].fixing])  ## określa z którego fixingu pochodzą dane (1-fixing1 / 2-fixing2)
-            self.dataBank.set_input_registers(address=123, word_list=[objectList[0].data_source])  ## określa z jakiego źródła pochodzą dane (1-entsoe / 2-tge)
+            self.dataBank.set_input_registers(address=122, word_list=[self.settings.fixing])  ## określa z którego fixingu pochodzą dane (1-fixing1 / 2-fixing2)
+            self.dataBank.set_input_registers(address=123, word_list=[self.settings.data_source])  ## określa z jakiego źródła pochodzą dane (1-entsoe / 2-tge)
             self.dataBank.set_input_registers(address=124, word_list=[self.settings.updateTime])  ## określa co ile sekund funkcja pobiera nowe dane
 
 
@@ -257,8 +252,8 @@ class EnergyPrices:
                     print("\nupdating settings..")
                     
                     ## dla waluty
-                    if settingsListener[0] == 1: currency='PLN'
-                    elif settingsListener[0] == 2: currency='EUR'
+                    if settingsListener[0] == 1:   currency='PLN'
+                    elif settingsListener[0] == 2:   currency='EUR'
                     if self.settings.currency != currency:
                         self.settings.currency = currency
                         self.currencyStringVar.set(str(self.settings.currency))
@@ -270,7 +265,6 @@ class EnergyPrices:
                         self.settings.fixing = settingsListener[1]
                         self.fixingStringVar.set(str(self.settings.fixing))
                         self.changeFixing()
-                        
                         if self.objectList_tge[0].currency != self.currencyStringVar.get():
                             self.settings.currency = self.currencyStringVar.get()
                             self.changeCurrency()
@@ -279,8 +273,8 @@ class EnergyPrices:
                     if self.settings.data_source != settingsListener[2]:
                         self.settings.data_source = settingsListener[2]
                         data_source = 'entsoe'
-                        if self.settings.data_source == 1: data_source = 'entsoe'
-                        if self.settings.data_source == 2: data_source = 'tge'
+                        if self.settings.data_source == 1:   data_source = 'entsoe'
+                        if self.settings.data_source == 2:   data_source = 'tge'
                         self.modbusSourceVar.set(data_source)
                         self.sendToModbus()
 
@@ -466,53 +460,46 @@ class EnergyPrices:
     def updateGraph(self):
         try:
             hour = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23)
-            plotValues = PlotValues()
 
             ## ustawia wartości danych do wykresu
-            plotValues.value_entsoe = (float(self.objectList_entsoe[0].price), float(self.objectList_entsoe[1].price), float(self.objectList_entsoe[2].price), float(self.objectList_entsoe[3].price), float(self.objectList_entsoe[4].price), float(self.objectList_entsoe[5].price), float(self.objectList_entsoe[6].price), float(self.objectList_entsoe[7].price), float(self.objectList_entsoe[8].price), float(self.objectList_entsoe[9].price), float(self.objectList_entsoe[10].price), float(self.objectList_entsoe[11].price), float(self.objectList_entsoe[12].price), float(self.objectList_entsoe[13].price), float(self.objectList_entsoe[14].price), float(self.objectList_entsoe[15].price), float(self.objectList_entsoe[16].price), float(self.objectList_entsoe[17].price), float(self.objectList_entsoe[18].price), float(self.objectList_entsoe[19].price), float(self.objectList_entsoe[20].price), float(self.objectList_entsoe[21].price), float(self.objectList_entsoe[22].price), float(self.objectList_entsoe[23].price))
-            plotValues.value_entsoe_next = (float(self.objectList_entsoe_next[0].price), float(self.objectList_entsoe_next[1].price), float(self.objectList_entsoe_next[2].price), float(self.objectList_entsoe_next[3].price), float(self.objectList_entsoe_next[4].price), float(self.objectList_entsoe_next[5].price), float(self.objectList_entsoe_next[6].price), float(self.objectList_entsoe_next[7].price), float(self.objectList_entsoe_next[8].price), float(self.objectList_entsoe_next[9].price), float(self.objectList_entsoe_next[10].price), float(self.objectList_entsoe_next[11].price), float(self.objectList_entsoe_next[12].price), float(self.objectList_entsoe_next[13].price), float(self.objectList_entsoe_next[14].price), float(self.objectList_entsoe_next[15].price), float(self.objectList_entsoe_next[16].price), float(self.objectList_entsoe_next[17].price), float(self.objectList_entsoe_next[18].price), float(self.objectList_entsoe_next[19].price), float(self.objectList_entsoe_next[20].price), float(self.objectList_entsoe_next[21].price), float(self.objectList_entsoe_next[22].price), float(self.objectList_entsoe_next[23].price))
-            plotValues.value_tge = (float(self.objectList_tge[0].price), float(self.objectList_tge[1].price), float(self.objectList_tge[2].price), float(self.objectList_tge[3].price), float(self.objectList_tge[4].price), float(self.objectList_tge[5].price), float(self.objectList_tge[6].price), float(self.objectList_tge[7].price), float(self.objectList_tge[8].price), float(self.objectList_tge[9].price), float(self.objectList_tge[10].price), float(self.objectList_tge[11].price), float(self.objectList_tge[12].price), float(self.objectList_tge[13].price), float(self.objectList_tge[14].price), float(self.objectList_tge[15].price), float(self.objectList_tge[16].price), float(self.objectList_tge[17].price), float(self.objectList_tge[18].price), float(self.objectList_tge[19].price), float(self.objectList_tge[20].price), float(self.objectList_tge[21].price), float(self.objectList_tge[22].price), float(self.objectList_tge[23].price))
-            plotValues.value_tge_next = (float(self.objectList_tge_next[0].price), float(self.objectList_tge_next[1].price), float(self.objectList_tge_next[2].price), float(self.objectList_tge_next[3].price), float(self.objectList_tge_next[4].price), float(self.objectList_tge_next[5].price), float(self.objectList_tge_next[6].price), float(self.objectList_tge_next[7].price), float(self.objectList_tge_next[8].price), float(self.objectList_tge_next[9].price), float(self.objectList_tge_next[10].price), float(self.objectList_tge_next[11].price), float(self.objectList_tge_next[12].price), float(self.objectList_tge_next[13].price), float(self.objectList_tge_next[14].price), float(self.objectList_tge_next[15].price), float(self.objectList_tge_next[16].price), float(self.objectList_tge_next[17].price), float(self.objectList_tge_next[18].price), float(self.objectList_tge_next[19].price), float(self.objectList_tge_next[20].price), float(self.objectList_tge_next[21].price), float(self.objectList_tge_next[22].price), float(self.objectList_tge_next[23].price))
-            plotValues.value_diff = ((float(self.objectList_tge[0].price)+float(self.objectList_diff[0])/2), (float(self.objectList_tge[1].price)+float(self.objectList_diff[1])/2), (float(self.objectList_tge[2].price)+float(self.objectList_diff[2])/2), (float(self.objectList_tge[3].price)+float(self.objectList_diff[3])/2), (float(self.objectList_tge[4].price)+float(self.objectList_diff[4])/2), (float(self.objectList_tge[5].price)+float(self.objectList_diff[5])/2), (float(self.objectList_tge[6].price)+float(self.objectList_diff[6])/2), (float(self.objectList_tge[7].price)+float(self.objectList_diff[7])/2), (float(self.objectList_tge[8].price)+float(self.objectList_diff[8])/2), (float(self.objectList_tge[9].price)+float(self.objectList_diff[9])/2), (float(self.objectList_tge[10].price)+float(self.objectList_diff[10])/2), (float(self.objectList_tge[11].price)+float(self.objectList_diff[11])/2), (float(self.objectList_tge[12].price)+float(self.objectList_diff[12])/2), (float(self.objectList_tge[13].price)+float(self.objectList_diff[13])/2), (float(self.objectList_tge[14].price)+float(self.objectList_diff[14])/2), (float(self.objectList_tge[15].price)+float(self.objectList_diff[15])/2), (float(self.objectList_tge[16].price)+float(self.objectList_diff[16])/2), (float(self.objectList_tge[17].price)+float(self.objectList_diff[17])/2), (float(self.objectList_tge[18].price)+float(self.objectList_diff[18])/2), (float(self.objectList_tge[19].price)+float(self.objectList_diff[19])/2), (float(self.objectList_tge[20].price)+float(self.objectList_diff[20])/2), (float(self.objectList_tge[21].price)+float(self.objectList_diff[21])/2), (float(self.objectList_tge[22].price)+float(self.objectList_diff[22])/2), (float(self.objectList_tge[23].price)+float(self.objectList_diff[23])/2))
-            plotValues.value_diff_next = ((float(self.objectList_tge_next[0].price)+float(self.objectList_diff_next[0])/2), (float(self.objectList_tge_next[1].price)+float(self.objectList_diff_next[1])/2), (float(self.objectList_tge_next[2].price)+float(self.objectList_diff_next[2])/2), (float(self.objectList_tge_next[3].price)+float(self.objectList_diff_next[3])/2), (float(self.objectList_tge_next[4].price)+float(self.objectList_diff_next[4])/2), (float(self.objectList_tge_next[5].price)+float(self.objectList_diff_next[5])/2), (float(self.objectList_tge_next[6].price)+float(self.objectList_diff_next[6])/2), (float(self.objectList_tge_next[7].price)+float(self.objectList_diff_next[7])/2), (float(self.objectList_tge_next[8].price)+float(self.objectList_diff_next[8])/2), (float(self.objectList_tge_next[9].price)+float(self.objectList_diff_next[9])/2), (float(self.objectList_tge_next[10].price)+float(self.objectList_diff_next[10])/2), (float(self.objectList_tge_next[11].price)+float(self.objectList_diff_next[11])/2), (float(self.objectList_tge_next[12].price)+float(self.objectList_diff_next[12])/2), (float(self.objectList_tge_next[13].price)+float(self.objectList_diff_next[13])/2), (float(self.objectList_tge_next[14].price)+float(self.objectList_diff_next[14])/2), (float(self.objectList_tge_next[15].price)+float(self.objectList_diff_next[15])/2), (float(self.objectList_tge_next[16].price)+float(self.objectList_diff_next[16])/2), (float(self.objectList_tge_next[17].price)+float(self.objectList_diff_next[17])/2), (float(self.objectList_tge_next[18].price)+float(self.objectList_diff_next[18])/2), (float(self.objectList_tge_next[19].price)+float(self.objectList_diff_next[19])/2), (float(self.objectList_tge_next[20].price)+float(self.objectList_diff_next[20])/2), (float(self.objectList_tge_next[21].price)+float(self.objectList_diff_next[21])/2), (float(self.objectList_tge_next[22].price)+float(self.objectList_diff_next[22])/2), (float(self.objectList_tge_next[23].price)+float(self.objectList_diff_next[23])/2))
+            self.plotValues_entsoe = (float(self.objectList_entsoe[0].price), float(self.objectList_entsoe[1].price), float(self.objectList_entsoe[2].price), float(self.objectList_entsoe[3].price), float(self.objectList_entsoe[4].price), float(self.objectList_entsoe[5].price), float(self.objectList_entsoe[6].price), float(self.objectList_entsoe[7].price), float(self.objectList_entsoe[8].price), float(self.objectList_entsoe[9].price), float(self.objectList_entsoe[10].price), float(self.objectList_entsoe[11].price), float(self.objectList_entsoe[12].price), float(self.objectList_entsoe[13].price), float(self.objectList_entsoe[14].price), float(self.objectList_entsoe[15].price), float(self.objectList_entsoe[16].price), float(self.objectList_entsoe[17].price), float(self.objectList_entsoe[18].price), float(self.objectList_entsoe[19].price), float(self.objectList_entsoe[20].price), float(self.objectList_entsoe[21].price), float(self.objectList_entsoe[22].price), float(self.objectList_entsoe[23].price))
+            self.plotValues_entsoe_next = (float(self.objectList_entsoe_next[0].price), float(self.objectList_entsoe_next[1].price), float(self.objectList_entsoe_next[2].price), float(self.objectList_entsoe_next[3].price), float(self.objectList_entsoe_next[4].price), float(self.objectList_entsoe_next[5].price), float(self.objectList_entsoe_next[6].price), float(self.objectList_entsoe_next[7].price), float(self.objectList_entsoe_next[8].price), float(self.objectList_entsoe_next[9].price), float(self.objectList_entsoe_next[10].price), float(self.objectList_entsoe_next[11].price), float(self.objectList_entsoe_next[12].price), float(self.objectList_entsoe_next[13].price), float(self.objectList_entsoe_next[14].price), float(self.objectList_entsoe_next[15].price), float(self.objectList_entsoe_next[16].price), float(self.objectList_entsoe_next[17].price), float(self.objectList_entsoe_next[18].price), float(self.objectList_entsoe_next[19].price), float(self.objectList_entsoe_next[20].price), float(self.objectList_entsoe_next[21].price), float(self.objectList_entsoe_next[22].price), float(self.objectList_entsoe_next[23].price))
+            self.plotValues_tge = (float(self.objectList_tge[0].price), float(self.objectList_tge[1].price), float(self.objectList_tge[2].price), float(self.objectList_tge[3].price), float(self.objectList_tge[4].price), float(self.objectList_tge[5].price), float(self.objectList_tge[6].price), float(self.objectList_tge[7].price), float(self.objectList_tge[8].price), float(self.objectList_tge[9].price), float(self.objectList_tge[10].price), float(self.objectList_tge[11].price), float(self.objectList_tge[12].price), float(self.objectList_tge[13].price), float(self.objectList_tge[14].price), float(self.objectList_tge[15].price), float(self.objectList_tge[16].price), float(self.objectList_tge[17].price), float(self.objectList_tge[18].price), float(self.objectList_tge[19].price), float(self.objectList_tge[20].price), float(self.objectList_tge[21].price), float(self.objectList_tge[22].price), float(self.objectList_tge[23].price))
+            self.plotValues_tge_next = (float(self.objectList_tge_next[0].price), float(self.objectList_tge_next[1].price), float(self.objectList_tge_next[2].price), float(self.objectList_tge_next[3].price), float(self.objectList_tge_next[4].price), float(self.objectList_tge_next[5].price), float(self.objectList_tge_next[6].price), float(self.objectList_tge_next[7].price), float(self.objectList_tge_next[8].price), float(self.objectList_tge_next[9].price), float(self.objectList_tge_next[10].price), float(self.objectList_tge_next[11].price), float(self.objectList_tge_next[12].price), float(self.objectList_tge_next[13].price), float(self.objectList_tge_next[14].price), float(self.objectList_tge_next[15].price), float(self.objectList_tge_next[16].price), float(self.objectList_tge_next[17].price), float(self.objectList_tge_next[18].price), float(self.objectList_tge_next[19].price), float(self.objectList_tge_next[20].price), float(self.objectList_tge_next[21].price), float(self.objectList_tge_next[22].price), float(self.objectList_tge_next[23].price))
+            self.plotValues_diff = ((float(self.objectList_tge[0].price)+float(self.objectList_diff[0])/2), (float(self.objectList_tge[1].price)+float(self.objectList_diff[1])/2), (float(self.objectList_tge[2].price)+float(self.objectList_diff[2])/2), (float(self.objectList_tge[3].price)+float(self.objectList_diff[3])/2), (float(self.objectList_tge[4].price)+float(self.objectList_diff[4])/2), (float(self.objectList_tge[5].price)+float(self.objectList_diff[5])/2), (float(self.objectList_tge[6].price)+float(self.objectList_diff[6])/2), (float(self.objectList_tge[7].price)+float(self.objectList_diff[7])/2), (float(self.objectList_tge[8].price)+float(self.objectList_diff[8])/2), (float(self.objectList_tge[9].price)+float(self.objectList_diff[9])/2), (float(self.objectList_tge[10].price)+float(self.objectList_diff[10])/2), (float(self.objectList_tge[11].price)+float(self.objectList_diff[11])/2), (float(self.objectList_tge[12].price)+float(self.objectList_diff[12])/2), (float(self.objectList_tge[13].price)+float(self.objectList_diff[13])/2), (float(self.objectList_tge[14].price)+float(self.objectList_diff[14])/2), (float(self.objectList_tge[15].price)+float(self.objectList_diff[15])/2), (float(self.objectList_tge[16].price)+float(self.objectList_diff[16])/2), (float(self.objectList_tge[17].price)+float(self.objectList_diff[17])/2), (float(self.objectList_tge[18].price)+float(self.objectList_diff[18])/2), (float(self.objectList_tge[19].price)+float(self.objectList_diff[19])/2), (float(self.objectList_tge[20].price)+float(self.objectList_diff[20])/2), (float(self.objectList_tge[21].price)+float(self.objectList_diff[21])/2), (float(self.objectList_tge[22].price)+float(self.objectList_diff[22])/2), (float(self.objectList_tge[23].price)+float(self.objectList_diff[23])/2))
+            self.plotValues_diff_next = ((float(self.objectList_tge_next[0].price)+float(self.objectList_diff_next[0])/2), (float(self.objectList_tge_next[1].price)+float(self.objectList_diff_next[1])/2), (float(self.objectList_tge_next[2].price)+float(self.objectList_diff_next[2])/2), (float(self.objectList_tge_next[3].price)+float(self.objectList_diff_next[3])/2), (float(self.objectList_tge_next[4].price)+float(self.objectList_diff_next[4])/2), (float(self.objectList_tge_next[5].price)+float(self.objectList_diff_next[5])/2), (float(self.objectList_tge_next[6].price)+float(self.objectList_diff_next[6])/2), (float(self.objectList_tge_next[7].price)+float(self.objectList_diff_next[7])/2), (float(self.objectList_tge_next[8].price)+float(self.objectList_diff_next[8])/2), (float(self.objectList_tge_next[9].price)+float(self.objectList_diff_next[9])/2), (float(self.objectList_tge_next[10].price)+float(self.objectList_diff_next[10])/2), (float(self.objectList_tge_next[11].price)+float(self.objectList_diff_next[11])/2), (float(self.objectList_tge_next[12].price)+float(self.objectList_diff_next[12])/2), (float(self.objectList_tge_next[13].price)+float(self.objectList_diff_next[13])/2), (float(self.objectList_tge_next[14].price)+float(self.objectList_diff_next[14])/2), (float(self.objectList_tge_next[15].price)+float(self.objectList_diff_next[15])/2), (float(self.objectList_tge_next[16].price)+float(self.objectList_diff_next[16])/2), (float(self.objectList_tge_next[17].price)+float(self.objectList_diff_next[17])/2), (float(self.objectList_tge_next[18].price)+float(self.objectList_diff_next[18])/2), (float(self.objectList_tge_next[19].price)+float(self.objectList_diff_next[19])/2), (float(self.objectList_tge_next[20].price)+float(self.objectList_diff_next[20])/2), (float(self.objectList_tge_next[21].price)+float(self.objectList_diff_next[21])/2), (float(self.objectList_tge_next[22].price)+float(self.objectList_diff_next[22])/2), (float(self.objectList_tge_next[23].price)+float(self.objectList_diff_next[23])/2))
 
             ## stworzenie wykresu, ustawienie podstawowych właściwości
-            self.plotObj.plot.clear()
-            self.plotObj.plot.set_xlabel("hour")
-            self.plotObj.plot.set_ylabel("price")
-            self.plotObj.plot.set_title(str(self.objectList_entsoe[0].date) + "  -  " + str(self.objectList_entsoe_next[0].date) + ",   EUR to PLN: " + str(self.objectList_entsoe[0].euro))
-            self.plotObj.plot.grid(which='both')
+            self.plot.clear()
+            self.plot.set_xlabel("hour")
+            self.plot.set_ylabel("price")
+            self.plot.set_title(str(self.objectList_entsoe[0].date) + "  -  " + str(self.objectList_entsoe_next[0].date) + ",   EUR to PLN: " + str(self.objectList_entsoe[0].euro))
+            self.plot.grid(which='both')
 
             ## nałożenie na wykres danych, które są uruchomione domyślnie
-            if self.checkboxStatus.entsoe_today_checked: self.plotObj.plot.step(hour, plotValues.value_entsoe, '#b3570c', where='mid', linewidth=0.8)  ## wykres entsoe
-            if self.checkboxStatus.entsoe_tomorrow_checked: self.plotObj.plot.step(hour, plotValues.value_entsoe_next, '#ff7d12', where='mid', linewidth=0.8, linestyle='--')  ## wykres entsoe_next
-            if self.checkboxStatus.tge_today_checked: self.plotObj.plot.step(hour, plotValues.value_tge, '#00b3b3', where='mid', linewidth=0.8)  ## wykres tge
-            if self.checkboxStatus.tge_tomorrow_checked: self.plotObj.plot.step(hour, plotValues.value_tge_next, '#00ffff', where='mid', linewidth=0.8, linestyle='--')  ## wykres tge_next
-            if self.checkboxStatus.diff_today_checked: self.plotObj.plot.step(hour, plotValues.value_tge, '#45e600', where='mid', linewidth=0.8)  ## wykres diff
-            if self.checkboxStatus.diff_tomorrow_checked: self.plotObj.plot.step(hour, plotValues.value_tge_next, '#2e9900', where='mid', linewidth=0.8, linestyle='--')  ## wykres diff_next
+            if self.checkboxStatus.entsoe_today_checked: self.plot.step(hour, self.plotValues_entsoe, '#b3570c', where='mid', linewidth=0.8)  ## wykres entsoe
+            if self.checkboxStatus.entsoe_tomorrow_checked: self.plot.step(hour, self.plotValues_entsoe_next, '#ff7d12', where='mid', linewidth=0.8, linestyle='--')  ## wykres entsoe_next
+            if self.checkboxStatus.tge_today_checked: self.plot.step(hour, self.plotValues_tge, '#00b3b3', where='mid', linewidth=0.8)  ## wykres tge
+            if self.checkboxStatus.tge_tomorrow_checked: self.plot.step(hour, self.plotValues_tge_next, '#00ffff', where='mid', linewidth=0.8, linestyle='--')  ## wykres tge_next
+            if self.checkboxStatus.diff_today_checked: self.plot.step(hour, self.plotValues_diff, '#45e600', where='mid', linewidth=0.8)  ## wykres diff
+            if self.checkboxStatus.diff_tomorrow_checked: self.plot.step(hour, self.plotValues_diff_next, '#2e9900', where='mid', linewidth=0.8, linestyle='--')  ## wykres diff_next
             
             ## tworzy legende w zależności od zaznaczonych checkboxów
             legend_list = []
-            entsoe_legend = 'entsoe'
-            entsoe_next_legend = 'entsoe_next'
-            tge_legend = 'tge'
-            tge_next_legend = 'tge_next'
-            diff_legend = 'diff'
-            diff_next_legend = 'diff_next'
-            if self.checkboxStatus.entsoe_today_checked: legend_list.append(entsoe_legend)
-            if self.checkboxStatus.entsoe_tomorrow_checked: legend_list.append(entsoe_next_legend)
-            if self.checkboxStatus.tge_today_checked: legend_list.append(tge_legend)
-            if self.checkboxStatus.tge_tomorrow_checked: legend_list.append(tge_next_legend)
-            if self.checkboxStatus.diff_today_checked: legend_list.append(diff_legend)
-            if self.checkboxStatus.diff_tomorrow_checked: legend_list.append(diff_next_legend)
-            self.plotObj.plot.legend(legend_list) 
+            if self.checkboxStatus.entsoe_today_checked:   legend_list.append('entsoe')
+            if self.checkboxStatus.entsoe_tomorrow_checked:   legend_list.append('entsoe')
+            if self.checkboxStatus.tge_today_checked:   legend_list.append('tge')
+            if self.checkboxStatus.tge_tomorrow_checked:   legend_list.append('tge_next')
+            if self.checkboxStatus.diff_today_checked:   legend_list.append('diff')
+            if self.checkboxStatus.diff_tomorrow_checked:   legend_list.append('diff_next')
+            self.plot.legend(legend_list) 
 
 
 
             ## zmaterializowanie wykresu 
-            self.plotObj.canvas.figure = self.plotObj.fig
-            self.plotObj.canvas.draw() 
-            self.plotObj.canvas.get_tk_widget().grid(row=2, column=11, rowspan=24)
+            self.canvas.figure = self.fig
+            self.canvas.draw() 
+            self.canvas.get_tk_widget().grid(row=2, column=11, rowspan=24)
 
 
         except Exception as e:
@@ -545,7 +532,7 @@ class EnergyPrices:
             self.window.after_cancel(self.afterFunc)
             self.afterFunc = self.window.after(int(self.updateTimeVariable.get())*1000, self.updateData)
 
-        except: 
+        except:   ## jeśli napotka jakiś błąd to znaczy, że wpisana wartość była nieprawidłowa (nie była int-em)  -->  ustawia 60 sekund
             self.updateTimeVariable.set(60)
             self.settings.updateTime = int(self.updateTimeVariable.get())
             self.sendToModbus()
@@ -557,8 +544,8 @@ class EnergyPrices:
 
 
 
-            
-            
+
+
 
 
 
@@ -574,10 +561,8 @@ class EnergyPrices:
             self.date = datetime.datetime.now()
             self.date_plus_day = datetime.datetime.now() + datetime.timedelta(days=1)
 
-            # self.date = self.date + datetime.timedelta(days=1) # del #########################################################################################
-            # self.date_plus_day = self.date + datetime.timedelta(days=1) # del #########################################################################################
 
-
+            ## tworzy nowe wątki na których pobiera dane
             parse_entsoe_thread = threading.Thread(target=parseENTSOE, args=(self.date, self.objectList_entsoe, self.errors, self.settings, ), daemon = True)
             parse_tge_thread = threading.Thread(target=parseTGE, args=(self.date, self.objectList_tge, self.errors, self.settings, ), daemon = True)
             parse_entsoe_next = threading.Thread(target=parseENTSOE, args=(self.date_plus_day, self.objectList_entsoe_next, self.errors, self.settings, ), daemon = True)
@@ -594,10 +579,10 @@ class EnergyPrices:
             parse_tge_next.join()
 
 
-            ## ustawienie waluty pobranej z pliku
+            ## ustawienie waluty ustawionej w ustawieniach
             if self.objectList_entsoe[0].currency != self.settings.currency:   self.changeCurrency()
 
-            ## ustawienie fixingu pobranego z pliku
+            ## ustawienie fixingu ustawionego w ustawieniach
             if self.objectList_tge[0].fixing != self.settings.fixing:   self.changeFixing()
             
             self.getDifference()
@@ -645,10 +630,9 @@ class EnergyPrices:
 
         
             ## stworzenie elementów wykresu
-            self.plotObj = PlotObj()
-            self.plotObj.fig = matplotlib.figure.Figure(figsize=(9, 6.2), dpi=100)
-            self.plotObj.canvas = FigureCanvasTkAgg(self.plotObj.fig, master=self.window)
-            self.plotObj.plot = self.plotObj.fig.add_subplot(111)
+            self.fig = matplotlib.figure.Figure(figsize=(9, 6.2), dpi=100)
+            self.canvas = FigureCanvasTkAgg(self.fig, master=self.window)
+            self.plot = self.fig.add_subplot(111)
 
 
             
@@ -738,6 +722,7 @@ class EnergyPrices:
             tk.Frame(bg='black', width=80, height=1).grid(row=1, column=10)
             tk.Frame(bg='black', width=900, height=1).grid(row=1, column=11)
             
+            ## wypisanie wartości z pamięci na interfejs
             for i in range(24):
                 hour = str(i) + ":00 - " + str(i+1) + ":00"
                 tk.Label(text=hour).grid(row=i+2, column=0)
@@ -772,7 +757,6 @@ class EnergyPrices:
             def CSV(): createCSV(self.objectList_entsoe, self.objectList_tge, self.objectList_entsoe_next, self.objectList_tge_next, self.errors, self.settings, self.window)
             def database(): sendToSQLite(self.objectList_entsoe, self.objectList_tge, self.objectList_entsoe_next, self.objectList_tge_next, self.errors, self.settings, self.window)
 
-            ## przyciski exportu do plików i danych hurtowych
             JSONbutton = tk.Button(self.managementFrame, text="JSON", command=JSON)
             HTMLbutton = tk.Button(self.managementFrame, text="HTML", command=HTML)
             CSVbutton = tk.Button(self.managementFrame, text="CSV", command=CSV)
@@ -790,7 +774,6 @@ class EnergyPrices:
                     self.combinedDataList.append(self.energyPrices_timeInterval)
                 else:   errorWindow('no internet connection', 'error')
 
-            ## przycisk do otwarcia danych hurtowych
             self.combinedDataButton = tk.Button(self.managementFrame, text="combined data", command=combinedData)
 
 
@@ -800,7 +783,6 @@ class EnergyPrices:
                 self.updateTime_onChange()
             self.window.bind('<Return>', updateTime_onChange_event)
 
-            ## wybieranie czasu między updatami
             self.updateTime_frame = tk.Frame(self.managementFrame)
             self.updateTimeVariable = tk.IntVar(self.updateTime_frame, self.settings.updateTime)
             self.updateTime = tk.Spinbox(self.updateTime_frame, from_=15, to=7200, increment=15, textvariable=self.updateTimeVariable, command=self.updateTime_onChange, width=7)
@@ -877,7 +859,7 @@ class EnergyPrices:
 
 
 
-            ## umiejscowienie wszystkich elementów frama
+            ## umiejscowienie wszystkich elementów w interfejsie
             saveInLabel.pack(side='left')
             JSONbutton.pack(side='left', padx=(10, 0))
             HTMLbutton.pack(side='left', padx=(10, 0))
@@ -895,11 +877,12 @@ class EnergyPrices:
 
 
 
-            ## wywołanie updatu, następne wywołują się w nim
+            ## zaktualizowanie aplikacji, po upływie ustawionego czasu (następne aktualizacje wywołują się rekurencyjnie)
             self.afterFunc = self.window.after(int(self.updateTimeVariable.get())*1000, self.updateData)
 
 
 
+            ## zamyka wszystki okna 
             def closeWindows():  
                 saveSettings_JSON(self.settings, self.errors)
 
@@ -951,29 +934,12 @@ if __name__ == '__main__':
 
 
 
-## - sprawdzić czy na pewno na entsoe nie ma fixingu - nope
-## - ustawienia: klucz entsoe
-## - max długość 124 dni (inaczej wypisywane elementy pokazują się jako czarne bloki)
-
-
-
-## każde uruchomienie 'windowTimeInterval' dokłada ok 3MB (Python usuwa, ale dopiero po jakimś czasie)
-
-
-
 ## TESTOWANIE: 
-#       - gdy dane są nieprawidłowe / niepełne (np. 31.03.2024)
-#       - gdy nie ma internetu różne kombinacje
+#       - gdy dane są nieprawidłowe / niepełne (np. 31.03.2024 brakuje jednej godziny, co psuje całe dane)
+#       - gdy nie ma internetu, różne kombinacje
 #       - odpalenie bez internetu
 #       - zmiana dnia
 #       - zmiana ustawień modbusem
 #       - wysyłanie modbusem
 #       - czy wysyła dobre 'dataok'
-#       - działanie ciągłe przez dłuższy czas
-
-
-
-### PRZED WYSŁANIEM: 
-##      if w updacie  (żeby restartował co godzine)
-##      '.after' w updacie  (żeby restartował co godzine)
-##      sprawdzić daty (czy wszędzie przypisuje '.now', czy jakieś nie są na sztywno)
+#       działanie ciągłe przez dłuższy czas

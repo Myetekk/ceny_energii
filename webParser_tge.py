@@ -11,7 +11,7 @@ from utils import getEUR, increaseOneDay, decreaseOneDay, decreaseOneMonth, save
 
 ## klasa przechowująca dane zparsowane z TGE
 class Tge:
-    date = datetime.datetime(2024, 7, 1)
+    date = datetime.datetime(datetime.datetime.now().year, datetime.datetime.now().month, datetime.datetime.now().day)
     hour = 0
     pricef1 = 0.0
     pricef2 = 0.0
@@ -21,10 +21,6 @@ class Tge:
     fixing = 1  ## 1-fixing pierwszy, 2-fixing drugi
     data_source = 2
     status = False  ## False- bad, True- good
-    
-
-    def printProps(self):
-        print(self.date, ', ', self.hour, ", ", self.pricef1, ", ", self.pricef2, ", ", self.price, ", ", self.euro, ", ", self.currency, ", ", self.fixing, ", ", self.data_source)
 
 
 
@@ -70,7 +66,6 @@ def getInfo(source_data, html_class_name, object, type_of_data, date, euro, sett
 
             object.euro = euro
             object.status = True
-
 
 
 
@@ -152,6 +147,7 @@ def parseTGE(date, RDNList, errors, settings):
             print("tge parsed for: ", original_date)
         else: 
             return
+
 
     except Exception as e:
         print(f"An error occurred in parseTGE: {e}. Trying again")

@@ -1,7 +1,7 @@
 {
    "currency": "EUR",
    "fixing": 2,
-   "data_source": 2,
-   "updateTime": 3600,
+   "data_source": 1,
+   "updateTime": 20,
    "entsoeKey": "d2f433b7-ab33-4210-8328-15b9462f7316"
 }

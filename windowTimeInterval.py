@@ -25,7 +25,6 @@ class EnergyPrices_timeInterval:
     frame_header = None
 
     
-    # date_start = (datetime.datetime.now() - datetime.timedelta(days=1))
     date_start = datetime.datetime.now()
     date_stop = datetime.datetime.now() + datetime.timedelta(days=1)
 
@@ -37,13 +36,13 @@ class EnergyPrices_timeInterval:
 
 
 
-    ## ładuje nagłówek z wybieraniem przedziału czasu
+    ## ładuje nagłówek (po lewej stronie okna) z wybieraniem przedziału czasu i exportem do plików
     def loadHeader(self):
+        ## pobiera nowe dane i przeładowuje interfejs
         def calendar_onChange():
             if tryInternetConnection():
                 self.date_start = self.CalendarStart.get_date()
                 self.date_stop = self.CalendarStop.get_date()
-
                 
                 if self.date_start <= self.date_stop  and  (self.date_stop-self.date_start).days <= 120:   
                     self.getData()
@@ -52,6 +51,7 @@ class EnergyPrices_timeInterval:
             else:   errorWindow('no internet connection', 'error')
 
         
+        ## tworzy wszystkie elementy potrzebne wybierania dat
         self.CalendarStart_variable = tk.StringVar()
         self.CalendarStop_variable = tk.StringVar()
         
@@ -87,6 +87,7 @@ class EnergyPrices_timeInterval:
         tk.Radiobutton(currencyFrame, text='PLN', variable=self.currencyStringVar, value='PLN', command=currencySelected, background='#e6f2ec').pack(side='top', padx=5)
         tk.Radiobutton(currencyFrame, text='EUR', variable=self.currencyStringVar, value='EUR', command=currencySelected, background='#e6f2ec').pack(side='bottom', padx=5)
         currencyFrame.pack(pady=(5, 10))
+
 
 
         ## wybieranie fixingu
@@ -131,7 +132,7 @@ class EnergyPrices_timeInterval:
         self.canvas.configure(xscrollcommand=self.scrollbar.set)
 
 
-        ## wizualizuje dane dla kazdego dnia
+        ## dodaje kolejno każdy dzień do interfejsu 
         for index in range(len(self.dataList), 0, -1):
             self.loadOneDay(index-1)
         
@@ -146,7 +147,7 @@ class EnergyPrices_timeInterval:
 
 
 
-    ## ładuje dane z bazy danych, w tym czasie pokazuje loading screan
+    ## pobiera nowe dane
     def getData(self):
         try:
             print('\n\nLoading combinedData window..')
@@ -169,8 +170,6 @@ class EnergyPrices_timeInterval:
 
                 parse_entsoe_thread.join()
                 parse_tge_thread.join()
-
-                print('\n')
 
                 self.dataList.append(oneDayObject.copy())
 
@@ -211,6 +210,7 @@ class EnergyPrices_timeInterval:
 
             print('Loaded combinedData window')
 
+
         except Exception as e:
             print(f"An error occurred in GetData in combinedData: {e}.")
             saveError(str(e) + "  in GetData in combinedData")
@@ -224,16 +224,18 @@ class EnergyPrices_timeInterval:
 
 
 
-    ## ładuje dane w formie tabelki
+    ## dodaje jeden dzień to interfejsu
     def loadOneDay(self, index):
         self.frame_table_inner = tk.Frame(self.scrollable_frame, background='#666666')
         
+        ## nagłówki tabeli
         headerBackground = '#cccccc'
         tk.Label(self.frame_table_inner, text=(self.dataList[index].objectList_entsoe[0].date), font='Helvetica 10', background=headerBackground).grid(row=0, column=0, padx=1, pady=1, ipadx=2, ipady=2, sticky=NSEW)
         tk.Label(self.frame_table_inner, text='entsoe', font='Helvetica 10 bold', background=headerBackground, width=5).grid(row=0, column=1, padx=1, pady=1, ipadx=2, ipady=2, sticky=NSEW)
         tk.Label(self.frame_table_inner, text='tge', font='Helvetica 10 bold', background=headerBackground, width=5).grid(row=0, column=3, padx=1, pady=1, ipadx=2, ipady=2, sticky=NSEW)
 
 
+        ## zawartość tabeli
         self.backgroundColor = '#d9cece'
         for i in range(24):
             if i%2 == 0:   self.backgroundColor = '#d4d9ce'
@@ -268,8 +270,8 @@ class EnergyPrices_timeInterval:
         self.combinedDataButton = combinedDataButton
         self.combinedDataButton.configure(state='disabled')
 
-        self.loadHeader()
 
+        self.loadHeader()
 
         gatData_thread = threading.Thread(target=self.getData, daemon=True)
         gatData_thread.start()
@@ -407,10 +409,10 @@ class EnergyPrices_timeInterval:
 
 
 
-    ## zamyka okno 
+    ## zamyka okno i aktywuje przycisk otwierający to okno
     def closeWindow(self):
         try:   self.combinedDataButton
-        except: print()
+        except:   print()
         else:   self.combinedDataButton.configure(state='active')
 
         self.window.destroy()

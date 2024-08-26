@@ -20,6 +20,7 @@ def createJSON(objectList_entsoe, objectList_tge, objectList_entsoe_next, object
                 if objectList_entsoe[i].hour != 23: outfile.write(", \n")
             outfile.write('\n\n]')
     
+    
     except Exception as e:
         print(f"An error occurred in createJSON: {e}.")
         saveError(str(e) + "  in createJSON")

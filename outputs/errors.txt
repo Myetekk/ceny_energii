@@ -1508,3 +1508,7 @@
 2024-08-26 11:24:57.597840  x and y must have same first dimension, but have shapes (24,) and (1,)  in updateGraph
 2024-08-26 11:24:57.609252  x and y must have same first dimension, but have shapes (24,) and (1,)  in updateGraph
 2024-08-26 11:25:18.732259  can't invoke "wm" command: application has been destroyed  in createInterface
+2024-08-26 13:11:38.523876  name 'PlotObj' is not defined  in createInterface
+2024-08-26 13:11:40.034024  name 'PlotObj' is not defined  in createInterface
+2024-08-26 13:11:44.946108  name 'PlotObj' is not defined  in createInterface
+2024-08-26 13:11:50.736817  name 'PlotObj' is not defined  in createInterface

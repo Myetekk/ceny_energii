@@ -16,6 +16,7 @@ def createCSV(objectList_entsoe, objectList_tge, objectList_entsoe_next, objectL
             for i in range(24):
                 writer.writerow([str(objectList_entsoe[i].hour), objectList_entsoe[i].price, objectList_entsoe_next[i].price, objectList_tge[i].price, objectList_tge_next[i].price] )
 
+
     except Exception as e:
         print(f"An error occurred in createCSV: {e}.")
         saveError(str(e) + "  in createCSV")

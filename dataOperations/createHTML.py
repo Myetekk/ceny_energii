@@ -63,6 +63,7 @@ def createHTML(objectList_entsoe, objectList_tge, objectList_entsoe_next, object
             
             outfile.write('</div>\n\n')
             
+            
     except Exception as e:
         print(f"An error occurred in createHTML: {e}.")
         saveError(str(e) + "  in createHTML")

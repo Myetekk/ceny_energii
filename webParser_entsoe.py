@@ -12,7 +12,7 @@ from utils import getEUR, increaseOneDay, saveError, tryInternetConnection
 
 ## klasa przechowująca dane zparsowane z entsoe
 class Entsoe:
-    date = datetime.datetime(2024, 7, 1)
+    date = datetime.datetime(datetime.datetime.now().year, datetime.datetime.now().month, datetime.datetime.now().day)
     hour = 0
     price = 0.0
     euro = 1.0
@@ -20,10 +20,6 @@ class Entsoe:
     fixing = 1  ## dla entsoe tylko fixing pierwszy
     data_source = 1
     status = False  ## False- bad, True- good
-
-
-    def printProps(self):
-        print(self.hour, ", ", self.price, ", ", self.date)
 
 
 
@@ -115,6 +111,7 @@ def parseENTSOE(date, objectList, errors, settings):
             if internetConn:   print("entsoe parsed for: ", str(date)[0:10])
         else: 
             return
+
 
     except Exception as e:
         print(f"An error occurred in parseENTSOE: {e}. Trying again")

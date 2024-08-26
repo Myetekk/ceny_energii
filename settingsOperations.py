@@ -14,7 +14,8 @@ def saveSettings_JSON(settings, errors):
             data = { "currency": str(settings.currency), "fixing": int(settings.fixing), "data_source": int(settings.data_source), "updateTime": int(settings.updateTime), "entsoeKey": str(settings.entsoeKey) }
             json_object = json.dumps(data, indent=3)
             outfile.write(json_object)
-                
+
+
     except Exception as e:
         print(f"An error occurred in saveSettings_JSON: {e}. Trying again")
         saveError(str(e) + "  in saveSettings_JSON")
@@ -25,7 +26,7 @@ def saveSettings_JSON(settings, errors):
 
 
 
-## zapisuje ustawienia domyślne w pliku JSON 
+## ustawia ustawienia domyślne i zapisuje w pliku JSON 
 def createDefaultSettings(settings, errors):
     settings.currency = 'PLN'
     settings.fixing = 2
@@ -40,6 +41,7 @@ def createDefaultSettings(settings, errors):
             json_object = json.dumps(data, indent=3)
             outfile.write(json_object)
 
+
     except Exception as e:
         print(f"An error occurred in createDefaultSettings: {e}. Trying again")
         saveError(str(e) + "  in createDefaultSettings")
@@ -49,7 +51,7 @@ def createDefaultSettings(settings, errors):
 
 
 
-## ładuje ustawienia z pliku JSON
+## ładuje ustawienia z pliku JSON, jeśli napotka jakieś problemy  -->  ustawia ustawienia domyślne
 def loadSettings(settings, errors):
     filePath = "outputs\\settings.json"
     
@@ -69,6 +71,7 @@ def loadSettings(settings, errors):
                 createDefaultSettings(settings, errors)
         else:
             createDefaultSettings(settings, errors)
+        
         
     except Exception as e:
         print(f"An error occurred in loadSettings: {e}. Using default settings")
@@ -95,6 +98,7 @@ def saveError(message):
         errorText = str(datetime.datetime.now()) + "  " + str(message) + "\n"
         file.write(errorText)
         file.close()
+
 
     except Exception as e:
         print(f"An error occurred in saveError: {e}.")
