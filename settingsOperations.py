@@ -11,7 +11,7 @@ def saveSettings_JSON(settings, errors):
     try:
         if os.path.exists("outputs") == False: os.mkdir("outputs") 
         with open("outputs\\settings.json", "w") as outfile:
-            data = { "currency": str(settings.currency), "fixing": int(settings.fixing), "data_source": int(settings.data_source), "updateTime": int(settings.updateTime) }
+            data = { "currency": str(settings.currency), "fixing": int(settings.fixing), "data_source": int(settings.data_source), "updateTime": int(settings.updateTime), "entsoeKey": str(settings.entsoeKey) }
             json_object = json.dumps(data, indent=3)
             outfile.write(json_object)
                 
@@ -28,14 +28,15 @@ def saveSettings_JSON(settings, errors):
 ## zapisuje ustawienia domyślne w pliku JSON 
 def createDefaultSettings(settings, errors):
     settings.currency = 'PLN'
-    settings.fixing = 1
-    settings.data_source = 1
+    settings.fixing = 2
+    settings.data_source = 2
     settings.updateTime = 3600
+    settings.entsoeKey = 'd2f433b7-ab33-4210-8328-15b9462f7316'
 
     try:
         if os.path.exists("outputs") == False: os.mkdir("outputs") 
         with open("outputs\\settings.json", "w") as outfile:
-            data = { "currency": str(settings.currency), "fixing": int(settings.fixing), "data_source": int(settings.data_source), "updateTime": int(settings.updateTime) }
+            data = { "currency": str(settings.currency), "fixing": int(settings.fixing), "data_source": int(settings.data_source), "updateTime": int(settings.updateTime), "entsoeKey": str(settings.entsoeKey) }
             json_object = json.dumps(data, indent=3)
             outfile.write(json_object)
 
@@ -55,7 +56,7 @@ def loadSettings(settings, errors):
     try:
         if os.path.exists(filePath):  ## jeśli plik istnieje 
             fileSize = os.path.getsize(filePath)
-            if fileSize >= 80  and  fileSize <= 100:  ## jeśli plik ma w sobie jakieś dane
+            if fileSize >= 135  and  fileSize <= 155:  ## jeśli plik ma w sobie jakieś dane
                 with open(filePath) as outfile:
                     data = json.load(outfile)
 
@@ -63,6 +64,7 @@ def loadSettings(settings, errors):
                     settings.fixing = int(data["fixing"])
                     settings.data_source = int(data["data_source"])
                     settings.updateTime = int(data["updateTime"])
+                    settings.entsoeKey = str(data["entsoeKey"])
             else: 
                 createDefaultSettings(settings, errors)
         else:

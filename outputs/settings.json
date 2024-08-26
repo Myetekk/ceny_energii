@@ -1,6 +1,7 @@
 {
-   "currency": "PLN",
+   "currency": "EUR",
    "fixing": 2,
    "data_source": 2,
-   "updateTime": 60
+   "updateTime": 3600,
+   "entsoeKey": "d2f433b7-ab33-4210-8328-15b9462f7316"
 }

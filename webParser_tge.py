@@ -30,6 +30,24 @@ class Tge:
 
 
 
+def resetData(RDNList): 
+    RDNList.clear()
+    
+    for i in range(24):
+        tge = Tge()
+        tge.hour = i  
+        tge.pricef1 = 0.0
+        tge.pricef2 = 0.0
+        tge.price = 0.0
+        tge.euro = 1.0
+        tge.status = False
+
+        RDNList.append(tge)
+
+
+
+
+
 ## wyciąga dane z linijek i przypisuje do odpowiednich wartości
 def getInfo(source_data, html_class_name, object, type_of_data, date, euro, settings):
     data_pattern = re.findall(html_class_name, source_data, re.DOTALL)
@@ -52,24 +70,6 @@ def getInfo(source_data, html_class_name, object, type_of_data, date, euro, sett
 
             object.euro = euro
             object.status = True
-
-
-
-
-
-def resetData(RDNList): 
-    RDNList.clear()
-    
-    for i in range(24):
-        tge = Tge()
-        tge.hour = i  
-        tge.pricef1 = 0.0
-        tge.pricef2 = 0.0
-        tge.price = 0.0
-        tge.euro = 1.0
-        tge.status = False
-
-        RDNList.append(tge)
 
 
 

@@ -48,7 +48,7 @@ def resetData(objectList, date):
 
 
 ## łączy się z API entsoe i pobiera info o danym dniu
-def getDataFromAPI_oneDay(date, errors):
+def getDataFromAPI_oneDay(date, errors, settings):
     try:
         country_code = 'PL'
         
@@ -56,19 +56,25 @@ def getDataFromAPI_oneDay(date, errors):
         next_date = increaseOneDay(str(date_string)[:10].split('-'))
         next_date = str(next_date[0] + next_date[1] + next_date[2])
 
-        client = EntsoeRawClient(api_key='d2f433b7-ab33-4210-8328-15b9462f7316')
+        client = EntsoeRawClient(api_key=settings.entsoeKey)
         start = pd.Timestamp(str(date_string), tz='Europe/Brussels')
         end = pd.Timestamp(str(next_date), tz='Europe/Brussels')
 
         apiAnswer = client.query_day_ahead_prices(country_code, start, end)
+        
         return apiAnswer
     
-    except :
+    except Exception as e:
         ## jeśli napotka jakiś błąd (najpewniej brak danych dla podanego dnia) zwraca pusty string, co w funkcji 'parseENTSOE' przypisuje wartości '0' dla wszystkich godzin
         if date > datetime.datetime.now():   return ""
+        elif "401 Client Error:" in str(e):   
+            saveError("wrong entsoe key in parseENTSOE")
+            print("Wrong entsoe key")
+            return ""
         else:   
+            print(f"An error occurred in parseENTSOE: {e}. Trying again")
             errors.entsoeErrorNumber += 1
-            if errors.entsoeErrorNumber <= 5:   getDataFromAPI_oneDay(date, errors)
+            if errors.entsoeErrorNumber <= 5:   getDataFromAPI_oneDay(date, errors, settings)
             else:   return ""
             time.sleep(1)
         
@@ -77,7 +83,7 @@ def getDataFromAPI_oneDay(date, errors):
 
 
 ## parsuje dane pobrane z entsoe
-def parseENTSOE(date, objectList, errors):
+def parseENTSOE(date, objectList, errors, settings):
     errors.entsoeErrorNumber = 0
     try:
         internetConn = tryInternetConnection()
@@ -85,9 +91,9 @@ def parseENTSOE(date, objectList, errors):
             objectList.clear()
 
             euro = getEUR(str(date)[:10].split('-'))
-            string = getDataFromAPI_oneDay(date, errors)
+            string = getDataFromAPI_oneDay(date, errors, settings)
 
-            if string == "":
+            if string == ""  or  string == None:
                 resetData(objectList, date)
             else:
                 document = parseString(string)
@@ -114,6 +120,6 @@ def parseENTSOE(date, objectList, errors):
         print(f"An error occurred in parseENTSOE: {e}. Trying again")
         saveError(str(e) + "  in parseENTSOE")
         errors.errorNumber += 1
-        if errors.errorNumber <= 20:   parseENTSOE(date, objectList, errors)
+        if errors.errorNumber <= 20:   parseENTSOE(date, objectList, errors, settings)
         else:   return
         time.sleep(1)

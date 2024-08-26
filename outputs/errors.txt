@@ -1427,3 +1427,84 @@
 2024-08-23 14:38:15.465104  'datetime.datetime' object has no attribute 'setFeature'  in parseENTSOE
 2024-08-23 14:38:15.966550  'datetime.datetime' object has no attribute 'setFeature'  in parseENTSOE
 2024-08-23 14:38:16.535209  'datetime.datetime' object has no attribute 'setFeature'  in parseENTSOE
+2024-08-26 09:55:03.458769  'entsoeKey'  in loadSettings
+2024-08-26 09:58:27.924084  invalid literal for int() with base 10: 'd2f433b7-ab33-4210-8328-15b9462f7316'  in loadSettings
+2024-08-26 09:59:23.719269  a bytes-like object is required, not 'NoneType'  in parseENTSOE
+2024-08-26 09:59:29.660687  a bytes-like object is required, not 'NoneType'  in parseENTSOE
+2024-08-26 09:59:35.521304  a bytes-like object is required, not 'NoneType'  in parseENTSOE
+2024-08-26 09:59:41.428009  a bytes-like object is required, not 'NoneType'  in parseENTSOE
+2024-08-26 09:59:47.356579  a bytes-like object is required, not 'NoneType'  in parseENTSOE
+2024-08-26 09:59:53.259985  a bytes-like object is required, not 'NoneType'  in parseENTSOE
+2024-08-26 09:59:59.206600  a bytes-like object is required, not 'NoneType'  in parseENTSOE
+2024-08-26 10:00:05.167478  a bytes-like object is required, not 'NoneType'  in parseENTSOE
+2024-08-26 10:00:12.551775  a bytes-like object is required, not 'NoneType'  in parseENTSOE
+2024-08-26 10:00:20.068722  a bytes-like object is required, not 'NoneType'  in parseENTSOE
+2024-08-26 10:00:45.987558  a bytes-like object is required, not 'NoneType'  in parseENTSOE
+2024-08-26 10:01:05.290375  a bytes-like object is required, not 'NoneType'  in parseENTSOE
+2024-08-26 10:01:11.565843  a bytes-like object is required, not 'NoneType'  in parseENTSOE
+2024-08-26 10:01:17.609292  a bytes-like object is required, not 'NoneType'  in parseENTSOE
+2024-08-26 10:01:31.670320  a bytes-like object is required, not 'NoneType'  in parseENTSOE
+2024-08-26 10:01:58.246257  a bytes-like object is required, not 'NoneType'  in parseENTSOE
+2024-08-26 10:02:04.743802  a bytes-like object is required, not 'NoneType'  in parseENTSOE
+2024-08-26 10:02:28.524522  a bytes-like object is required, not 'NoneType'  in parseENTSOE
+2024-08-26 10:13:24.113120  wrong entsoe key in parseENTSOE
+2024-08-26 10:13:52.927817  wrong entsoe key in parseENTSOE
+2024-08-26 10:14:15.359706  wrong entsoe key in parseENTSOE
+2024-08-26 10:14:29.605431  wrong entsoe key in parseENTSOE
+2024-08-26 10:14:40.903777  wrong entsoe key in parseENTSOE
+2024-08-26 10:15:20.513294  wrong entsoe key in parseENTSOE
+2024-08-26 10:15:36.835613  wrong entsoe key in parseENTSOE
+2024-08-26 10:15:48.181593  wrong entsoe key in parseENTSOE
+2024-08-26 10:16:06.382591  wrong entsoe key in parseENTSOE
+2024-08-26 10:16:19.381592  wrong entsoe key in parseENTSOE
+2024-08-26 10:16:32.188918  wrong entsoe key in parseENTSOE
+2024-08-26 10:16:48.804833  wrong entsoe key in parseENTSOE
+2024-08-26 10:17:05.029347  wrong entsoe key in parseENTSOE
+2024-08-26 10:17:18.268234  wrong entsoe key in parseENTSOE
+2024-08-26 10:17:41.256835  wrong entsoe key in parseENTSOE
+2024-08-26 10:18:30.444423  wrong entsoe key in parseENTSOE
+2024-08-26 10:18:41.512091  wrong entsoe key in parseENTSOE
+2024-08-26 11:24:21.169996  matplotlib does not support generators as input  in updateGraph
+2024-08-26 11:24:21.178987  matplotlib does not support generators as input  in updateGraph
+2024-08-26 11:24:21.186814  matplotlib does not support generators as input  in updateGraph
+2024-08-26 11:24:21.194697  matplotlib does not support generators as input  in updateGraph
+2024-08-26 11:24:21.209956  matplotlib does not support generators as input  in updateGraph
+2024-08-26 11:24:21.241532  matplotlib does not support generators as input  in updateGraph
+2024-08-26 11:24:21.256532  matplotlib does not support generators as input  in updateGraph
+2024-08-26 11:24:21.257202  matplotlib does not support generators as input  in updateGraph
+2024-08-26 11:24:21.273477  matplotlib does not support generators as input  in updateGraph
+2024-08-26 11:24:21.287929  matplotlib does not support generators as input  in updateGraph
+2024-08-26 11:24:21.287929  matplotlib does not support generators as input  in updateGraph
+2024-08-26 11:24:21.304961  matplotlib does not support generators as input  in updateGraph
+2024-08-26 11:24:21.318797  matplotlib does not support generators as input  in updateGraph
+2024-08-26 11:24:21.321750  matplotlib does not support generators as input  in updateGraph
+2024-08-26 11:24:21.338158  matplotlib does not support generators as input  in updateGraph
+2024-08-26 11:24:21.350151  matplotlib does not support generators as input  in updateGraph
+2024-08-26 11:24:21.358431  matplotlib does not support generators as input  in updateGraph
+2024-08-26 11:24:21.369198  matplotlib does not support generators as input  in updateGraph
+2024-08-26 11:24:21.369198  matplotlib does not support generators as input  in updateGraph
+2024-08-26 11:24:21.385741  matplotlib does not support generators as input  in updateGraph
+2024-08-26 11:24:21.395772  matplotlib does not support generators as input  in updateGraph
+2024-08-26 11:24:42.522067  can't invoke "wm" command: application has been destroyed  in createInterface
+2024-08-26 11:24:57.314106  x and y must have same first dimension, but have shapes (24,) and (1,)  in updateGraph
+2024-08-26 11:24:57.339420  x and y must have same first dimension, but have shapes (24,) and (1,)  in updateGraph
+2024-08-26 11:24:57.350465  x and y must have same first dimension, but have shapes (24,) and (1,)  in updateGraph
+2024-08-26 11:24:57.354533  x and y must have same first dimension, but have shapes (24,) and (1,)  in updateGraph
+2024-08-26 11:24:57.367785  x and y must have same first dimension, but have shapes (24,) and (1,)  in updateGraph
+2024-08-26 11:24:57.404590  x and y must have same first dimension, but have shapes (24,) and (1,)  in updateGraph
+2024-08-26 11:24:57.413708  x and y must have same first dimension, but have shapes (24,) and (1,)  in updateGraph
+2024-08-26 11:24:57.449431  x and y must have same first dimension, but have shapes (24,) and (1,)  in updateGraph
+2024-08-26 11:24:57.474909  x and y must have same first dimension, but have shapes (24,) and (1,)  in updateGraph
+2024-08-26 11:24:57.483647  x and y must have same first dimension, but have shapes (24,) and (1,)  in updateGraph
+2024-08-26 11:24:57.497666  x and y must have same first dimension, but have shapes (24,) and (1,)  in updateGraph
+2024-08-26 11:24:57.497666  x and y must have same first dimension, but have shapes (24,) and (1,)  in updateGraph
+2024-08-26 11:24:57.524034  x and y must have same first dimension, but have shapes (24,) and (1,)  in updateGraph
+2024-08-26 11:24:57.531046  x and y must have same first dimension, but have shapes (24,) and (1,)  in updateGraph
+2024-08-26 11:24:57.545417  x and y must have same first dimension, but have shapes (24,) and (1,)  in updateGraph
+2024-08-26 11:24:57.553317  x and y must have same first dimension, but have shapes (24,) and (1,)  in updateGraph
+2024-08-26 11:24:57.564374  x and y must have same first dimension, but have shapes (24,) and (1,)  in updateGraph
+2024-08-26 11:24:57.575820  x and y must have same first dimension, but have shapes (24,) and (1,)  in updateGraph
+2024-08-26 11:24:57.581082  x and y must have same first dimension, but have shapes (24,) and (1,)  in updateGraph
+2024-08-26 11:24:57.597840  x and y must have same first dimension, but have shapes (24,) and (1,)  in updateGraph
+2024-08-26 11:24:57.609252  x and y must have same first dimension, but have shapes (24,) and (1,)  in updateGraph
+2024-08-26 11:25:18.732259  can't invoke "wm" command: application has been destroyed  in createInterface

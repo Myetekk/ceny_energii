@@ -254,6 +254,7 @@ class Settings:
     fixing = 2
     data_source = 1
     updateTime = 15  ## w sekundach
+    entsoeKey = 'd2f433b7-ab33-4210-8328-15b9462f7316'
     
 
 

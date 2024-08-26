@@ -50,6 +50,7 @@ class EnergyPrices:
 
 
 
+    ## główna funkcja tworząca okno, odpalająca modbusa
     def main(self):
         print("Loading..")
         print(datetime.datetime.now())
@@ -62,6 +63,8 @@ class EnergyPrices:
 
         self.errors.errorNumber = 0
 
+
+        ## do testów zmiany dnia
         # self.date = datetime.datetime(2024, 8, 18, 12, 00) #################################################################################
         # self.date_plus_day = self.date + datetime.timedelta(days=1) #################################################################################
 
@@ -69,18 +72,14 @@ class EnergyPrices:
 
         ## ładuje ustawienia z pliku
         self.settings = Settings()
-        currency_number = 1
-        if self.settings.currency == 'PLN':   currency_number = 1
-        elif self.settings.currency == 'EUR':   currency_number = 2
-        self.prevSettings = [currency_number, int(self.settings.fixing), self.settings.data_source, self.settings.updateTime]
         loadSettings(self.settings, self.errors)
 
-        ## sprawdza połączenie z internetem
-        if tryInternetConnection():
-            ## jeśli ma połączenie z internetem  -->  pobiera dane z entsoe i tge dla dnia dzisiejszego i następnego
-            parse_entsoe_thread = threading.Thread(target=parseENTSOE, args=(self.date, self.objectList_entsoe, self.errors, ), daemon = True)
+
+        ## sprawdza połączenie z internetem przy pierwszym uruchomieniu
+        if tryInternetConnection():   ## jeśli ma połączenie z internetem  -->  pobiera dane z entsoe i tge dla dnia dzisiejszego i następnego
+            parse_entsoe_thread = threading.Thread(target=parseENTSOE, args=(self.date, self.objectList_entsoe, self.errors, self.settings, ), daemon = True)
             parse_tge_thread = threading.Thread(target=parseTGE, args=(self.date, self.objectList_tge, self.errors, self.settings, ), daemon = True)
-            parse_entsoe_next = threading.Thread(target=parseENTSOE, args=(self.date_plus_day, self.objectList_entsoe_next, self.errors, ), daemon = True)
+            parse_entsoe_next = threading.Thread(target=parseENTSOE, args=(self.date_plus_day, self.objectList_entsoe_next, self.errors, self.settings, ), daemon = True)
             parse_tge_next = threading.Thread(target=parseTGE, args=(self.date_plus_day, self.objectList_tge_next, self.errors, self.settings, ), daemon = True)
 
             parse_entsoe_thread.start()
@@ -92,8 +91,7 @@ class EnergyPrices:
             parse_tge_thread.join()
             parse_entsoe_next.join()
             parse_tge_next.join()
-        else:   
-            ## jeśli nie ma połączenia z internetem  -->  informuje o tym użytkownika i przypisuje zerowe dane aby program dalej działał
+        else:   ## jeśli nie ma połączenia z internetem  -->  informuje o tym użytkownika i przypisuje zerowe dane aby program dalej działał
             errorWindow('no internet connection', 'error')
 
             for i in range(24):
@@ -106,14 +104,13 @@ class EnergyPrices:
                 entsoe.date = str(self.date)[0:10]
                 tge.date = str(self.date)[0:10]
 
-
                 self.objectList_entsoe.append(entsoe)
                 self.objectList_entsoe_next.append(entsoe)
                 self.objectList_tge.append(tge)
                 self.objectList_tge_next.append(tge)
 
 
-                
+
 
         ## ustawienie waluty pobranej z pliku
         if self.objectList_entsoe[0].currency != self.settings.currency:   self.changeCurrency()
@@ -164,10 +161,10 @@ class EnergyPrices:
         try: 
             date = datetime.datetime.now()
 
-
             objectList= list()
             objectListNext= list()
 
+            ## sprawdza z którego źródła danych korzystać
             if self.settings.data_source == 1:
                 objectList = self.objectList_entsoe
                 objectListNext = self.objectList_entsoe_next
@@ -176,42 +173,48 @@ class EnergyPrices:
                 objectListNext = self.objectList_tge_next
 
 
+            ## czyści całą liste
             blancList = []
             for i in range(120):   blancList += [0] 
             self.dataBank.set_input_registers(address=0, word_list=blancList)
 
 
+            ## ustawia dane i czas
             dateList = [date.year] + [date.month] + [date.day] + [date.hour] + [date.minute] + [date.second]
-            self.dataBank.set_input_registers(address=0, word_list=dateList)  ## data i godzina
+            self.dataBank.set_input_registers(address=0, word_list=dateList) 
 
 
+            ## kurs euro
             euro = str(objectList[0].euro).split('.')
-            self.dataBank.set_input_registers(address=7, word_list=[euro[0]])  ## kurs euro, część całkowita 
-            self.dataBank.set_input_registers(address=8, word_list=[euro[1]])  ## kurs euro, część dziesiętna 
+            self.dataBank.set_input_registers(address=7, word_list=[euro[0]])  ## część całkowita 
+            self.dataBank.set_input_registers(address=8, word_list=[euro[1]])  ## część dziesiętna 
             
 
+            ## dane z dzisiaj
             currentDayList = [] 
             for object in objectList:   
                 if object.status == True: 
                     currentDayList += [float(object.price)] 
             if len(currentDayList) != 0: 
-                self.dataBank.set_input_registers(address=10, word_list=currentDayList)  ## dane z dzisiaj 
+                self.dataBank.set_input_registers(address=10, word_list=currentDayList)  ## dane  
                 self.dataBank.set_input_registers(address=34, word_list=[1])  ## data_ok
                 self.dataBank.set_input_registers(address=35, word_list=[min(currentDayList)])  ## min
                 self.dataBank.set_input_registers(address=36, word_list=[max(currentDayList)])  ## max
 
 
+            ## dane z jutra
             nextDayList = []
             for object in objectListNext:   
                 if object.status == True: 
                     nextDayList += [float(object.price)] 
             if len(nextDayList) != 0: 
-                self.dataBank.set_input_registers(address=40, word_list=nextDayList)  ## dane z jutra
+                self.dataBank.set_input_registers(address=40, word_list=nextDayList)  ## dane 
                 self.dataBank.set_input_registers(address=64, word_list=[1])  ## data_ok
                 self.dataBank.set_input_registers(address=65, word_list=[min(nextDayList)])  ## min
                 self.dataBank.set_input_registers(address=66, word_list=[max(nextDayList)])  ## max
 
 
+            ## ustawienia aplikacji
             currency = 0
             if objectList[0].currency == 'PLN': currency = 1
             elif objectList[0].currency == 'EUR': currency = 2
@@ -252,7 +255,8 @@ class EnergyPrices:
                     
                 if settingsListener != [0, 0, 0, 0]  and  (settingsListener != [currency_number, int(self.settings.fixing), self.settings.data_source, self.settings.updateTime]):  ## jeszcze jakiś warunek
                     print("\nupdating settings..")
-
+                    
+                    ## dla waluty
                     if settingsListener[0] == 1: currency='PLN'
                     elif settingsListener[0] == 2: currency='EUR'
                     if self.settings.currency != currency:
@@ -261,7 +265,7 @@ class EnergyPrices:
                         if self.objectList_tge[0].currency != self.currencyStringVar.get():
                             self.changeCurrency()
 
-
+                    ## dla fixingu
                     if self.settings.fixing != settingsListener[1]:
                         self.settings.fixing = settingsListener[1]
                         self.fixingStringVar.set(str(self.settings.fixing))
@@ -271,7 +275,7 @@ class EnergyPrices:
                             self.settings.currency = self.currencyStringVar.get()
                             self.changeCurrency()
 
-
+                    ## dla źródła danych
                     if self.settings.data_source != settingsListener[2]:
                         self.settings.data_source = settingsListener[2]
                         data_source = 'entsoe'
@@ -280,13 +284,14 @@ class EnergyPrices:
                         self.modbusSourceVar.set(data_source)
                         self.sendToModbus()
 
-                    
+                    ## dla czasu aktualizacji
                     if self.settings.updateTime != settingsListener[3]:
                         self.settings.updateTime = settingsListener[3]
                         self.updateTimeVariable.set(int(settingsListener[3]))
                         self.updateTime_onChange()
 
                     
+                    ## czyści 'oczekujące' dane (dane którymi ktoś zmienił ustawienia)
                     self.dataBank.set_holding_registers(121, [0, 0, 0, 0])
 
 
@@ -296,6 +301,7 @@ class EnergyPrices:
 
                     print("settings updated")
                 time.sleep(1)
+
 
         except Exception as e:
             print(f"An error occurred in checkSettingsChange: {e}.")
@@ -315,7 +321,7 @@ class EnergyPrices:
 
 
 
-    ## obliczenie różnic entsoe i tge
+    ## obliczenie różnic między entsoe i tge
     def getDifference(self):
         self.objectList_diff.clear()
         self.objectList_diff_next.clear()
@@ -335,25 +341,25 @@ class EnergyPrices:
     ## zmienia walute danych
     def changeCurrency(self):
         multiply = 1
-        if self.settings.currency == 'EUR':
+        if self.settings.currency == 'EUR':   ## gdy zmienia na euro
             multiply = self.objectList_entsoe[0].euro
             for i in range(24):
-                self.objectList_entsoe[i].price = float(self.objectList_entsoe[i].price) / multiply
-                self.objectList_entsoe_next[i].price = float(self.objectList_entsoe_next[i].price) / multiply
-                self.objectList_tge[i].price = float(self.objectList_tge[i].price) / multiply
-                self.objectList_tge_next[i].price = float(self.objectList_tge_next[i].price) / multiply
+                self.objectList_entsoe[i].price = round(float(self.objectList_entsoe[i].price) / multiply, 2)
+                self.objectList_entsoe_next[i].price = round(float(self.objectList_entsoe_next[i].price) / multiply, 2)
+                self.objectList_tge[i].price = round(float(self.objectList_tge[i].price) / multiply, 2)
+                self.objectList_tge_next[i].price = round(float(self.objectList_tge_next[i].price) / multiply, 2)
 
                 self.objectList_entsoe[i].currency = 'EUR'
                 self.objectList_entsoe_next[i].currency = 'EUR'
                 self.objectList_tge[i].currency = 'EUR'
                 self.objectList_tge_next[i].currency = 'EUR'
-        elif self.settings.currency == 'PLN':
+        elif self.settings.currency == 'PLN':   ## gdy zmienia na pln
             multiply = 1 / self.objectList_entsoe[0].euro
             for i in range(24):
-                self.objectList_entsoe[i].price = float(self.objectList_entsoe[i].price) / multiply
-                self.objectList_entsoe_next[i].price = float(self.objectList_entsoe_next[i].price) / multiply
-                self.objectList_tge[i].price = float(self.objectList_tge[i].price) / multiply
-                self.objectList_tge_next[i].price = float(self.objectList_tge_next[i].price) / multiply
+                self.objectList_entsoe[i].price = round(float(self.objectList_entsoe[i].price) / multiply, 2)
+                self.objectList_entsoe_next[i].price = round(float(self.objectList_entsoe_next[i].price) / multiply, 2)
+                self.objectList_tge[i].price = round(float(self.objectList_tge[i].price) / multiply, 2)
+                self.objectList_tge_next[i].price = round(float(self.objectList_tge_next[i].price) / multiply, 2)
                 
                 self.objectList_entsoe[i].currency = 'PLN'
                 self.objectList_entsoe_next[i].currency = 'PLN'
@@ -371,40 +377,41 @@ class EnergyPrices:
 
     ## zmienia fixing dla tge
     def changeFixing(self):
-        if str(self.settings.fixing) == '1':
+        if str(self.settings.fixing) == '1':   ## gdy zmienia na fixing 1
             for i in range(24):
-                self.objectList_tge[i].price = float(self.objectList_tge[i].pricef1)
-                self.objectList_tge_next[i].price = float(self.objectList_tge_next[i].pricef1)
+                self.objectList_tge[i].price = round(float(self.objectList_tge[i].pricef1), 2)
+                self.objectList_tge_next[i].price = round(float(self.objectList_tge_next[i].pricef1), 2)
                 
                 self.objectList_tge[i].currency = 'PLN'
                 self.objectList_tge_next[i].currency = 'PLN'
                 self.objectList_tge[i].fixing = 1
                 self.objectList_tge_next[i].fixing = 1
-        elif str(self.settings.fixing) == '2': 
+        elif str(self.settings.fixing) == '2':   ## gdy zmienia na fixing 1
             for i in range(24):
-                self.objectList_tge[i].price = float(self.objectList_tge[i].pricef2)
-                self.objectList_tge_next[i].price = float(self.objectList_tge_next[i].pricef2)
+                self.objectList_tge[i].price = round(float(self.objectList_tge[i].pricef2), 2)
+                self.objectList_tge_next[i].price = round(float(self.objectList_tge_next[i].pricef2), 2)
                 
                 self.objectList_tge[i].currency = 'PLN'
                 self.objectList_tge_next[i].currency = 'PLN'
                 self.objectList_tge[i].fixing = 2
                 self.objectList_tge_next[i].fixing = 2
         
+        ## sprawdza czy waluta tge nie wymaga zmiany
         if self.objectList_tge[0].currency != self.settings.currency:
             multiply = 1
-            if self.settings.currency == 'EUR':
+            if self.settings.currency == 'EUR':   ## gdy zmienia na euro
                 multiply = self.objectList_tge[0].euro
                 for i in range(24):
-                    self.objectList_tge[i].price = float(self.objectList_tge[i].price) / multiply
-                    self.objectList_tge_next[i].price = float(self.objectList_tge_next[i].price) / multiply
+                    self.objectList_tge[i].price = round(float(self.objectList_tge[i].price) / multiply, 2)
+                    self.objectList_tge_next[i].price = round(float(self.objectList_tge_next[i].price) / multiply, 2)
 
                     self.objectList_tge[i].currency = 'EUR'
                     self.objectList_tge_next[i].currency = 'EUR'
-            elif self.settings.currency == 'PLN':
+            elif self.settings.currency == 'PLN':   ## gdy zmienia na pln
                 multiply = 1 / self.objectList_tge[0].euro
                 for i in range(24):
-                    self.objectList_tge[i].price = float(self.objectList_tge[i].price) / multiply
-                    self.objectList_tge_next[i].price = float(self.objectList_tge_next[i].price) / multiply
+                    self.objectList_tge[i].price = round(float(self.objectList_tge[i].price) / multiply, 2)
+                    self.objectList_tge_next[i].price = round(float(self.objectList_tge_next[i].price) / multiply, 2)
                     
                     self.objectList_tge[i].currency = 'PLN'
                     self.objectList_tge_next[i].currency = 'PLN'
@@ -418,7 +425,7 @@ class EnergyPrices:
 
 
 
-    ## przeładowuje wszystkie dane  
+    ## przeładowuje wszystkie dane w tabeli
     def reloadElements(self):
         try:
             self.getDifference()
@@ -436,6 +443,7 @@ class EnergyPrices:
                 tk.Label(text=( round(self.objectList_tge_next[i].price, 2) )).grid(row=i+2, column=6)
                 tk.Label(text=( round(self.objectList_diff[i], 2) )).grid(row=i+2, column=8)
                 tk.Label(text=( round(self.objectList_diff_next[i], 2) )).grid(row=i+2, column=9)
+
 
         except Exception as e:
             print(f"An error occurred in reloadElements: {e}. Trying again")
@@ -460,6 +468,7 @@ class EnergyPrices:
             hour = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23)
             plotValues = PlotValues()
 
+            ## ustawia wartości danych do wykresu
             plotValues.value_entsoe = (float(self.objectList_entsoe[0].price), float(self.objectList_entsoe[1].price), float(self.objectList_entsoe[2].price), float(self.objectList_entsoe[3].price), float(self.objectList_entsoe[4].price), float(self.objectList_entsoe[5].price), float(self.objectList_entsoe[6].price), float(self.objectList_entsoe[7].price), float(self.objectList_entsoe[8].price), float(self.objectList_entsoe[9].price), float(self.objectList_entsoe[10].price), float(self.objectList_entsoe[11].price), float(self.objectList_entsoe[12].price), float(self.objectList_entsoe[13].price), float(self.objectList_entsoe[14].price), float(self.objectList_entsoe[15].price), float(self.objectList_entsoe[16].price), float(self.objectList_entsoe[17].price), float(self.objectList_entsoe[18].price), float(self.objectList_entsoe[19].price), float(self.objectList_entsoe[20].price), float(self.objectList_entsoe[21].price), float(self.objectList_entsoe[22].price), float(self.objectList_entsoe[23].price))
             plotValues.value_entsoe_next = (float(self.objectList_entsoe_next[0].price), float(self.objectList_entsoe_next[1].price), float(self.objectList_entsoe_next[2].price), float(self.objectList_entsoe_next[3].price), float(self.objectList_entsoe_next[4].price), float(self.objectList_entsoe_next[5].price), float(self.objectList_entsoe_next[6].price), float(self.objectList_entsoe_next[7].price), float(self.objectList_entsoe_next[8].price), float(self.objectList_entsoe_next[9].price), float(self.objectList_entsoe_next[10].price), float(self.objectList_entsoe_next[11].price), float(self.objectList_entsoe_next[12].price), float(self.objectList_entsoe_next[13].price), float(self.objectList_entsoe_next[14].price), float(self.objectList_entsoe_next[15].price), float(self.objectList_entsoe_next[16].price), float(self.objectList_entsoe_next[17].price), float(self.objectList_entsoe_next[18].price), float(self.objectList_entsoe_next[19].price), float(self.objectList_entsoe_next[20].price), float(self.objectList_entsoe_next[21].price), float(self.objectList_entsoe_next[22].price), float(self.objectList_entsoe_next[23].price))
             plotValues.value_tge = (float(self.objectList_tge[0].price), float(self.objectList_tge[1].price), float(self.objectList_tge[2].price), float(self.objectList_tge[3].price), float(self.objectList_tge[4].price), float(self.objectList_tge[5].price), float(self.objectList_tge[6].price), float(self.objectList_tge[7].price), float(self.objectList_tge[8].price), float(self.objectList_tge[9].price), float(self.objectList_tge[10].price), float(self.objectList_tge[11].price), float(self.objectList_tge[12].price), float(self.objectList_tge[13].price), float(self.objectList_tge[14].price), float(self.objectList_tge[15].price), float(self.objectList_tge[16].price), float(self.objectList_tge[17].price), float(self.objectList_tge[18].price), float(self.objectList_tge[19].price), float(self.objectList_tge[20].price), float(self.objectList_tge[21].price), float(self.objectList_tge[22].price), float(self.objectList_tge[23].price))
@@ -482,6 +491,7 @@ class EnergyPrices:
             if self.checkboxStatus.diff_today_checked: self.plotObj.plot.step(hour, plotValues.value_tge, '#45e600', where='mid', linewidth=0.8)  ## wykres diff
             if self.checkboxStatus.diff_tomorrow_checked: self.plotObj.plot.step(hour, plotValues.value_tge_next, '#2e9900', where='mid', linewidth=0.8, linestyle='--')  ## wykres diff_next
             
+            ## tworzy legende w zależności od zaznaczonych checkboxów
             legend_list = []
             entsoe_legend = 'entsoe'
             entsoe_next_legend = 'entsoe_next'
@@ -497,12 +507,13 @@ class EnergyPrices:
             if self.checkboxStatus.diff_tomorrow_checked: legend_list.append(diff_next_legend)
             self.plotObj.plot.legend(legend_list) 
 
-                
+
 
             ## zmaterializowanie wykresu 
             self.plotObj.canvas.figure = self.plotObj.fig
             self.plotObj.canvas.draw() 
             self.plotObj.canvas.get_tk_widget().grid(row=2, column=11, rowspan=24)
+
 
         except Exception as e:
             print(f"An error occurred in updateGraph: {e}. Trying again")
@@ -521,6 +532,7 @@ class EnergyPrices:
 
 
 
+    ## aktualizuje czas aktualizacji
     def updateTime_onChange(self):
         try:
             if int(self.updateTimeVariable.get()) > 7200:   self.updateTimeVariable.set(7200)
@@ -552,64 +564,57 @@ class EnergyPrices:
 
 
 
+    ## aktualizuje dane - pobiera nowe, wykonuje niezbędne operacje, loguje do bazy i przeładowywuje interfejs
     def updateData(self):
         try:
-            # if datetime.datetime.now().hour != self.prev_hour  and  datetime.datetime.now().minute > 10: # ¿?¿?¿? #########################################################################################
+            print("\nupdating..")
+            self.errors.errorNumber = 0
+            print(datetime.datetime.now())
 
-                print("\nupdating..")
-                self.errors.errorNumber = 0
-                print(datetime.datetime.now())
+            self.date = datetime.datetime.now()
+            self.date_plus_day = datetime.datetime.now() + datetime.timedelta(days=1)
 
-                self.date = datetime.datetime.now()
-                self.date_plus_day = datetime.datetime.now() + datetime.timedelta(days=1)
-
-                # self.date = self.date + datetime.timedelta(days=1) # del #########################################################################################
-                # self.date_plus_day = self.date + datetime.timedelta(days=1) # del #########################################################################################
+            # self.date = self.date + datetime.timedelta(days=1) # del #########################################################################################
+            # self.date_plus_day = self.date + datetime.timedelta(days=1) # del #########################################################################################
 
 
-                parse_entsoe_thread = threading.Thread(target=parseENTSOE, args=(self.date, self.objectList_entsoe, self.errors, ), daemon = True)
-                parse_tge_thread = threading.Thread(target=parseTGE, args=(self.date, self.objectList_tge, self.errors, self.settings, ), daemon = True)
-                parse_entsoe_next = threading.Thread(target=parseENTSOE, args=(self.date_plus_day, self.objectList_entsoe_next, self.errors, ), daemon = True)
-                parse_tge_next = threading.Thread(target=parseTGE, args=(self.date_plus_day, self.objectList_tge_next, self.errors, self.settings, ), daemon = True)
+            parse_entsoe_thread = threading.Thread(target=parseENTSOE, args=(self.date, self.objectList_entsoe, self.errors, self.settings, ), daemon = True)
+            parse_tge_thread = threading.Thread(target=parseTGE, args=(self.date, self.objectList_tge, self.errors, self.settings, ), daemon = True)
+            parse_entsoe_next = threading.Thread(target=parseENTSOE, args=(self.date_plus_day, self.objectList_entsoe_next, self.errors, self.settings, ), daemon = True)
+            parse_tge_next = threading.Thread(target=parseTGE, args=(self.date_plus_day, self.objectList_tge_next, self.errors, self.settings, ), daemon = True)
 
-                parse_entsoe_thread.start()
-                parse_tge_thread.start()
-                parse_entsoe_next.start()
-                parse_tge_next.start()
+            parse_entsoe_thread.start()
+            parse_tge_thread.start()
+            parse_entsoe_next.start()
+            parse_tge_next.start()
 
-                parse_entsoe_thread.join()
-                parse_tge_thread.join()
-                parse_entsoe_next.join()
-                parse_tge_next.join()
-
-
-                ## ustawienie waluty pobranej z pliku
-                if self.objectList_entsoe[0].currency != self.settings.currency:   self.changeCurrency()
-
-                ## ustawienie fixingu pobranego z pliku
-                if self.objectList_tge[0].fixing != self.settings.fixing:   self.changeFixing()
-                
-                self.getDifference()
-
-                
-                self.reloadElements()
-                self.updateGraph()
-                self.sendToModbus()
-                sendToSQLite(self.objectList_entsoe, self.objectList_tge, self.objectList_entsoe_next, self.objectList_tge_next, self.errors, self.settings, self.window)
+            parse_entsoe_thread.join()
+            parse_tge_thread.join()
+            parse_entsoe_next.join()
+            parse_tge_next.join()
 
 
-                # self.prev_hour = datetime.datetime.now().hour # ¿?¿?¿? #########################################################################################
-                
-                print("update finished\n\n")
-                
-                if self.errors.errorNumber <= 20:   self.afterFunc = self.window.after(int(self.updateTimeVariable.get())*1000, self.updateData) # del #########################################################################################
-                else:   checkNumberOfErrors(self.errors, self.settings, self.window) # del #########################################################################################
+            ## ustawienie waluty pobranej z pliku
+            if self.objectList_entsoe[0].currency != self.settings.currency:   self.changeCurrency()
 
+            ## ustawienie fixingu pobranego z pliku
+            if self.objectList_tge[0].fixing != self.settings.fixing:   self.changeFixing()
+            
+            self.getDifference()
 
+            
+            self.reloadElements()
+            self.updateGraph()
+            self.sendToModbus()
+            sendToSQLite(self.objectList_entsoe, self.objectList_tge, self.objectList_entsoe_next, self.objectList_tge_next, self.errors, self.settings, self.window)
+            saveSettings_JSON(self.settings, self.errors)
 
-
-            # if self.errors.errorNumber <= 20:   self.afterFunc = self.window.after(int(self.updateTimeVariable.get())*1000, updateData) # add #########################################################################################
-            # else:   checkNumberOfErrors(self.errors, self.settings, self.window) # add #########################################################################################
+            
+            print("update finished\n\n")
+            
+            if self.errors.errorNumber <= 20:   self.afterFunc = self.window.after(int(self.updateTimeVariable.get())*1000, self.updateData) # del #########################################################################################
+            else:   checkNumberOfErrors(self.errors, self.settings, self.window) # del #########################################################################################
+            
         
         except Exception as e:
             print(f"An error occurred in updateData: {e}. Trying again")
@@ -766,6 +771,16 @@ class EnergyPrices:
             def HTML(): createHTML(self.objectList_entsoe, self.objectList_tge, self.objectList_entsoe_next, self.objectList_tge_next, self.errors, self.settings, self.window)
             def CSV(): createCSV(self.objectList_entsoe, self.objectList_tge, self.objectList_entsoe_next, self.objectList_tge_next, self.errors, self.settings, self.window)
             def database(): sendToSQLite(self.objectList_entsoe, self.objectList_tge, self.objectList_entsoe_next, self.objectList_tge_next, self.errors, self.settings, self.window)
+
+            ## przyciski exportu do plików i danych hurtowych
+            JSONbutton = tk.Button(self.managementFrame, text="JSON", command=JSON)
+            HTMLbutton = tk.Button(self.managementFrame, text="HTML", command=HTML)
+            CSVbutton = tk.Button(self.managementFrame, text="CSV", command=CSV)
+            databaseButton = tk.Button(self.managementFrame, text="database", command=database)
+
+
+            
+            ## otwiera okno z danymi w formie hurtowej
             def combinedData(): 
                 if tryInternetConnection():
                     self.energyPrices_timeInterval = EnergyPrices_timeInterval()
@@ -774,19 +789,16 @@ class EnergyPrices:
                     self.combinedDataList.clear()
                     self.combinedDataList.append(self.energyPrices_timeInterval)
                 else:   errorWindow('no internet connection', 'error')
-            def updateTime_onChange_event(event):
-                self.updateTime_onChange()
-            self.window.bind('<Return>', updateTime_onChange_event)
 
-
-            ## przyciski exportu do plików i danych hurtowych
-            JSONbutton = tk.Button(self.managementFrame, text="JSON", command=JSON)
-            HTMLbutton = tk.Button(self.managementFrame, text="HTML", command=HTML)
-            CSVbutton = tk.Button(self.managementFrame, text="CSV", command=CSV)
-            databaseButton = tk.Button(self.managementFrame, text="database", command=database)
+            ## przycisk do otwarcia danych hurtowych
             self.combinedDataButton = tk.Button(self.managementFrame, text="combined data", command=combinedData)
 
 
+
+            ## ustawiwa czas między updatami
+            def updateTime_onChange_event(event):
+                self.updateTime_onChange()
+            self.window.bind('<Return>', updateTime_onChange_event)
 
             ## wybieranie czasu między updatami
             self.updateTime_frame = tk.Frame(self.managementFrame)
@@ -810,7 +822,7 @@ class EnergyPrices:
                 self.reloadElements()
                 self.updateGraph()
                 self.sendToModbus()
-                
+            
             self.currencyStringVar = tk.StringVar(self.managementFrame, self.settings.currency)
             currencyFrame = tk.Frame(self.managementFrame)
             tk.Label(currencyFrame, text="waluta:").pack(side='top', padx=5)
@@ -883,7 +895,6 @@ class EnergyPrices:
 
 
 
-            # self.prev_hour = self.date.hour # ¿?¿?¿? #########################################################################################
             ## wywołanie updatu, następne wywołują się w nim
             self.afterFunc = self.window.after(int(self.updateTimeVariable.get())*1000, self.updateData)
 
@@ -903,6 +914,7 @@ class EnergyPrices:
 
             self.window.protocol("WM_DELETE_WINDOW", closeWindows)
             self.window.mainloop()
+
 
         except Exception as e: 
             print(f"An error occurred in createInterface: {e}. Trying again")
@@ -939,8 +951,13 @@ if __name__ == '__main__':
 
 
 
+## - sprawdzić czy na pewno na entsoe nie ma fixingu - nope
+## - ustawienia: klucz entsoe
+## - max długość 124 dni (inaczej wypisywane elementy pokazują się jako czarne bloki)
+
+
+
 ## każde uruchomienie 'windowTimeInterval' dokłada ok 3MB (Python usuwa, ale dopiero po jakimś czasie)
-## przycisk usuwania obiektu 'EnergyPrices_timeInterval' (tylko do testów, żeby sprawdzić czy to on dokłada te 3MB do RAM)
 
 
 

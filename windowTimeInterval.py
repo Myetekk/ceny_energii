@@ -41,11 +41,13 @@ class EnergyPrices_timeInterval:
     def loadHeader(self):
         def calendar_onChange():
             if tryInternetConnection():
-                self.dataList.clear()
                 self.date_start = self.CalendarStart.get_date()
                 self.date_stop = self.CalendarStop.get_date()
+
                 
-                if self.date_start <= self.date_stop:   self.getData()
+                if self.date_start <= self.date_stop  and  (self.date_stop-self.date_start).days <= 120:   
+                    self.getData()
+                elif (self.date_stop-self.date_start).days > 120:   errorWindow('przedział to maksymalnie 120 dni', 'error')
                 else:   errorWindow('nieprawidłowa data', 'error')
             else:   errorWindow('no internet connection', 'error')
 
@@ -159,7 +161,7 @@ class EnergyPrices_timeInterval:
             self.datelist = pandas.date_range(self.date_start, self.date_stop)
             for date in self.datelist: 
                 oneDayObject = OneDayObject()
-                parse_entsoe_thread = threading.Thread(target=parseENTSOE, args=(date, oneDayObject.objectList_entsoe, self.errors, ), daemon = True)
+                parse_entsoe_thread = threading.Thread(target=parseENTSOE, args=(date, oneDayObject.objectList_entsoe, self.errors, self.settings, ), daemon = True)
                 parse_tge_thread = threading.Thread(target=parseTGE, args=(date, oneDayObject.objectList_tge, self.errors, self.settings, ), daemon = True)
 
                 parse_entsoe_thread.start()
@@ -251,7 +253,7 @@ class EnergyPrices_timeInterval:
     def createInterface(self, combinedDataButton):
         self.window = tk.Tk()
         self.window.title('Energy prices - combined data')
-        self.window.geometry('1200x810+100+100')
+        self.window.geometry('1200x810+50+50')
         self.window.resizable(False, False)
         self.window.configure(padx=10, pady=10)
         self.window.configure(background='#e6f2ec')
