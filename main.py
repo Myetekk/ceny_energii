@@ -40,8 +40,8 @@ class EnergyPrices:
 
     date = datetime.datetime.now()
     date_plus_day = datetime.datetime.now() + datetime.timedelta(days=1)
-    # date = datetime.datetime(2024, 10, 27, 12, 0, 0) ###################################################################
-    # date_plus_day = datetime.datetime(2024, 10, 28, 12, 0, 0) ###################################################################
+    # date = datetime.datetime(2024, 3, 31, 12, 0, 0) ###################################################################
+    # date_plus_day = datetime.datetime(2024, 3, 31, 12, 0, 0) ###################################################################
 
 
 
@@ -936,14 +936,14 @@ if __name__ == '__main__':
 
 
 
-## RZECZY: 
-# - zmiana czasu - za mało godzin w dobie
+## TO DO: 
+# - errory w bazie a nie w .txt
 # - zawiesza się po długim czasie: 
 #       - jeżeli pobieranie danych trwa za długo - przerwać
-# - errory w bazie a nie w .txt
 
 
-# + zmiana czasu - za dużo godzin w dobie: 
+# + zmiana czasu - za dużo godzin w dobie
+# + zmiana czasu - za mało godzin w dobie
 #       + nie pobierać godzin z TGE  =>  pobierał, ale nigdzie nie wykorzystywał XD
 #       + weryfikować zmiane czasu ¿XD?
 # + czasem nie zmienia waluty  =>  przy zerowaniu danych dla dnia zerował też kurs euro)

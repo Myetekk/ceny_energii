@@ -2,6 +2,7 @@ import pandas as pd
 import time
 from entsoe import EntsoeRawClient
 import datetime
+import copy
 from xml.dom.minidom import parseString
 
 from utils import getEUR, increaseOneDay, saveError, tryInternetConnection
@@ -90,31 +91,43 @@ def parseENTSOE(date, objectList, errors, settings):
 
             euro = getEUR(str(date)[:10].split('-'))
             string = getDataFromAPI_oneDay(date, errors, settings)
+            # print(string)
 
             if string == ""  or  string == None:
                 resetData(objectList, date, euro)
             else:
                 document = parseString(string)
 
-                # if len(document.getElementsByTagName("price.amount")) != 24:   resetData(objectList, date, euro) ###### tu się psuje zmiana czasu 
-                # else:
-                hourIndex = 0
-                for hourObj in document.getElementsByTagName("price.amount"):
+                prevSafetyIndex = 0
+                prevEntsoe = {}
+
+                pricesList = document.getElementsByTagName("price.amount")
+                for index in range(len(pricesList)):
                     entsoe = Entsoe()
-                    price = hourObj.firstChild.nodeValue
+                    price = pricesList[index].firstChild.nodeValue
+                    safetyIndex = int(document.getElementsByTagName("position")[index].firstChild.nodeValue)
                     date_fromapi = document.getElementsByTagName("end")[1].firstChild.nodeValue
 
-                    entsoe.hour = hourIndex
+                    entsoe.hour = safetyIndex
                     entsoe.price = round(float(price) * euro, 2)
                     entsoe.date = date_fromapi[0:10]
                     entsoe.euro = euro
                     entsoe.status = True
 
-                    if (len(document.getElementsByTagName("price.amount")) == 25  and hourIndex == 2): # gdy lista ma 25 obiektów  =>  zmiana czasu z letniego na zimowy
-                        print('zmiana czasu z letniego na zimowy')
+
+                    if ((len(pricesList) < 24)  and  (safetyIndex != prevSafetyIndex+1)): # gdy lista ma mniej niż 24 obiekty  =>  dziwność tego api - gdy 2h z rzęgu jest ta sama wartość to wysyła ją tylko raz
+                        objectList.append(prevEntsoe)
+                    
+                    if (len(pricesList) == 25  and  safetyIndex == 3): # gdy lista ma 25 obiektów  =>  zmiana czasu z letniego na zimowy
+                        print('za dużo godzin w dobie')
+                    elif (len(pricesList) < 23  and  safetyIndex == 2): # gdy lista ma 23 obiektów  =>  zmiana czasu z zimowego na letni
+                        objectList.append(copy.deepcopy(entsoe))
+                        objectList.append(copy.deepcopy(entsoe))
                     else:
                         objectList.append(entsoe)
-                    hourIndex += 1
+                    
+                    prevSafetyIndex = safetyIndex
+                    prevEntsoe = copy.deepcopy(entsoe)
             if internetConn:   print("entsoe parsed for: ", str(date)[0:10])
         else: 
             return

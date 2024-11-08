@@ -1534,3 +1534,112 @@
 2024-11-08 15:22:55.143615  list index out of range  in parseENTSOE
 2024-11-08 15:22:55.660730  list index out of range  in parseENTSOE
 2024-11-08 15:22:55.839967  list index out of range  in parseENTSOE
+2024-11-08 23:12:51.798763  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:12:52.534933  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:12:52.539364  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:12:53.266099  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:12:53.306010  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:12:53.961554  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:12:54.024585  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:12:54.693943  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:12:54.713829  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:12:55.366516  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:12:55.418930  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:12:56.073877  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:12:56.075083  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:12:56.878688  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:12:56.941706  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:12:57.543500  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:12:57.593864  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:12:58.214619  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:12:58.283183  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:12:58.914852  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:12:58.946035  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:13:16.193020  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:13:16.232816  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:13:17.105465  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:13:17.115518  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:13:17.822964  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:13:17.838709  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:13:18.529068  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:13:18.551890  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:13:19.261973  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:13:19.341642  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:13:20.007464  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:13:20.084647  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:13:20.808877  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:13:20.808877  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:13:21.534646  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:13:21.534646  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:13:22.317873  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:13:22.318859  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:13:22.982903  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:13:23.253548  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:13:23.694719  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:13:24.658644  'int' object is not iterable  in parseENTSOE
+2024-11-08 23:18:30.350855  can only concatenate str (not "int") to str  in parseENTSOE
+2024-11-08 23:18:30.462206  can only concatenate str (not "int") to str  in parseENTSOE
+2024-11-08 23:18:31.121725  can only concatenate str (not "int") to str  in parseENTSOE
+2024-11-08 23:18:31.213865  can only concatenate str (not "int") to str  in parseENTSOE
+2024-11-08 23:18:32.333822  can only concatenate str (not "int") to str  in parseENTSOE
+2024-11-08 23:18:32.550099  can only concatenate str (not "int") to str  in parseENTSOE
+2024-11-08 23:18:33.027641  can only concatenate str (not "int") to str  in parseENTSOE
+2024-11-08 23:18:33.316616  can only concatenate str (not "int") to str  in parseENTSOE
+2024-11-08 23:18:34.397745  can only concatenate str (not "int") to str  in parseENTSOE
+2024-11-08 23:18:34.400741  can only concatenate str (not "int") to str  in parseENTSOE
+2024-11-08 23:18:35.532548  can only concatenate str (not "int") to str  in parseENTSOE
+2024-11-08 23:18:35.532548  can only concatenate str (not "int") to str  in parseENTSOE
+2024-11-08 23:18:36.176653  can only concatenate str (not "int") to str  in parseENTSOE
+2024-11-08 23:18:36.453034  can only concatenate str (not "int") to str  in parseENTSOE
+2024-11-08 23:18:36.857892  can only concatenate str (not "int") to str  in parseENTSOE
+2024-11-08 23:18:37.519349  can only concatenate str (not "int") to str  in parseENTSOE
+2024-11-08 23:18:37.585557  can only concatenate str (not "int") to str  in parseENTSOE
+2024-11-08 23:18:38.258083  can only concatenate str (not "int") to str  in parseENTSOE
+2024-11-08 23:18:38.307430  can only concatenate str (not "int") to str  in parseENTSOE
+2024-11-08 23:18:39.104160  can only concatenate str (not "int") to str  in parseENTSOE
+2024-11-08 23:18:39.114700  can only concatenate str (not "int") to str  in parseENTSOE
+2024-11-08 23:18:39.886063  can only concatenate str (not "int") to str  in parseENTSOE
+2024-11-08 23:48:56.423867  'str' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:48:56.457165  'str' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:48:57.139563  'str' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:48:57.159224  'str' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:48:57.799392  'str' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:48:57.803491  'str' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:48:58.418345  'str' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:48:58.525547  'str' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:48:59.233457  'str' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:48:59.414226  'str' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:48:59.914490  'str' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:49:00.047269  'str' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:49:00.600034  'str' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:49:00.681305  'str' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:49:01.350512  'str' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:49:01.409288  'str' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:49:01.998992  'str' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:49:02.048215  'str' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:49:02.921816  'str' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:49:03.026352  'str' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:49:03.559743  'str' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:49:03.709532  'str' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:49:31.299466  'dict' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:49:31.300467  'dict' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:49:32.053767  'dict' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:49:32.072756  'dict' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:49:33.140550  'dict' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:49:33.141556  'dict' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:49:33.906154  'dict' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:49:34.311473  'dict' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:49:34.844286  'dict' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:49:35.367764  'dict' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:49:35.683733  'dict' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:49:36.067931  'dict' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:49:36.443204  'dict' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:49:36.954783  'dict' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:49:37.145598  'dict' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:49:37.641037  'dict' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:49:37.838994  'dict' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:49:38.602326  'dict' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:49:38.602326  'dict' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:49:39.339345  'dict' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:49:39.340364  'dict' object has no attribute 'oldprice'  in parseENTSOE
+2024-11-08 23:49:40.396462  'dict' object has no attribute 'oldprice'  in parseENTSOE

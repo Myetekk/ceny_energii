@@ -145,10 +145,8 @@ def parseTGE(date, RDNList, errors, settings):
                                 tge.hour = hourIndex
 
                                 if (len(prices) == 25  and hourIndex == 2): # gdy lista ma 25 obiektów  =>  zmiana czasu z letniego na zimowy
-                                    print('zmiana czasu z letniego na zimowy')
-                                elif (result["success"] == True): ## gdy dobra wartość
-                                    RDNList.append(tge)
-                                elif (result["success"] == False  and  len(prices) == 24): ## gdy zła wartość ale to nie zmiana czasu
+                                    print('za dużo godzin w dobie')
+                                elif (result["success"] == True  or  (result["success"] == False  and  len(prices) == 24)): ## gdy dobra wartość lub gdy zła wartość ale to nie zmiana czasu
                                     RDNList.append(tge)
                                 hourIndex += 1
                         break
