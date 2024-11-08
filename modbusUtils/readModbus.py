@@ -7,7 +7,7 @@ import time
 
 
 if __name__ == '__main__':
-    client = ModbusClient(host='192.168.96.30', port=502, auto_open=True, auto_close=False)
+    client = ModbusClient(host='192.168.1.2', port=502, auto_open=True, auto_close=False)
     while True:
         for i in range(0, 124, 10):
             list_temp = []

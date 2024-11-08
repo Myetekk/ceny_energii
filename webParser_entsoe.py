@@ -25,7 +25,7 @@ class Entsoe:
 
 
 
-def resetData(objectList, date):
+def resetData(objectList, date, euro):
     objectList.clear()
 
     for index in range(24):
@@ -34,7 +34,7 @@ def resetData(objectList, date):
         entsoe.hour = index
         entsoe.date = str(date)[:10]
         entsoe.price = 0.0
-        entsoe.euro = 1.0
+        entsoe.euro = euro
         entsoe.status = False
         
         objectList.append(entsoe)
@@ -80,7 +80,9 @@ def getDataFromAPI_oneDay(date, errors, settings):
 
 ## parsuje dane pobrane z entsoe
 def parseENTSOE(date, objectList, errors, settings):
+    euro = 1
     errors.entsoeErrorNumber = 0
+    
     try:
         internetConn = tryInternetConnection()
         if internetConn:
@@ -90,24 +92,29 @@ def parseENTSOE(date, objectList, errors, settings):
             string = getDataFromAPI_oneDay(date, errors, settings)
 
             if string == ""  or  string == None:
-                resetData(objectList, date)
+                resetData(objectList, date, euro)
             else:
                 document = parseString(string)
 
-                if len(document.getElementsByTagName("price.amount")) != 24:   resetData(objectList, date)
-                else:
-                    for index in range(24):
-                        entsoe = Entsoe()
-                        price = document.getElementsByTagName("price.amount")[index].firstChild.nodeValue
-                        date_fromapi = document.getElementsByTagName("end")[1].firstChild.nodeValue
+                # if len(document.getElementsByTagName("price.amount")) != 24:   resetData(objectList, date, euro) ###### tu się psuje zmiana czasu 
+                # else:
+                hourIndex = 0
+                for hourObj in document.getElementsByTagName("price.amount"):
+                    entsoe = Entsoe()
+                    price = hourObj.firstChild.nodeValue
+                    date_fromapi = document.getElementsByTagName("end")[1].firstChild.nodeValue
 
-                        entsoe.hour = index
-                        entsoe.price = round(float(price) * euro, 2)
-                        entsoe.date = date_fromapi[0:10]
-                        entsoe.euro = euro
-                        entsoe.status = True
+                    entsoe.hour = hourIndex
+                    entsoe.price = round(float(price) * euro, 2)
+                    entsoe.date = date_fromapi[0:10]
+                    entsoe.euro = euro
+                    entsoe.status = True
 
+                    if (len(document.getElementsByTagName("price.amount")) == 25  and hourIndex == 2): # gdy lista ma 25 obiektów  =>  zmiana czasu z letniego na zimowy
+                        print('zmiana czasu z letniego na zimowy')
+                    else:
                         objectList.append(entsoe)
+                    hourIndex += 1
             if internetConn:   print("entsoe parsed for: ", str(date)[0:10])
         else: 
             return

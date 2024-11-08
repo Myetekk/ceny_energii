@@ -58,7 +58,7 @@ def loadSettings(settings, errors):
     try:
         if os.path.exists(filePath):  ## jeśli plik istnieje 
             fileSize = os.path.getsize(filePath)
-            if fileSize >= 135  and  fileSize <= 155:  ## jeśli plik ma w sobie jakieś dane
+            if fileSize >= 135  and  fileSize <= 155:  ## jeśli plik ma w sobie jakieś dane i są odpowiednio długie
                 with open(filePath) as outfile:
                     data = json.load(outfile)
 

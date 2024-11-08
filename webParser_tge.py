@@ -26,7 +26,7 @@ class Tge:
 
 
 
-def resetData(RDNList): 
+def resetData(RDNList, euro): 
     RDNList.clear()
     
     for i in range(24):
@@ -35,7 +35,7 @@ def resetData(RDNList):
         tge.pricef1 = 0.0
         tge.pricef2 = 0.0
         tge.price = 0.0
-        tge.euro = 1.0
+        tge.euro = euro
         tge.status = False
 
         RDNList.append(tge)
@@ -45,7 +45,7 @@ def resetData(RDNList):
 
 
 ## wyciąga dane z linijek i przypisuje do odpowiednich wartości
-def getInfo(source_data, html_class_name, object, type_of_data, date, euro, settings):
+def getInfo(source_data, html_class_name, object, date, euro, settings):
     data_pattern = re.findall(html_class_name, source_data, re.DOTALL)
 
     if data_pattern != []: 
@@ -55,17 +55,25 @@ def getInfo(source_data, html_class_name, object, type_of_data, date, euro, sett
             data_pattern[index] = re.sub("\\s", "", data_pattern[index])
             data_pattern[index] = data_pattern[index].replace(",", ".")
 
-        if type_of_data=="time": object.hour = data_pattern[0]
-        elif type_of_data=="rate": 
-            object.date = date
-            object.pricef1 = round(float(data_pattern[0]), 2)
-            object.pricef2 = round(float(data_pattern[2]), 2)
+        object.date = date
+        if (data_pattern[0] == '-'): 
+            object.pricef1 = 0.0
+            return {'success': False}
+        else: object.pricef1 = round(float(data_pattern[0]), 2)
+        if (data_pattern[2] == '-'): 
+            object.pricef2 = 0.0
+            return {'success': False}
+        else: object.pricef2 = round(float(data_pattern[2]), 2)
+        
+        
 
-            if settings.fixing == 1:   object.price = round(float(data_pattern[0]), 2)
-            elif settings.fixing == 2:   object.price = round(float(data_pattern[2]), 2)
+        if settings.fixing == 1:   object.price = object.pricef1
+        elif settings.fixing == 2:   object.price = object.pricef2
 
-            object.euro = euro
-            object.status = True
+        object.euro = euro
+        object.status = True
+
+        return {'success': True}
 
 
 
@@ -73,6 +81,8 @@ def getInfo(source_data, html_class_name, object, type_of_data, date, euro, sett
 
 ## parsuje dane pobrane z TGE
 def parseTGE(date, RDNList, errors, settings):
+    euro = 1
+
     try:
         if tryInternetConnection():
             RDNList.clear()
@@ -93,7 +103,7 @@ def parseTGE(date, RDNList, errors, settings):
 
             if original_date_ <= minimum_date: 
                 ## gdy data jest zbyt daleko w tyle (TGE podaje dane tylko 2 mesiące wstacz)
-                resetData(RDNList)
+                resetData(RDNList, euro)
             else:
                 ## aby obejść (prawdopodobne) blokowanie przez strone zbyt częstych wejść
                 inteager = 0
@@ -125,16 +135,22 @@ def parseTGE(date, RDNList, errors, settings):
 
 
                         if date_new == date_link  or  date_link_ >= ( datetime.datetime.now() + datetime.timedelta(days=1) ):
-                            resetData(RDNList)
+                            resetData(RDNList, euro)
                         else:
                             ## wyciąga pojedyńcze dane z wierszy tabeli
+                            hourIndex = 0
                             for price in prices:
                                 tge = Tge()
-                                getInfo(price, '<td.*?class="footable-visible footable-first-column.*?">.*?</td.*?>', tge, "time", original_date, euro, settings)  ## godziny
-                                getInfo(price, '<td style="display: table-cell;" class="footable-visible.*?>.*?</td.*?>', tge, "rate", original_date, euro, settings)  ## wartości
-                                
-                                # if tge.hour != 0:
-                                RDNList.append(tge)
+                                result = getInfo(price, '<td style="display: table-cell;" class="footable-visible.*?>.*?</td.*?>', tge, original_date, euro, settings)  ## wartości
+                                tge.hour = hourIndex
+
+                                if (len(prices) == 25  and hourIndex == 2): # gdy lista ma 25 obiektów  =>  zmiana czasu z letniego na zimowy
+                                    print('zmiana czasu z letniego na zimowy')
+                                elif (result["success"] == True): ## gdy dobra wartość
+                                    RDNList.append(tge)
+                                elif (result["success"] == False  and  len(prices) == 24): ## gdy zła wartość ale to nie zmiana czasu
+                                    RDNList.append(tge)
+                                hourIndex += 1
                         break
 
                     except Exception as e:
@@ -142,7 +158,7 @@ def parseTGE(date, RDNList, errors, settings):
                         time.sleep(1)
                         inteager += 1
                         if inteager > 10:  ## jeśli zbyt dużo razy nie udało mu się pobrać danych - ustawia 0 
-                            resetData(RDNList)
+                            resetData(RDNList, euro)
                             break
             print("tge parsed for: ", original_date)
         else: 

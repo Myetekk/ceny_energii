@@ -36,6 +36,12 @@ def getEUR(date):
 
 
 
+
+
+
+
+
+
 ## zwraca podaną date zmniejszoną o jeden dzień
 def decreaseOneDay(date_data):
     year = str(date_data[0])

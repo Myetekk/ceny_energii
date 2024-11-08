@@ -40,6 +40,8 @@ class EnergyPrices:
 
     date = datetime.datetime.now()
     date_plus_day = datetime.datetime.now() + datetime.timedelta(days=1)
+    # date = datetime.datetime(2024, 10, 27, 12, 0, 0) ###################################################################
+    # date_plus_day = datetime.datetime(2024, 10, 28, 12, 0, 0) ###################################################################
 
 
 
@@ -94,7 +96,7 @@ class EnergyPrices:
                 tge = Tge()
 
                 entsoe.hour = i
-                tge.hour = i  
+                tge.hour = i
 
                 entsoe.date = str(self.date)[0:10]
                 tge.date = str(self.date)[0:10]
@@ -214,7 +216,7 @@ class EnergyPrices:
             if self.settings.currency == 'PLN': currency = 1
             elif self.settings.currency == 'EUR': currency = 2
             self.dataBank.set_input_registers(address=121, word_list=[currency])  ## określa w jakiej walucie są dane (PLN / EUR)
-            self.dataBank.set_input_registers(address=122, word_list=[self.settings.fixing])  ## określa z którego fixingu pochodzą dane (1-fixing1 / 2-fixing2)
+            self.dataBank.set_input_registers(address=122, word_list=[self.settings.fixing])  ## określa z którego fixingu pochodzą dane (1-fixing 1 / 2-fixing 2)
             self.dataBank.set_input_registers(address=123, word_list=[self.settings.data_source])  ## określa z jakiego źródła pochodzą dane (1-entsoe / 2-tge)
             self.dataBank.set_input_registers(address=124, word_list=[self.settings.updateTime])  ## określa co ile sekund funkcja pobiera nowe dane
 
@@ -319,7 +321,7 @@ class EnergyPrices:
     def getDifference(self):
         self.objectList_diff.clear()
         self.objectList_diff_next.clear()
-        for i in range(len(self.objectList_entsoe)):
+        for i in range(24):
             self.objectList_diff.append(round(float(self.objectList_entsoe[i].price) - float(self.objectList_tge[i].price), 2))
             self.objectList_diff_next.append(round(float(self.objectList_entsoe_next[i].price) - float(self.objectList_tge_next[i].price), 2))
     
@@ -934,12 +936,15 @@ if __name__ == '__main__':
 
 
 
-## TESTOWANIE: 
-#       - gdy dane są nieprawidłowe / niepełne (np. 31.03.2024 brakuje jednej godziny, co psuje całe dane)
-#       - gdy nie ma internetu, różne kombinacje
-#       - odpalenie bez internetu
-#       - zmiana dnia
-#       - zmiana ustawień modbusem
-#       - wysyłanie modbusem
-#       - czy wysyła dobre 'dataok'
-#       działanie ciągłe przez dłuższy czas
+## RZECZY: 
+# - zmiana czasu - za mało godzin w dobie
+# - zawiesza się po długim czasie: 
+#       - jeżeli pobieranie danych trwa za długo - przerwać
+# - errory w bazie a nie w .txt
+
+
+# + zmiana czasu - za dużo godzin w dobie: 
+#       + nie pobierać godzin z TGE  =>  pobierał, ale nigdzie nie wykorzystywał XD
+#       + weryfikować zmiane czasu ¿XD?
+# + czasem nie zmienia waluty  =>  przy zerowaniu danych dla dnia zerował też kurs euro)
+# + jeśli w TGE w cenie pojawia się '-' to się sypie  =>  próbował castować '-' na float
