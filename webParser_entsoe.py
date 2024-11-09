@@ -119,8 +119,9 @@ def parseENTSOE(date, objectList, errors, settings):
                         objectList.append(prevEntsoe)
                     
                     if (len(pricesList) == 25  and  safetyIndex == 3): # gdy lista ma 25 obiektów  =>  zmiana czasu z letniego na zimowy
-                        print('za dużo godzin w dobie')
+                        print('ENTSOE za dużo godzin w dobie')
                     elif (len(pricesList) < 23  and  safetyIndex == 2): # gdy lista ma 23 obiektów  =>  zmiana czasu z zimowego na letni
+                        print('ENTSOE za mało godzin w dobie')
                         objectList.append(copy.deepcopy(entsoe))
                         objectList.append(copy.deepcopy(entsoe))
                     else:

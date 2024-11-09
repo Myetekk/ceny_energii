@@ -1,5 +1,6 @@
 import json
 import os
+import sqlite3
 import datetime
 
 
@@ -91,13 +92,21 @@ def loadSettings(settings, errors):
 ## loguje errory do pliku .txt;   ta sama funkcja co w 'utils.py', poniewać circular import
 def saveError(message):
     try:
-        if os.path.exists("outputs") == False: os.mkdir("outputs") 
-        fileName = "outputs\\errors.txt"
+        path = "outputs\\dataBase.db"
+        conn = sqlite3.connect(path)
+        cur = conn.cursor()
 
-        file = open(fileName, "a")
-        errorText = str(datetime.datetime.now()) + "  " + str(message) + "\n"
-        file.write(errorText)
-        file.close()
+        sql1 ='''CREATE TABLE IF NOT EXISTS errors (
+            date	TEXT NOT NULL,
+            message	TEXT NOT NULL
+        );'''
+        cur.execute(sql1)
+
+        sql2 ='''INSERT INTO errors (date, message) VALUES (?, ?);'''
+        cur.execute(sql2, [str(datetime.datetime.now()), str(message)])
+
+        conn.commit()
+        conn.close()
 
 
     except Exception as e:

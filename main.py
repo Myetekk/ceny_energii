@@ -38,10 +38,10 @@ class EnergyPrices:
     
     dataBank = DataBank()
 
-    date = datetime.datetime.now()
-    date_plus_day = datetime.datetime.now() + datetime.timedelta(days=1)
-    # date = datetime.datetime(2024, 3, 31, 12, 0, 0) ###################################################################
-    # date_plus_day = datetime.datetime(2024, 3, 31, 12, 0, 0) ###################################################################
+    # date = datetime.datetime.now()
+    # date_plus_day = datetime.datetime.now() + datetime.timedelta(days=1)
+    date = datetime.datetime(2024, 10, 27, 12, 0, 0) ###################################################################
+    date_plus_day = datetime.datetime(2024, 10, 27, 12, 0, 0) ###################################################################
 
 
 
@@ -937,7 +937,6 @@ if __name__ == '__main__':
 
 
 ## TO DO: 
-# - errory w bazie a nie w .txt
 # - zawiesza się po długim czasie: 
 #       - jeżeli pobieranie danych trwa za długo - przerwać
 
@@ -948,3 +947,4 @@ if __name__ == '__main__':
 #       + weryfikować zmiane czasu ¿XD?
 # + czasem nie zmienia waluty  =>  przy zerowaniu danych dla dnia zerował też kurs euro)
 # + jeśli w TGE w cenie pojawia się '-' to się sypie  =>  próbował castować '-' na float
+# + errory w bazie a nie w .txt

@@ -1,6 +1,7 @@
 import re
 import time
 import datetime
+import copy
 from urllib import request
 
 from utils import getEUR, increaseOneDay, decreaseOneDay, decreaseOneMonth, saveError, tryInternetConnection
@@ -56,15 +57,19 @@ def getInfo(source_data, html_class_name, object, date, euro, settings):
             data_pattern[index] = data_pattern[index].replace(",", ".")
 
         object.date = date
-        if (data_pattern[0] == '-'): 
+        success = True
+
+        try:
+            object.pricef1 = round(float(data_pattern[0]), 2)
+        except Exception as e:
             object.pricef1 = 0.0
-            return {'success': False}
-        else: object.pricef1 = round(float(data_pattern[0]), 2)
-        if (data_pattern[2] == '-'): 
+            success = False
+
+        try:
+            object.pricef2 = round(float(data_pattern[2]), 2)
+        except Exception as e:
             object.pricef2 = 0.0
-            return {'success': False}
-        else: object.pricef2 = round(float(data_pattern[2]), 2)
-        
+            success = False
         
 
         if settings.fixing == 1:   object.price = object.pricef1
@@ -73,7 +78,7 @@ def getInfo(source_data, html_class_name, object, date, euro, settings):
         object.euro = euro
         object.status = True
 
-        return {'success': True}
+        return {'success': success}
 
 
 
@@ -145,7 +150,11 @@ def parseTGE(date, RDNList, errors, settings):
                                 tge.hour = hourIndex
 
                                 if (len(prices) == 25  and hourIndex == 2): # gdy lista ma 25 obiektów  =>  zmiana czasu z letniego na zimowy
-                                    print('za dużo godzin w dobie')
+                                    print('TGE za dużo godzin w dobie')
+                                elif (len(prices) == 23  and hourIndex == 2): # gdy lista ma 25 obiektów  =>  zmiana czasu z letniego na zimowy
+                                    print('TGE za mało godzin w dobie')
+                                    RDNList.append(copy.deepcopy(tge))
+                                    RDNList.append(copy.deepcopy(tge))
                                 elif (result["success"] == True  or  (result["success"] == False  and  len(prices) == 24)): ## gdy dobra wartość lub gdy zła wartość ale to nie zmiana czasu
                                     RDNList.append(tge)
                                 hourIndex += 1

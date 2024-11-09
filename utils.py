@@ -2,8 +2,8 @@ import tkinter as tk
 from tkinter import BOTH
 import re
 import os
+import sqlite3
 import datetime
-# from urllib.request import urlopen
 from urllib import request
 
 from settingsOperations import saveSettings_JSON
@@ -209,13 +209,21 @@ def errorWindow(message, windowTitle):
 ## loguje błędy do pliku .txt
 def saveError(message):
     try:
-        if os.path.exists("outputs") == False: os.mkdir("outputs") 
-        fileName = "outputs\\errors.txt"
+        path = "outputs\\dataBase.db"
+        conn = sqlite3.connect(path)
+        cur = conn.cursor()
 
-        file = open(fileName, "a")
-        errorText = str(datetime.datetime.now()) + "  " + str(message) + "\n"
-        file.write(errorText)
-        file.close()
+        sql1 ='''CREATE TABLE IF NOT EXISTS errors (
+            date	TEXT NOT NULL,
+            message	TEXT NOT NULL
+        );'''
+        cur.execute(sql1)
+
+        sql2 ='''INSERT INTO errors (date, message) VALUES (?, ?);'''
+        cur.execute(sql2, [str(datetime.datetime.now()), str(message)])
+
+        conn.commit()
+        conn.close()
 
     except Exception as e:
         print(f"An error occurred in saveError: {e}.")
