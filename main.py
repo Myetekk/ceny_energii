@@ -38,10 +38,8 @@ class EnergyPrices:
     
     dataBank = DataBank()
 
-    # date = datetime.datetime.now()
-    # date_plus_day = datetime.datetime.now() + datetime.timedelta(days=1)
-    date = datetime.datetime(2024, 10, 27, 12, 0, 0) ###################################################################
-    date_plus_day = datetime.datetime(2024, 10, 27, 12, 0, 0) ###################################################################
+    date = datetime.datetime.now()
+    date_plus_day = datetime.datetime.now() + datetime.timedelta(days=1)
 
 
 
@@ -117,6 +115,12 @@ class EnergyPrices:
         
         ## liczy różnice między Entsoe i Tge
         self.getDifference()
+
+        ## sprawdza czy któreś ze źródeł jest puste
+        if self.objectList_entsoe[0].status == False:
+            self.settings.data_source = 2
+        elif self.objectList_tge[0].status == False:
+            self.settings.data_source = 1
 
         ## wysyła dane modbusem
         self.sendToModbus()
@@ -592,6 +596,13 @@ class EnergyPrices:
             
             self.reloadElements()
             self.updateGraph()
+            
+            ## sprawdza czy któreś ze źródeł jest puste
+            if self.objectList_entsoe[0].status == False:
+                self.settings.data_source = 2
+            elif self.objectList_tge[0].status == False:
+                self.settings.data_source = 1
+
             self.sendToModbus()
             sendToSQLite(self.objectList_entsoe, self.objectList_tge, self.objectList_entsoe_next, self.objectList_tge_next, self.errors, self.settings, self.window)
             saveSettings_JSON(self.settings, self.errors)
@@ -937,10 +948,11 @@ if __name__ == '__main__':
 
 
 ## TO DO: 
-# - zawiesza się po długim czasie: 
-#       - jeżeli pobieranie danych trwa za długo - przerwać
 
 
+
+# + zawiesza się po długim czasie: 
+#       + jeżeli pobieranie danych trwa za długo - przerwać
 # + zmiana czasu - za dużo godzin w dobie
 # + zmiana czasu - za mało godzin w dobie
 #       + nie pobierać godzin z TGE  =>  pobierał, ale nigdzie nie wykorzystywał XD
@@ -948,3 +960,5 @@ if __name__ == '__main__':
 # + czasem nie zmienia waluty  =>  przy zerowaniu danych dla dnia zerował też kurs euro)
 # + jeśli w TGE w cenie pojawia się '-' to się sypie  =>  próbował castować '-' na float
 # + errory w bazie a nie w .txt
+# + przetestować gdy nie ma danych z entsoe
+# + gdy wybrane entsoe i brak danych w entsoe przełącza na tge i odwrotnie

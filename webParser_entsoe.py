@@ -53,7 +53,7 @@ def getDataFromAPI_oneDay(date, errors, settings):
         next_date = increaseOneDay(str(date_string)[:10].split('-'))
         next_date = str(next_date[0] + next_date[1] + next_date[2])
 
-        client = EntsoeRawClient(api_key=settings.entsoeKey)
+        client = EntsoeRawClient(api_key=settings.entsoeKey, timeout=15)
         start = pd.Timestamp(str(date_string), tz='Europe/Brussels')
         end = pd.Timestamp(str(next_date), tz='Europe/Brussels')
 
@@ -91,9 +91,9 @@ def parseENTSOE(date, objectList, errors, settings):
 
             euro = getEUR(str(date)[:10].split('-'))
             string = getDataFromAPI_oneDay(date, errors, settings)
-            # print(string)
+            print(len(string))
 
-            if string == ""  or  string == None:
+            if string == ""  or  string == None  or  len(string) < 1000:
                 resetData(objectList, date, euro)
             else:
                 document = parseString(string)
@@ -139,5 +139,7 @@ def parseENTSOE(date, objectList, errors, settings):
         saveError(str(e) + "  in parseENTSOE")
         errors.errorNumber += 1
         if errors.errorNumber <= 20:   parseENTSOE(date, objectList, errors, settings)
-        else:   return
+        else:   
+            resetData(objectList, date, euro)
+            return
         time.sleep(1)

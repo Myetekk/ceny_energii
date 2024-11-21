@@ -177,5 +177,7 @@ def parseTGE(date, RDNList, errors, settings):
         saveError(str(e) + "  in parseTGE")
         errors.errorNumber += 1
         if errors.errorNumber <= 20:   parseTGE(date, RDNList, errors, settings)
-        else:   return
+        else:   
+            resetData(RDNList, euro)
+            return
         time.sleep(1)
