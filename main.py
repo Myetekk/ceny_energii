@@ -40,8 +40,6 @@ class EnergyPrices:
 
     date = datetime.datetime.now()
     date_plus_day = datetime.datetime.now() + datetime.timedelta(days=1)
-    # date = datetime.datetime(2023, 3, 25)
-    # date_plus_day = datetime.datetime(2023, 3, 26)
 
 
 
@@ -568,8 +566,6 @@ class EnergyPrices:
 
             self.date = datetime.datetime.now()
             self.date_plus_day = datetime.datetime.now() + datetime.timedelta(days=1)
-            # self.date = datetime.datetime(2023, 3, 25)
-            # self.date_plus_day = datetime.datetime(2023, 3, 26)
             
 
 
