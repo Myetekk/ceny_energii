@@ -91,7 +91,6 @@ def parseENTSOE(date, objectList, errors, settings):
 
             euro = getEUR(str(date)[:10].split('-'))
             string = getDataFromAPI_oneDay(date, errors, settings)
-            print(len(string))
 
             if string == ""  or  string == None  or  len(string) < 1000:
                 resetData(objectList, date, euro)
@@ -120,7 +119,7 @@ def parseENTSOE(date, objectList, errors, settings):
                     
                     if (len(pricesList) == 25  and  safetyIndex == 3): # gdy lista ma 25 obiektów  =>  zmiana czasu z letniego na zimowy
                         print('ENTSOE za dużo godzin w dobie')
-                    elif (len(pricesList) < 23  and  safetyIndex == 2): # gdy lista ma 23 obiektów  =>  zmiana czasu z zimowego na letni
+                    elif (len(pricesList) <= 23  and  safetyIndex == 2): # gdy lista ma 23 obiektów  =>  zmiana czasu z zimowego na letni
                         print('ENTSOE za mało godzin w dobie')
                         objectList.append(copy.deepcopy(entsoe))
                         objectList.append(copy.deepcopy(entsoe))

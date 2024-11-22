@@ -40,6 +40,8 @@ class EnergyPrices:
 
     date = datetime.datetime.now()
     date_plus_day = datetime.datetime.now() + datetime.timedelta(days=1)
+    # date = datetime.datetime(2023, 3, 25)
+    # date_plus_day = datetime.datetime(2023, 3, 26)
 
 
 
@@ -116,7 +118,7 @@ class EnergyPrices:
         ## liczy różnice między Entsoe i Tge
         self.getDifference()
 
-        ## sprawdza czy któreś ze źródeł jest puste
+        # sprawdza czy któreś ze źródeł jest puste
         if self.objectList_entsoe[0].status == False:
             self.settings.data_source = 2
         elif self.objectList_tge[0].status == False:
@@ -566,6 +568,9 @@ class EnergyPrices:
 
             self.date = datetime.datetime.now()
             self.date_plus_day = datetime.datetime.now() + datetime.timedelta(days=1)
+            # self.date = datetime.datetime(2023, 3, 25)
+            # self.date_plus_day = datetime.datetime(2023, 3, 26)
+            
 
 
             ## tworzy nowe wątki na których pobiera dane
@@ -951,6 +956,7 @@ if __name__ == '__main__':
 
 
 
+## DO DO
 # + zawiesza się po długim czasie: 
 #       + jeżeli pobieranie danych trwa za długo - przerwać
 # + zmiana czasu - za dużo godzin w dobie
@@ -962,3 +968,26 @@ if __name__ == '__main__':
 # + errory w bazie a nie w .txt
 # + przetestować gdy nie ma danych z entsoe
 # + gdy wybrane entsoe i brak danych w entsoe przełącza na tge i odwrotnie
+
+
+
+## TESTOWANIE: 
+# + wysyłanie modbusem
+# + zmiana ustawień modbusem
+# + czy wysyła dobre 'dataok'
+
+# + zmiana dnia
+# + zmiana roku
+# + zmiana strefy czasowej lato -> zima
+# + zmiana strefy czasowej zima -> lato 
+
+# + odpalenie bez internetu
+# + zerwanie internetu podczas pracy
+
+# + gdy dane są nieprawidłowe / niepełne (entsoe: 31.03.2024 brakuje jednej godziny, tge: 28.10.2024 ma jedną godzine za dużo)
+
+# + pobieranie do plików
+# + combined data
+# + combined data w pobieranie do plików
+
+# - działanie ciągłe przez dłuższy czas

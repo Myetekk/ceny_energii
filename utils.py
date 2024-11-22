@@ -206,7 +206,7 @@ def errorWindow(message, windowTitle):
 
 
 
-## loguje błędy do pliku .txt
+## loguje błędy do bazy danych
 def saveError(message):
     try:
         path = "outputs\\dataBase.db"
