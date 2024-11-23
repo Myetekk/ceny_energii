@@ -116,10 +116,11 @@ def parseENTSOE(date, objectList, errors, settings):
 
                     if ((len(pricesList) < 24)  and  (safetyIndex != prevSafetyIndex+1)): # gdy lista ma mniej niż 24 obiekty  =>  dziwność tego api - gdy 2h z rzęgu jest ta sama wartość to wysyła ją tylko raz
                         objectList.append(prevEntsoe)
-                    
+                        
                     if (len(pricesList) == 25  and  safetyIndex == 3): # gdy lista ma 25 obiektów  =>  zmiana czasu z letniego na zimowy
                         print('ENTSOE za dużo godzin w dobie')
-                    elif (len(pricesList) <= 23  and  safetyIndex == 2): # gdy lista ma 23 obiektów  =>  zmiana czasu z zimowego na letni
+                    elif (len(pricesList) < 24  and  safetyIndex == 2  and  (int(date_fromapi[5:7]) == 3 and int(date_fromapi[8:10]) >= 20)): # gdy lista ma 23 obiektów  =>  zmiana czasu z zimowego na letni
+                        # print(string)
                         print('ENTSOE za mało godzin w dobie')
                         objectList.append(copy.deepcopy(entsoe))
                         objectList.append(copy.deepcopy(entsoe))

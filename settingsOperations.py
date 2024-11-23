@@ -89,7 +89,7 @@ def loadSettings(settings, errors):
 
 
 
-## loguje errory do pliku .txt;   ta sama funkcja co w 'utils.py', poniewać circular import
+## loguje błędy do bazy danych;   ta sama funkcja co w 'utils.py', poniewać circular import
 def saveError(message):
     try:
         path = "outputs\\dataBase.db"

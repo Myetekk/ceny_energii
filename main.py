@@ -611,8 +611,8 @@ class EnergyPrices:
             
             print("update finished\n\n")
             
-            if self.errors.errorNumber <= 20:   self.afterFunc = self.window.after(int(self.updateTimeVariable.get())*1000, self.updateData) # del #########################################################################################
-            else:   checkNumberOfErrors(self.errors, self.settings, self.window) # del #########################################################################################
+            if self.errors.errorNumber <= 20:   self.afterFunc = self.window.after(int(self.updateTimeVariable.get())*1000, self.updateData) # #########################################################################################
+            else:   checkNumberOfErrors(self.errors, self.settings, self.window) # #########################################################################################
             
         
         except Exception as e:
